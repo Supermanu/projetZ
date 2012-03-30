@@ -74,9 +74,9 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
   //------------------------------ experimental hall (world volume)
   //------------------------------ beam line along x axis
   
-  G4double expHall_x = 5.0*m;
-  G4double expHall_y = 5.0*m;
-  G4double expHall_z = 5.0*m;
+  G4double expHall_x = 4.0*m;
+  G4double expHall_y = 4.0*m;
+  G4double expHall_z = 4.0*m;
   G4Box* experimentalHall_box
   = new G4Box("expHall_box",expHall_x,expHall_y,expHall_z);
   experimentalHall_log = new G4LogicalVolume(experimentalHall_box,
