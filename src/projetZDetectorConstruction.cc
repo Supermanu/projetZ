@@ -24,11 +24,11 @@
 // ********************************************************************
 //
 //
-// $Id: ExN01DetectorConstruction.cc,v 1.9 2006-06-29 17:47:19 gunter Exp $
+// $Id: projetZDetectorConstruction.cc,v 1.9 2006-06-29 17:47:19 gunter Exp $
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
 
-#include "ExN01DetectorConstruction.hh"
+#include "projetZDetectorConstruction.hh"
 
 #include "G4Material.hh"
 #include "G4Box.hh"
@@ -38,18 +38,18 @@
 #include "G4PVPlacement.hh"
 #include "globals.hh"
 
-ExN01DetectorConstruction::ExN01DetectorConstruction()
+projetZDetectorConstruction::projetZDetectorConstruction()
  :  experimentalHall_log(0), tracker_log(0),
     calorimeterBlock_log(0), calorimeterLayer_log(0),
     experimentalHall_phys(0), calorimeterLayer_phys(0),
     calorimeterBlock_phys(0), tracker_phys(0)
 {;}
 
-ExN01DetectorConstruction::~ExN01DetectorConstruction()
+projetZDetectorConstruction::~projetZDetectorConstruction()
 {
 }
 
-G4VPhysicalVolume* ExN01DetectorConstruction::Construct()
+G4VPhysicalVolume* projetZDetectorConstruction::Construct()
 {
 
   //------------------------------------------------------ materials

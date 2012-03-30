@@ -24,47 +24,31 @@
 // ********************************************************************
 //
 //
-// $Id: ExN01PhysicsList.cc,v 1.6 2006-06-29 17:47:21 gunter Exp $
+// $Id: projetZPrimaryGeneratorAction.hh,v 1.5 2006-06-29 17:47:17 gunter Exp $
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
-// 
 
-#include "ExN01PhysicsList.hh"
-#include "G4ParticleTypes.hh"
+#ifndef projetZPrimaryGeneratorAction_h
+#define projetZPrimaryGeneratorAction_h 1
 
+#include "G4VUserPrimaryGeneratorAction.hh"
 
-ExN01PhysicsList::ExN01PhysicsList()
-{;}
+class G4ParticleGun;
+class G4Event;
 
-ExN01PhysicsList::~ExN01PhysicsList()
-{;}
-
-void ExN01PhysicsList::ConstructParticle()
+class projetZPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
-  // In this method, static member functions should be called
-  // for all particles which you want to use.
-  // This ensures that objects of these particle types will be
-  // created in the program. 
+  public:
+    projetZPrimaryGeneratorAction();
+    ~projetZPrimaryGeneratorAction();
 
-  G4Geantino::GeantinoDefinition();
-}
+  public:
+    void GeneratePrimaries(G4Event* anEvent);
 
-void ExN01PhysicsList::ConstructProcess()
-{
-  // Define transportation process
+  private:
+    G4ParticleGun* particleGun;
+};
 
-  AddTransportation();
-}
+#endif
 
-void ExN01PhysicsList::SetCuts()
-{
-  // uppress error messages even in case e/gamma/proton do not exist            
-  G4int temp = GetVerboseLevel();                                                SetVerboseLevel(0);                                                           
-  //  " G4VUserPhysicsList::SetCutsWithDefault" method sets 
-  //   the default cut value for all particle types 
-  SetCutsWithDefault();   
-
-  // Retrieve verbose level
-  SetVerboseLevel(temp);  
-}
 

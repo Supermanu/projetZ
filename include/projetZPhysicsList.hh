@@ -24,12 +24,12 @@
 // ********************************************************************
 //
 //
-// $Id: ExN01PhysicsList.hh,v 1.6 2006-06-29 17:47:15 gunter Exp $
+// $Id: projetZPhysicsList.hh,v 1.6 2006-06-29 17:47:15 gunter Exp $
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
 // 
 //
-// ExN01PhysicsList
+// projetZPhysicsList
 //  Construct/define particles and physics processes
 //
 //  Particle defined in ExampleN01
@@ -39,17 +39,17 @@
 //    transportation
 //
 
-#ifndef ExN01PhysicsList_h
-#define ExN01PhysicsList_h 1
+#ifndef projetZPhysicsList_h
+#define projetZPhysicsList_h 1
 
 #include "G4VUserPhysicsList.hh"
 #include "globals.hh"
 
-class ExN01PhysicsList: public G4VUserPhysicsList
+class projetZPhysicsList: public G4VUserPhysicsList
 {
   public:
-    ExN01PhysicsList();
-    ~ExN01PhysicsList();
+    projetZPhysicsList();
+    ~projetZPhysicsList();
 
   protected:
     // Construct particle and physics process

@@ -35,9 +35,9 @@
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 
-#include "ExN01DetectorConstruction.hh"
-#include "ExN01PhysicsList.hh"
-#include "ExN01PrimaryGeneratorAction.hh"
+#include "projetZDetectorConstruction.hh"
+#include "projetZPhysicsList.hh"
+#include "projetZPrimaryGeneratorAction.hh"
 
 int main()
 {
@@ -47,15 +47,15 @@ int main()
 
   // set mandatory initialization classes
   //
-  G4VUserDetectorConstruction* detector = new ExN01DetectorConstruction;
+  G4VUserDetectorConstruction* detector = new projetZDetectorConstruction;
   runManager->SetUserInitialization(detector);
   //
-  G4VUserPhysicsList* physics = new ExN01PhysicsList;
+  G4VUserPhysicsList* physics = new projetZPhysicsList;
   runManager->SetUserInitialization(physics);
 
   // set mandatory user action class
   //
-  G4VUserPrimaryGeneratorAction* gen_action = new ExN01PrimaryGeneratorAction;
+  G4VUserPrimaryGeneratorAction* gen_action = new projetZPrimaryGeneratorAction;
   runManager->SetUserAction(gen_action);
 
   // Initialize G4 kernel

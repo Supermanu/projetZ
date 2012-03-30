@@ -24,52 +24,43 @@
 // ********************************************************************
 //
 //
-// $Id: ExN01PrimaryGeneratorAction.cc,v 1.6 2006-06-29 17:47:23 gunter Exp $
+// $Id: projetZDetectorConstruction.hh,v 1.6 2006-06-29 17:47:13 gunter Exp $
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
 
-#include "ExN01PrimaryGeneratorAction.hh"
+#ifndef projetZDetectorConstruction_H
+#define projetZDetectorConstruction_H 1
 
-#include "G4Event.hh"
-#include "G4ParticleGun.hh"
-#include "G4ParticleTable.hh"
-#include "G4ParticleDefinition.hh"
-#include "globals.hh"
+class G4LogicalVolume;
+class G4VPhysicalVolume;
 
-ExN01PrimaryGeneratorAction::ExN01PrimaryGeneratorAction()
+#include "G4VUserDetectorConstruction.hh"
+
+class projetZDetectorConstruction : public G4VUserDetectorConstruction
 {
-  G4int n_particle = 1;
-  particleGun = new G4ParticleGun(n_particle);
+  public:
 
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4String particleName;
-  particleGun->SetParticleDefinition(particleTable->FindParticle(particleName="geantino"));
-  particleGun->SetParticleEnergy(1.0*GeV);
-  particleGun->SetParticlePosition(G4ThreeVector(-2.0*m, 0.0, 0.0));
-}
+    projetZDetectorConstruction();
+    ~projetZDetectorConstruction();
 
-ExN01PrimaryGeneratorAction::~ExN01PrimaryGeneratorAction()
-{
-  delete particleGun;
-}
+    G4VPhysicalVolume* Construct();
 
-void ExN01PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
-{
-  G4int i = anEvent->GetEventID() % 3;
-  G4ThreeVector v(1.0,0.0,0.0);
-  switch(i)
-  {
-    case 0:
-      break;
-    case 1:
-      v.setY(0.1);
-      break;
-    case 2:
-      v.setZ(0.1);
-      break;
-  }
-  particleGun->SetParticleMomentumDirection(v);
-  particleGun->GeneratePrimaryVertex(anEvent);
-}
+  private:
+    
+    // Logical volumes
+    //
+    G4LogicalVolume* experimentalHall_log;
+    G4LogicalVolume* tracker_log;
+    G4LogicalVolume* calorimeterBlock_log;
+    G4LogicalVolume* calorimeterLayer_log;
 
+    // Physical volumes
+    //
+    G4VPhysicalVolume* experimentalHall_phys;
+    G4VPhysicalVolume* calorimeterLayer_phys;
+    G4VPhysicalVolume* calorimeterBlock_phys;
+    G4VPhysicalVolume* tracker_phys;
+};
+
+#endif
 

@@ -24,43 +24,47 @@
 // ********************************************************************
 //
 //
-// $Id: ExN01DetectorConstruction.hh,v 1.6 2006-06-29 17:47:13 gunter Exp $
+// $Id: projetZPhysicsList.cc,v 1.6 2006-06-29 17:47:21 gunter Exp $
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
+// 
 
-#ifndef ExN01DetectorConstruction_H
-#define ExN01DetectorConstruction_H 1
+#include "projetZPhysicsList.hh"
+#include "G4ParticleTypes.hh"
 
-class G4LogicalVolume;
-class G4VPhysicalVolume;
 
-#include "G4VUserDetectorConstruction.hh"
+projetZPhysicsList::projetZPhysicsList()
+{;}
 
-class ExN01DetectorConstruction : public G4VUserDetectorConstruction
+projetZPhysicsList::~projetZPhysicsList()
+{;}
+
+void projetZPhysicsList::ConstructParticle()
 {
-  public:
+  // In this method, static member functions should be called
+  // for all particles which you want to use.
+  // This ensures that objects of these particle types will be
+  // created in the program. 
 
-    ExN01DetectorConstruction();
-    ~ExN01DetectorConstruction();
+  G4Geantino::GeantinoDefinition();
+}
 
-    G4VPhysicalVolume* Construct();
+void projetZPhysicsList::ConstructProcess()
+{
+  // Define transportation process
 
-  private:
-    
-    // Logical volumes
-    //
-    G4LogicalVolume* experimentalHall_log;
-    G4LogicalVolume* tracker_log;
-    G4LogicalVolume* calorimeterBlock_log;
-    G4LogicalVolume* calorimeterLayer_log;
+  AddTransportation();
+}
 
-    // Physical volumes
-    //
-    G4VPhysicalVolume* experimentalHall_phys;
-    G4VPhysicalVolume* calorimeterLayer_phys;
-    G4VPhysicalVolume* calorimeterBlock_phys;
-    G4VPhysicalVolume* tracker_phys;
-};
+void projetZPhysicsList::SetCuts()
+{
+  // uppress error messages even in case e/gamma/proton do not exist            
+  G4int temp = GetVerboseLevel();                                                SetVerboseLevel(0);                                                           
+  //  " G4VUserPhysicsList::SetCutsWithDefault" method sets 
+  //   the default cut value for all particle types 
+  SetCutsWithDefault();   
 
-#endif
+  // Retrieve verbose level
+  SetVerboseLevel(temp);  
+}
 
