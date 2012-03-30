@@ -1,1 +1,11 @@
 Instruction pour l'installation:
+Il faut Geant4, cmake et make.
+
+Pour installer cmake et make sur ubuntu:
+Dans un terminal: sudo apt-get install cmake make
+
+Pour utiliser git:
+sudo apt-get install git
+
+Pour installer geant4 sur windows (j'ai pas essayé):
+http://conferences.fnal.gov/g4tutorial/g4cd/Documentation/WorkshopExercises/Exercise0_files/Windows.html
