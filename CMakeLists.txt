@@ -59,7 +59,7 @@ target_link_libraries(projetZ ${Geant4_LIBRARIES})
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(N01 DEPENDS projetZ)
+#add_custom_target(N01 DEPENDS projetZ)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
