@@ -38,28 +38,28 @@ class G4VPhysicalVolume;
 
 class projetZDetectorConstruction : public G4VUserDetectorConstruction
 {
-  public:
+public:
 
     projetZDetectorConstruction();
     ~projetZDetectorConstruction();
 
     G4VPhysicalVolume* Construct();
 
-  private:
-    
+private:
+
     // Logical volumes
     //
-    G4LogicalVolume* experimentalHall_log;
+    G4LogicalVolume* WorldVolume_log;
     G4LogicalVolume* tracker_log;
     G4LogicalVolume* calorimeterBlock_log;
     G4LogicalVolume* calorimeterLayer_log;
 
     // Physical volumes
     //
-    G4VPhysicalVolume* experimentalHall_phys;
+    G4VPhysicalVolume* World_Volume;
     G4VPhysicalVolume* calorimeterLayer_phys;
     G4VPhysicalVolume* calorimeterBlock_phys;
-    G4VPhysicalVolume* tracker_phys;
+    G4VPhysicalVolume* tracker;
 };
 
 #endif
