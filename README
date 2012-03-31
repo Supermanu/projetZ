@@ -29,7 +29,7 @@ Pour utiliser notre dépôt, il faut se placer dans un terminal à l'endroit où
 
 	cd ~/mon/endroit/préféré/
 
-et rentrer les commandes suivantes:
+et rentrer la commande suivante:
 
 	git clone git@github.com:Supermanu/projetZ.git
 
@@ -46,5 +46,5 @@ Pour ajouter un fichier ou un dossier.
 	git commit -a
 	git push
 
-Pour envoyer les modifications.
+Pour envoyer les modifications et l'ajout de fichiers.
 
