@@ -116,7 +116,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     
     tracker_log = new G4LogicalVolume(tracker_Solid, Si,names[1][i],0,0,0); // fill the solid with "Silicon"       variable non declarée...
     // G4SensitiveDetector* trackerS_log = new   //  		!!!!! TO DO !!!
-    tracker = new G4PVPlacement(0,G4ThreeVector(),tracker_log, names[2][i],0,false,0);   // raises it to physical volume
+    tracker = new G4PVPlacement(0,G4ThreeVector(),tracker_log, names[2][i],WorldVolume_log,false,0);   // raises it to physical volume
   }
   
   
