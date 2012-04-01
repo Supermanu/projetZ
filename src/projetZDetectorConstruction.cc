@@ -81,7 +81,6 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
   //------------------------------------------------------ volumes
   
   //------------------------------ experimental hall (world volume)
-  //------------------------------ beam line along x axis
   
   G4double innerRadiusOfTheTube = 0.*m;
   G4double outerRadiusOfTheTube = 20.*m;
@@ -121,40 +120,37 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
   }
   
   
-  //------------------------------ a calorimeter block
+  //------------------------------ a calorimeter tube
   
-  G4double block_x = 1.0*m;
-  G4double block_y = 50.0*cm;
-  G4double block_z = 50.0*cm;
-  G4Box* calorimeterBlock_box = new G4Box("calBlock_box",block_x,
-					  block_y,block_z);
-  calorimeterBlock_log = new G4LogicalVolume(calorimeterBlock_box,
+  G4double innerRadiusOfTheCalo = 2.*m;
+  G4double outerRadiusOfTheCalo = 3.*m;
+  G4double hightOfTheCalo = 5.8*m;     //half length of the tube
+  G4double startAngleOfTheCalo = 0.*deg;
+  G4double spanningAngleOfTheCalo = 360.*deg;
+  
+  G4Tubs* calorimeterBlock_tube = new G4Tubs("caloTubs",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo);
+  calorimeterBlock_log = new G4LogicalVolume(calorimeterBlock_tube,
 					     Pb,"caloBlock_log",0,0,0);
-  G4double blockPos_x = 1.0*m;
-  G4double blockPos_y = 0.0*m;
-  G4double blockPos_z = 0.0*m;
-  calorimeterBlock_phys = new G4PVPlacement(0,
-					    G4ThreeVector(blockPos_x,blockPos_y,blockPos_z),
-					    calorimeterBlock_log,"caloBlock",WorldVolume_log,false,0);
+  calorimeterBlock_phys = new G4PVPlacement(0,G4ThreeVector(),calorimeterBlock_log,"caloBlock",WorldVolume_log,false,0);
   
   //------------------------------ calorimeter layers
   
-  G4double calo_x = 1.*cm;
-  G4double calo_y = 40.*cm;
-  G4double calo_z = 40.*cm;
-  G4Box* calorimeterLayer_box = new G4Box("caloLayer_box",
-					  calo_x,calo_y,calo_z);
-  calorimeterLayer_log = new G4LogicalVolume(calorimeterLayer_box,
-					     Al,"caloLayer_log",0,0,0);
-  for(G4int i=0; i<19; i++) // loop for 19 layers
-    {
-      G4double caloPos_x = (i-9)*10.*cm;
-      G4double caloPos_y = 0.0*m;
-      G4double caloPos_z = 0.0*m;
-      calorimeterLayer_phys = new G4PVPlacement(0,
-						G4ThreeVector(caloPos_x,caloPos_y,caloPos_z),
-						calorimeterLayer_log,"caloLayer",WorldVolume_log,false,i);
-    }
+//   G4double calo_x = 1.*cm;
+//   G4double calo_y = 40.*cm;
+//   G4double calo_z = 40.*cm;
+//   G4Box* calorimeterLayer_box = new G4Box("caloLayer_box",
+// 					  calo_x,calo_y,calo_z);
+//   calorimeterLayer_log = new G4LogicalVolume(calorimeterLayer_box,
+// 					     Al,"caloLayer_log",0,0,0);
+//   for(G4int i=0; i<19; i++) // loop for 19 layers
+//     {
+//       G4double caloPos_x = (i-9)*10.*cm;
+//       G4double caloPos_y = 0.0*m;
+//       G4double caloPos_z = 0.0*m;
+//       calorimeterLayer_phys = new G4PVPlacement(0,
+// 						G4ThreeVector(caloPos_x,caloPos_y,caloPos_z),
+// 						calorimeterLayer_log,"caloLayer",WorldVolume_log,false,i);
+//     }
     
     //------------------------------------------------------------------
     
