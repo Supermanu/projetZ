@@ -122,7 +122,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
   
   //------------------------------ a calorimeter tube
   
-  G4double innerRadiusOfTheCalo = 2.*m;
+  G4double innerRadiusOfTheCalo = 1.5*m;
   G4double outerRadiusOfTheCalo = 3.*m;
   G4double hightOfTheCalo = 5.8*m;     //half length of the tube
   G4double startAngleOfTheCalo = 0.*deg;
