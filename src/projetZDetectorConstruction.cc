@@ -96,8 +96,8 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
   //------------------------------ a tracker tube
   
   int const nbTracker=13;
-  G4int Oradii[nbTracker]={8*cm,9*cm,10*cm,20*cm,30*cm,40*cm,50*cm,60*cm,70*cm,80*cm,90*cm,100*cm,110*cm};
-  G4int Iradii[nbTracker]={8.1*cm,9.1*cm,10.1*cm,20.1*cm,30.1*cm,40.1*cm,50.1*cm,60.1*cm,70.1*cm,80.1*cm,90.1*cm,100.1*cm,110.1*cm};
+  G4int Iradii[nbTracker]={8*cm,9*cm,10*cm,20*cm,30*cm,40*cm,50*cm,60*cm,70*cm,80*cm,90*cm,100*cm,110*cm};
+  G4int Oradii[nbTracker]={8.1*cm,9.1*cm,10.1*cm,20.1*cm,30.1*cm,40.1*cm,50.1*cm,60.1*cm,70.1*cm,80.1*cm,90.1*cm,100.1*cm,110.1*cm};
   int const nbSteps=3;
   
   std::string names[nbSteps][nbTracker] =
