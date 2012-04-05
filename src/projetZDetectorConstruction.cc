@@ -37,8 +37,10 @@
 #include "G4LogicalVolume.hh"
 #include "G4ThreeVector.hh"
 #include "G4PVPlacement.hh"
+#include "G4SDManager.hh"
 #include "globals.hh"
 #include <string>
+#include "G4String.hh"
 
 projetZDetectorConstruction::projetZDetectorConstruction()
 :  WorldVolume_log(0), tracker_log(0),
@@ -115,7 +117,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     G4Tubs* tracker_Solid = new G4Tubs(namesTracker[0][i],innerRadiusOfTheTube,outerRadiusOfTheTube,hightOfTheTube,startAngleOfTheTube,spanningAngleOfTheTube);
     
     tracker_log = new G4LogicalVolume(tracker_Solid, Si,namesTracker[1][i],0,0,0); // fill the solid with "Silicon"       variable non declarée...
-    // G4SensitiveDetector* trackerS_log = new   //  		!!!!! TO DO !!!
+    ///TODO G4SensitiveDetector* trackerS_log = new   //  		
     tracker = new G4PVPlacement(0,G4ThreeVector(),tracker_log, namesTracker[2][i],WorldVolume_log,false,0);   // raises it to physical volume
   }
   
@@ -132,11 +134,10 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
   {
   G4double startAngleOfTheCalo = n*18.*deg;
   G4double spanningAngleOfTheCalo = 18.*deg;
-  
   G4Tubs* calorimeterBlock_tube = new G4Tubs(nomsCalo[0][n],innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo);
   calorimeterBlock_log = new G4LogicalVolume(calorimeterBlock_tube,
 					     Pb,nomsCalo[1][n],0,0,0);
-  calorimeterBlock_phys = new G4PVPlacement(0,G4ThreeVector(),calorimeterBlock_log,nomsCalo[2][n],WorldVolume_log,false,0);
+  calorimeterBlock_phys = new G4PVPlacement(0,G4ThreeVector(),calorimeterBlock_log,nomsCalo[2][n],WorldVolume_log,false,n);
   }
 
     //------------------------------------------------------------------
