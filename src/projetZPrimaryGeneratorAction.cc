@@ -45,7 +45,7 @@ projetZPrimaryGeneratorAction::projetZPrimaryGeneratorAction()
   G4String particleName;
   particleGun->SetParticleDefinition(particleTable->FindParticle(particleName="geantino"));
   particleGun->SetParticleEnergy(1.0*GeV);
-  particleGun->SetParticlePosition(G4ThreeVector(-2.0*m, 0.0, 0.0));
+  particleGun->SetParticlePosition(G4ThreeVector(0.0, 0.0, 0.0));
 }
 
 projetZPrimaryGeneratorAction::~projetZPrimaryGeneratorAction()
