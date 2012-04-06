@@ -17,13 +17,13 @@
 */
 
 
-#include "projetZCaloHit.h"
+#include "projetZCaloHit.hh"
 #include "G4UnitsTable.hh"
 
 G4Allocator<projetZCaloHit> projetZCaloHitAllocator;
 
 projetZCaloHit::projetZCaloHit() {}
-projetZCaloHit::~projetZCaloHit(){}
+projetZCaloHit::~projetZCaloHit() {}
 
 
 projetZCaloHit::projetZCaloHit ( const projetZCaloHit& other ) :G4VHit()
@@ -38,12 +38,12 @@ projetZCaloHit& projetZCaloHit::operator= ( const projetZCaloHit& other )
     trackID = other.trackID;
     caloNb = other.caloNb;
     eDep = other.eDep;
-  return *this;
+    return *this;
 }
 
 G4int projetZCaloHit::operator== ( const projetZCaloHit& other ) const
 {
-    return (this==&other) ? 1 : 0;
+    return ( this==&other ) ? 1 : 0;
 }
 
 void projetZCaloHit::Draw()
@@ -54,5 +54,5 @@ void projetZCaloHit::Draw()
 void projetZCaloHit::Print()
 {
     G4cout << "TrackID: " << trackID << "  caloNb: " << caloNb
-    << "  energy deposit: " << G4BestUnit(eDep,"Energy");
+           << "  energy deposit: " << G4BestUnit ( eDep,"Energy" );
 }

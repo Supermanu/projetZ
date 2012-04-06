@@ -20,8 +20,9 @@
 #ifndef PROJETZCALOSD_H
 #define PROJETZCALOSD_H
 
-#include "projetZCaloHit.h" 
-#include <G4VSensitiveDetector.hh>
+#include "G4VSensitiveDetector.hh"
+#include "projetZCaloHit.hh" 
+
 
 class G4Step;
 class G4HCofThisEvent;
@@ -30,13 +31,14 @@ class projetZCaloSD : public G4VSensitiveDetector
 {
 
 public:
-    projetZCaloSD ( G4String name );
+    projetZCaloSD ( G4String );
     ~projetZCaloSD();
+    
     virtual void Initialize ( G4HCofThisEvent* );
     virtual void EndOfEvent ( G4HCofThisEvent* );
-    G4bool ProcessHits ( G4Step* aStep, G4TouchableHistory* );
+    G4bool ProcessHits ( G4Step*, G4TouchableHistory* );
 private:
-    projetZCaloHitsCollection* caloCollection;
+    projetZCaloHitCollection* caloCollection;
 };
 
 #endif // PROJETZCALOSD_H

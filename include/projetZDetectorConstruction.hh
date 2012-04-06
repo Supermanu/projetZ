@@ -57,7 +57,6 @@ private:
     // Physical volumes
     //
     G4VPhysicalVolume* World_Volume;
-    G4VPhysicalVolume* calorimeterLayer_phys;
     G4VPhysicalVolume* calorimeterBlock_phys;
     G4VPhysicalVolume* tracker;
 };
