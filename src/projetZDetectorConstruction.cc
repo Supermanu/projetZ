@@ -45,7 +45,7 @@
 
 projetZDetectorConstruction::projetZDetectorConstruction()
     :  WorldVolume_log ( 0 ), tracker_log ( 0 ),
-       calorimeterBlock_log ( 0 ), calorimeterLayer_log ( 0 ),
+       calorimeterBlock_log ( 0 ),
        World_Volume ( 0 ),calorimeterBlock_phys ( 0 ), tracker ( 0 )
 {
     ;
@@ -65,15 +65,16 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     G4double density;
     G4double temperature;
     G4double pressure;
-
-    G4Material* Ar =
-        new G4Material ( "ArgonGas", z= 18., a= 39.95*g/mole, density= 1.782*mg/cm3 );
-
-    G4Material* Al =
-        new G4Material ( "Aluminum", z= 13., a= 26.98*g/mole, density= 2.7*g/cm3 );
-
-    G4Material* Pb =
-        new G4Material ( "Lead", z= 82., a= 207.19*g/mole, density= 11.35*g/cm3 );
+    G4String name, symbole;
+    G4int nel;
+    
+    G4Element* elI = new G4Element(name="Iodine",   symbole="I",  z = 53., a = 126.9*g/mole);
+    a = 132.9*g/mole;
+    G4Element* elCs= new G4Element(name="Cesium",   symbole="Cs", z = 55., a = 132.9*g/mole);
+    
+    G4Material* CsI = new G4Material(name="CsI", density=4.51*g/cm3, nel = 2);
+    CsI->AddElement(elI, .5);
+    CsI->AddElement(elCs,.5);
 
     // Ajout du vide (nitrogen ~70%) et du silicium
     G4Material* Vacuum =
@@ -84,13 +85,8 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
 
     //------------------------------ experimental hall (world volume)
 
-    G4double innerRadiusOfTheTube = 0.*m;
-    G4double outerRadiusOfTheTube = 20.*m;
-    G4double hightOfTheTube = 12.5*m;     //half length of the tube
-    G4double startAngleOfTheTube = 0.*deg;
-    G4double spanningAngleOfTheTube = 360.*deg;
 
-    G4Tubs* WorldSolid = new G4Tubs ( "World_Volume_solid",innerRadiusOfTheTube,outerRadiusOfTheTube,hightOfTheTube,startAngleOfTheTube,spanningAngleOfTheTube );
+    G4Box* WorldSolid = new G4Box ( "World_Volume_solid",20.*m,20.*m,20.*m );
 
     WorldVolume_log = new G4LogicalVolume ( WorldSolid, Vacuum,"World_Volume_log",0,0,0 ); // fill the solid with "Vacuum"
     World_Volume = new G4PVPlacement ( 0,G4ThreeVector(),WorldVolume_log,"World_Volume",0,false,0 ); // raises it to physical volume
@@ -133,7 +129,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
         G4double startAngleOfTheCalo = n*18.*deg;
         G4double spanningAngleOfTheCalo = 18.*deg;
         G4Tubs* calorimeterBlock_tube = new G4Tubs ( nomsCalo[0][n],innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo );
-        calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,Pb,nomsCalo[1][n],0,0,0 );
+        calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,CsI,nomsCalo[1][n],0,0,0 );
         calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log,nomsCalo[2][n],WorldVolume_log,false,n );
     }
 

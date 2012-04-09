@@ -57,6 +57,9 @@ class projetZPhysicsList: public G4VUserPhysicsList
     void ConstructProcess();
     void SetCuts();
 
+  protected:
+    void ConstructEM();
+     void AddStepMax();
 };
 
 #endif

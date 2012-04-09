@@ -54,5 +54,5 @@ void projetZCaloHit::Draw()
 void projetZCaloHit::Print()
 {
     G4cout << "TrackID: " << trackID << "  caloNb: " << caloNb
-           << "  energy deposit: " << G4BestUnit ( eDep,"Energy" );
+           << "  énergie déposée: " << G4BestUnit ( eDep,"Energy" );
 }
