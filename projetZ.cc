@@ -108,11 +108,11 @@ int main(int argc,char** argv)
 
     // Start a run
     //
-    G4int numberOfEvent = 1;
+    G4int numberOfEvent = 3;
     runManager->BeamOn(numberOfEvent);
   // Job termination
   //
-  // Free the store: user actions, physics_list and detector_description are
+  // Free the store: user actions, physics_list and detector_desription are
   //                 owned and deleted by the run manager, so they should not
   //                 be deleted in the main() program !
   //

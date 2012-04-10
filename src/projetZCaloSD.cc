@@ -16,13 +16,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "projetZCaloSD.hh"
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
 #include "G4ThreeVector.hh"
 #include "G4SDManager.hh"
 #include "G4ios.hh"
+#include "G4UnitsTable.hh"
+#include <iostream>
+#include <fstream>
 
 // On donne un nom au détecteur pour pouvoir l'identifier
 projetZCaloSD::projetZCaloSD ( G4String name ) :G4VSensitiveDetector ( name )
@@ -44,6 +46,7 @@ void projetZCaloSD::Initialize ( G4HCofThisEvent* HCE )
         HCID = G4SDManager::GetSDMpointer()->GetCollectionID ( collectionName[0] );
     }
     HCE->AddHitsCollection ( HCID, caloCollection );
+    energieTotal = 0;
 }
 
 // Dans cette méthode, on décrit ce qu'il se passe quand un step (une étape de la particule)
@@ -59,21 +62,39 @@ G4bool projetZCaloSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
     newhit->SetTrackID ( aStep->GetTrack()->GetTrackID() );
     newhit->SetCaloNb ( aStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() );
     newhit->SetEdep ( eDep );
-    caloCollection->insert ( newhit ); // On range le hit dans la collection du calorimètre.
-    //newhit->Print(); // Si on veut un cout.
+    caloCollection->insert ( newhit );
+    energieTotal += eDep;
+    // On range le hit dans la collection du calorimètre.
+    newhit->Print(); // Si on veut un cout.
     return true;
 }
 
 // Donne juste des détails
 void projetZCaloSD::EndOfEvent ( G4HCofThisEvent* )
 {
-    if ( verboseLevel>0 ) {
+//     if ( verboseLevel>0 ) {
         G4int NbHits = caloCollection->entries();
-        G4cout << "\n-------->Collection de hits: dans cet évenement il y a " << NbHits
+        G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
                << " hits dans le calorimètre: " << G4endl;
-        for ( G4int i=0; i<NbHits; i++ ) {
-            ( *caloCollection ) [i]->Print();
-        }
-    }
+/// Je comprends pas pourquoi je dois diviser par deux :(
+	G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal/2,"Energy" ) << G4endl;
+	EcrireEnergie(energieTotal/2);
+//         for ( G4int i=0; i<NbHits; i++ ) {
+//             ( *caloCollection ) [i]->Print();
+//         }
+//     }
 }
 
+void projetZCaloSD::EcrireEnergie (G4double energie)
+{
+    std::string const nomFichier("energieCalorimetre.txt");
+    std::ofstream monFlux(nomFichier.c_str(), std::ios::app);
+    if(monFlux)    
+    {
+        monFlux << energie << G4endl;
+    }
+    else
+    {
+        G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+    }
+}
