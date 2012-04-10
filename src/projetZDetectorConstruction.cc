@@ -86,7 +86,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     //------------------------------ experimental hall (world volume)
 
 
-    G4Box* WorldSolid = new G4Box ( "World_Volume_solid",20.*m,20.*m,20.*m );
+    G4Box* WorldSolid = new G4Box ( "World_Volume_solid",10.*m,10.*m,15.*m );
 
     WorldVolume_log = new G4LogicalVolume ( WorldSolid, Vacuum,"World_Volume_log",0,0,0 ); // fill the solid with "Vacuum"
     World_Volume = new G4PVPlacement ( 0,G4ThreeVector(),WorldVolume_log,"World_Volume",0,false,0 ); // raises it to physical volume
@@ -119,23 +119,21 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
 
     //------------------------------ Le calorimètre
 
-    const int nbrCalo = 20 ;
-    std::string nomsCalo[3][nbrCalo] = { "cal01t", "cal02t", "cal03t", "cal04t", "cal05t", "cal06t", "cal07t", "cal08t" "cal09t", "cal10t", "cal11t", "cal12t", "cal13t", "cal14t", "cal15t", "cal16t", "cal17t", "cal18t", "cal19t", "cal20t","cal01l", "cal02l", "cal03l", "cal04l", "cal05l", "cal06l", "cal07l", "cal08l" "cal09l", "cal10l", "cal11l", "cal12l", "cal13l", "cal14l", "cal15l", "cal16l", "cal17l", "cal18l", "cal19l", "cal20l","cal01", "cal02", "cal03", "cal04", "cal05", "cal06", "cal07", "cal08" "cal09", "cal10", "cal11", "cal12", "cal13", "cal14", "cal15", "cal16", "cal17", "cal18", "cal19", "cal20" };
+     G4SDManager* SDman = G4SDManager::GetSDMpointer(); // On initialise le manager Sensitive Detector
+     
     G4double innerRadiusOfTheCalo = 1.5*m;
     G4double outerRadiusOfTheCalo = 3.*m;
     G4double hightOfTheCalo = 5.8*m;
 
-    for ( int n = 0; n< nbrCalo ; n++ ) {
-        G4double startAngleOfTheCalo = n*18.*deg;
-        G4double spanningAngleOfTheCalo = 18.*deg;
-        G4Tubs* calorimeterBlock_tube = new G4Tubs ( nomsCalo[0][n],innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo );
-        calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,CsI,nomsCalo[1][n],0,0,0 );
-        calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log,nomsCalo[2][n],WorldVolume_log,false,n );
-    }
+    G4double startAngleOfTheCalo = 0.*deg;
+    G4double spanningAngleOfTheCalo = 360.*deg;
+    G4Tubs* calorimeterBlock_tube = new G4Tubs ( "caloTube",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo );
+        calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,CsI,"calo_log",0,0,0 );
+        calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log, "calo_phys",WorldVolume_log,false,0 );
 
     //------------------------------- Détecteur sensible
     
-    G4SDManager* SDman = G4SDManager::GetSDMpointer(); // On initialise le manager Sensitive Detector
+   
     
     // Calorimètre
     G4String caloDetectSDname = "projetZ/caloDetectSD"; 

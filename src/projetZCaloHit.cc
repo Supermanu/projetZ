@@ -41,7 +41,7 @@ projetZCaloHit& projetZCaloHit::operator= ( const projetZCaloHit& other )
     return *this;
 }
 
-G4int projetZCaloHit::operator== ( const projetZCaloHit& other ) const
+G4bool projetZCaloHit::operator== ( const projetZCaloHit& other ) const
 {
     return ( this==&other ) ? 1 : 0;
 }

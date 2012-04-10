@@ -34,7 +34,7 @@ public:
     projetZCaloHit ( const projetZCaloHit& );
     virtual ~projetZCaloHit();
     virtual projetZCaloHit& operator= ( const projetZCaloHit& );
-    virtual G4int operator== ( const projetZCaloHit& ) const;
+    virtual G4bool operator== ( const projetZCaloHit& ) const;
     
     inline void* operator new(size_t);
     inline void  operator delete(void*);

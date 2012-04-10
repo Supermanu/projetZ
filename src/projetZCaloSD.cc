@@ -60,7 +60,8 @@ G4bool projetZCaloSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
     newhit->SetCaloNb ( aStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() );
     newhit->SetEdep ( eDep );
     caloCollection->insert ( newhit ); // On range le hit dans la collection du calorimètre.
-    //newhit->Print() // Si on veut un cout.
+    //newhit->Print(); // Si on veut un cout.
+    return true;
 }
 
 // Donne juste des détails
