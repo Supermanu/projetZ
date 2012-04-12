@@ -45,7 +45,7 @@ projetZPrimaryGeneratorAction::projetZPrimaryGeneratorAction()
     G4String particleName;
     particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e-" ) );
     particleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));
-    particleGun->SetParticleEnergy(0.5*GeV);
+    particleGun->SetParticleEnergy(200.0*GeV);
 }
 
 projetZPrimaryGeneratorAction::~projetZPrimaryGeneratorAction()
