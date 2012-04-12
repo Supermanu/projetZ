@@ -31,8 +31,6 @@
 #ifndef projetZDetectorConstruction_H
 #define projetZDetectorConstruction_H 1
 
-class G4Box;
-class G4Tube;
 class G4LogicalVolume;
 class G4VPhysicalVolume;
 
@@ -49,18 +47,18 @@ public:
 
 private:
 
-    G4Box* WorldSolid;
+    // Logical volumes
+    //
     G4LogicalVolume* WorldVolume_log;
-    G4VPhysicalVolume* World_Volume;
-    
-    G4Tube* tracker_Solid;
     G4LogicalVolume* tracker_log;
-    G4VPhysicalVolume* tracker;
-    
-    G4Tube* calorimeterBlock_solid;
     G4LogicalVolume* calorimeterBlock_log;
-    G4VPhysicalVolume* calorimeterBlock_phys; 
-    
+    G4LogicalVolume* calorimeterLayer_log;
+
+    // Physical volumes
+    //
+    G4VPhysicalVolume* World_Volume;
+    G4VPhysicalVolume* calorimeterBlock_phys;
+    G4VPhysicalVolume* tracker;
 };
 
 #endif

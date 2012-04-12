@@ -44,9 +44,9 @@
 #include "G4String.hh"
 
 projetZDetectorConstruction::projetZDetectorConstruction()
-    :  WorldSolid(0), WorldVolume_log ( 0 ), World_Volume ( 0 ),
-    tracker_Solid(0), tracker_log ( 0 ), tracker ( 0 ),
-    calorimeterBlock_solid(0), calorimeterBlock_log ( 0 ),calorimeterBlock_phys ( 0 )
+    :  WorldVolume_log ( 0 ), tracker_log ( 0 ),
+       calorimeterBlock_log ( 0 ),
+       World_Volume ( 0 ),calorimeterBlock_phys ( 0 ), tracker ( 0 )
 {
     ;
 }
@@ -119,19 +119,21 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
 
     //------------------------------ Le calorimètre
 
+     G4SDManager* SDman = G4SDManager::GetSDMpointer(); // On initialise le manager Sensitive Detector
+     
     G4double innerRadiusOfTheCalo = 1.5*m;
     G4double outerRadiusOfTheCalo = 3.*m;
     G4double hightOfTheCalo = 5.8*m;
 
     G4double startAngleOfTheCalo = 0.*deg;
     G4double spanningAngleOfTheCalo = 360.*deg;
-    G4Tubs* calorimeterBlock_solid = new G4Tubs ( "caloTube",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo );
-    calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_solid,CsI,"calo_log",0,0,0 );
-    calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log, "calo_phys",WorldVolume_log,false,0 );
+    G4Tubs* calorimeterBlock_tube = new G4Tubs ( "caloTube",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo );
+        calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,CsI,"calo_log",0,0,0 );
+        calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log, "calo_phys",WorldVolume_log,false,0 );
 
     //------------------------------- Détecteur sensible
     
-    G4SDManager* SDman = G4SDManager::GetSDMpointer(); // On initialise le manager Sensitive Detector
+   
     
     // Calorimètre
     G4String caloDetectSDname = "projetZ/caloDetectSD"; 
