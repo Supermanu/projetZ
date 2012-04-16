@@ -28,27 +28,25 @@
 
 G4Allocator<projetZTrackerHit> projetZTrackerHitAllocator;
 
-projetZTrackerHit::projetZTrackerHit()
-{;}
+projetZTrackerHit::projetZTrackerHit() {}
 
-projetZTrackerHit::~projetZTrackerHit()
-{;}
+projetZTrackerHit::~projetZTrackerHit() {}
 
-projetZTrackerHit::projetZTrackerHit(const projetZTrackerHit &right)   //on demande l'objet dans notre constructeur de cet objet?! fonction right???
+projetZTrackerHit::projetZTrackerHit(const projetZTrackerHit& right)   //on demande l'objet dans notre constructeur de cet objet?! fonction right???
   : G4VHit()
 {
   edep = right.edep;
   pos = right.pos;
 }
 
-const projetZTrackerHit& projetZTrackerHit::operator=(const projetZTrackerHit &right)
+projetZTrackerHit& projetZTrackerHit::operator=(const projetZTrackerHit& right)
 {
   edep = right.edep;
   pos = right.pos;
   return *this;
 }
 
-G4int projetZTrackerHit::operator==(const projetZTrackerHit &right) const
+G4int projetZTrackerHit::operator==(const projetZTrackerHit& right) const
 {
   return (this==&right) ? 1 : 0;
 }

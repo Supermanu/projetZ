@@ -25,16 +25,18 @@
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 
-class projetZtrackerHit : public G4VHit
+class projetZTrackerHit : public G4VHit
 {
 
 public:
     
       projetZTrackerHit();
+      projetZTrackerHit(const projetZTrackerHit& );
       ~projetZTrackerHit();
-      projetZTrackerHit(const projetZTrackerHit &right);
-      const projetZTrackerHit& operator=(const projetZTrackerHit &right);
-      G4int operator==(const projetZTrackerHit &right) const;
+      
+      
+      virtual projetZTrackerHit& operator=(const projetZTrackerHit& );
+      G4int operator==(const projetZTrackerHit& ) const;
 
       inline void *operator new(size_t);
       inline void operator delete(void *aHit);
