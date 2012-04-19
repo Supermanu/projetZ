@@ -141,8 +141,10 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     SDman->AddNewDetector(aCaloSD);
     calorimeterBlock_log->SetSensitiveDetector(aCaloSD);
     // Trackeur
-    
-    
+    G4String trackerSDname = "projetZ/trackerDetectSD ";
+    projetZTrackerSD * trackerSD = new projetZTrackerSD(trackerSDname);
+    SDman->AddNewDetector(trackerSD);
+    trackerLayer_log->SetSensitiveDetector(trackerSD);
     
 
     return World_Volume;
