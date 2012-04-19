@@ -43,13 +43,16 @@
 #include "globals.hh"
 #include <string>
 #include "G4String.hh"
+#include "G4UniformMagField.hh"
+#include "G4TransportationManager.hh"
+#include "G4FieldManager.hh"
 
 projetZDetectorConstruction::projetZDetectorConstruction()
     :  WorldVolume_log ( 0 ), tracker_log ( 0 ),
        calorimeterBlock_log ( 0 ),
        World_Volume ( 0 ),calorimeterBlock_phys ( 0 ), tracker ( 0 )
 {
-    ;
+    SetMagField(0.0004);
 }
 
 projetZDetectorConstruction::~projetZDetectorConstruction()
@@ -60,6 +63,7 @@ projetZDetectorConstruction::~projetZDetectorConstruction()
   
   delete elI;
   delete elCs;
+  
 }
 
 G4VPhysicalVolume* projetZDetectorConstruction::Construct()
@@ -162,4 +166,10 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     return World_Volume;
 }
 
-
+void projetZDetectorConstruction::SetMagField(G4double fieldValue)
+{
+    G4UniformMagField* magField = new G4UniformMagField(G4ThreeVector(0.,0.,fieldValue));
+    G4FieldManager* fieldMgr = G4TransportationManager::GetTransportationManager()->GetFieldManager();
+    fieldMgr->SetDetectorField(magField);
+    fieldMgr->CreateChordFinder(magField);
+}

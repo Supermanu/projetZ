@@ -47,6 +47,7 @@ public:
     ~projetZDetectorConstruction();
 
     G4VPhysicalVolume* Construct();
+    void SetMagField(G4double);
 
 private:
 
