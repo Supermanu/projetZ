@@ -31,6 +31,7 @@
 
 #include "projetZDetectorConstruction.hh"
 #include "projetZCaloSD.hh"
+#include "projetZTrackerSD.hh"
 
 #include "G4Material.hh"
 #include "G4Box.hh"
@@ -141,10 +142,10 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     SDman->AddNewDetector(aCaloSD);
     calorimeterBlock_log->SetSensitiveDetector(aCaloSD);
     // Trackeur
-    G4String trackerSDname = "projetZ/trackerDetectSD ";
-    projetZTrackerSD * trackerSD = new projetZTrackerSD(trackerSDname);
+    G4String trackerSDname = "projetZ/trackerDetectSD";
+    projetZTrackerSD* trackerSD = new projetZTrackerSD(trackerSDname);
     SDman->AddNewDetector(trackerSD);
-    trackerLayer_log->SetSensitiveDetector(trackerSD);
+    tracker_log->SetSensitiveDetector(trackerSD);
     
 
     return World_Volume;
