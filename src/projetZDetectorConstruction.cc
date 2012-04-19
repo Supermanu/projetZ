@@ -102,7 +102,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     {"t1s","t2s","t3s","t4s","t5s","t6s","t7s","t8s","t9s","t10s","t11s","t12s","t13s","t1l","t2l","t3l","t4l","t5l","t6l","t7l","t8l","t9l","t10l","t11l","t12l","t13l","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13"} ; // J'ai inversé nbSteps et nbTracker pour bien définir l'array. J'ai répercuté le changement dans la boucle en bas.
 
 
-    for ( int i=0; i<12; i++ ) {
+    for ( int i=0; i<13; i++ ) {
         G4double innerRadiusOfTheTube = Iradii[i];
         G4double outerRadiusOfTheTube =Oradii[i];
         G4double hightOfTheTube = 5.8*m;     //half length of the tube
