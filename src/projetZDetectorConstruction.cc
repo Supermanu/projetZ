@@ -31,6 +31,7 @@
 
 #include "projetZDetectorConstruction.hh"
 #include "projetZCaloSD.hh"
+#include "projetZTrackerSD.hh"
 
 #include "G4Material.hh"
 #include "G4Box.hh"
@@ -82,9 +83,14 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     CsI->AddElement(elI, .5);
     CsI->AddElement(elCs,.5);
 
-    // Ajout du vide (nitrogen ~70%) et du silicium
-    G4Material* Vacuum =
-        new G4Material ( "Vacuum", z = 7, a = 14.0067*g/mole, density = 1.e-25*g/cm3, kStateGas, temperature = 2.73*kelvin, pressure  = 3.e-18*pascal );
+    //Air
+  G4Element* N = new G4Element("Nitrogen", "N", z=7., a= 14.01*g/mole);
+  G4Element* O = new G4Element("Oxygen"  , "O", z=8., a= 16.00*g/mole);
+   
+  G4Material* Air = new G4Material("Air", density= 1.29*mg/cm3, nel=2);
+  Air->AddElement(N, 70*perCent);
+  Air->AddElement(O, 30*perCent);
+
 
     G4Material* Si = new G4Material ( "Silicon", z=14., a= 28.09*g/mole, density= 2.33*g/cm3 );
     //------------------------------------------------------ volumes
@@ -94,7 +100,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
 
     G4Box* WorldSolid = new G4Box ( "World_Volume_solid",10.*m,10.*m,15.*m );
 
-    WorldVolume_log = new G4LogicalVolume ( WorldSolid, Vacuum,"World_Volume_log",0,0,0 ); // fill the solid with "Vacuum"
+    WorldVolume_log = new G4LogicalVolume ( WorldSolid, Air,"World_Volume_log",0,0,0 ); // fill the solid with "Air"
     World_Volume = new G4PVPlacement ( 0,G4ThreeVector(),WorldVolume_log,"World_Volume",0,false,0 ); // raises it to physical volume
 
     //------------------------------ a tracker tube
@@ -108,7 +114,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     {"t1s","t2s","t3s","t4s","t5s","t6s","t7s","t8s","t9s","t10s","t11s","t12s","t13s","t1l","t2l","t3l","t4l","t5l","t6l","t7l","t8l","t9l","t10l","t11l","t12l","t13l","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13"} ; // J'ai inversé nbSteps et nbTracker pour bien définir l'array. J'ai répercuté le changement dans la boucle en bas.
 
 
-    for ( int i=0; i<12; i++ ) {
+    for ( int i=0; i<13; i++ ) {
         G4double innerRadiusOfTheTube = Iradii[i];
         G4double outerRadiusOfTheTube =Oradii[i];
         G4double hightOfTheTube = 5.8*m;     //half length of the tube
@@ -147,8 +153,10 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     SDman->AddNewDetector(aCaloSD);
     calorimeterBlock_log->SetSensitiveDetector(aCaloSD);
     // Trackeur
-    
-    
+    G4String trackerSDname = "projetZ/trackerDetectSD";
+    projetZTrackerSD* trackerSD = new projetZTrackerSD(trackerSDname);
+    SDman->AddNewDetector(trackerSD);
+    tracker_log->SetSensitiveDetector(trackerSD);
     
 
     return World_Volume;
