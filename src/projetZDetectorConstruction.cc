@@ -53,6 +53,12 @@ projetZDetectorConstruction::projetZDetectorConstruction()
 
 projetZDetectorConstruction::~projetZDetectorConstruction()
 {
+  delete CsI;
+  delete Vacuum;
+  delete Si;
+  
+  delete elI;
+  delete elCs;
 }
 
 G4VPhysicalVolume* projetZDetectorConstruction::Construct()

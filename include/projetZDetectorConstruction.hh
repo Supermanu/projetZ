@@ -33,8 +33,11 @@
 
 class G4LogicalVolume;
 class G4VPhysicalVolume;
+class G4Material;
+class G4Element;
 
 #include "G4VUserDetectorConstruction.hh"
+#include "globals.hh"
 
 class projetZDetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -59,6 +62,15 @@ private:
     G4VPhysicalVolume* World_Volume;
     G4VPhysicalVolume* calorimeterBlock_phys;
     G4VPhysicalVolume* tracker;
+    
+    // Eléments et matériaux
+    //
+    G4Material* CsI;
+    G4Material* Vacuum;
+    G4Material* Si;
+  
+    G4Element* elI;
+    G4Element* elCs;
 };
 
 #endif
