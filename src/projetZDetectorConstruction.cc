@@ -77,9 +77,14 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     CsI->AddElement(elI, .5);
     CsI->AddElement(elCs,.5);
 
-    // Ajout du vide (nitrogen ~70%) et du silicium
-    G4Material* Vacuum =
-        new G4Material ( "Vacuum", z = 7, a = 14.0067*g/mole, density = 1.e-25*g/cm3, kStateGas, temperature = 2.73*kelvin, pressure  = 3.e-18*pascal );
+    //Air
+  G4Element* N = new G4Element("Nitrogen", "N", z=7., a= 14.01*g/mole);
+  G4Element* O = new G4Element("Oxygen"  , "O", z=8., a= 16.00*g/mole);
+   
+  G4Material* Air = new G4Material("Air", density= 1.29*mg/cm3, nel=2);
+  Air->AddElement(N, 70*perCent);
+  Air->AddElement(O, 30*perCent);
+
 
     G4Material* Si = new G4Material ( "Silicon", z=14., a= 28.09*g/mole, density= 2.33*g/cm3 );
     //------------------------------------------------------ volumes
@@ -89,7 +94,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
 
     G4Box* WorldSolid = new G4Box ( "World_Volume_solid",10.*m,10.*m,15.*m );
 
-    WorldVolume_log = new G4LogicalVolume ( WorldSolid, Vacuum,"World_Volume_log",0,0,0 ); // fill the solid with "Vacuum"
+    WorldVolume_log = new G4LogicalVolume ( WorldSolid, Air,"World_Volume_log",0,0,0 ); // fill the solid with "Air"
     World_Volume = new G4PVPlacement ( 0,G4ThreeVector(),WorldVolume_log,"World_Volume",0,false,0 ); // raises it to physical volume
 
     //------------------------------ a tracker tube
