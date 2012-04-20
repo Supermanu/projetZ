@@ -37,6 +37,7 @@
 #include "projetZDetectorConstruction.hh"
 #include "projetZPhysicsList.hh"
 #include "projetZPrimaryGeneratorAction.hh"
+#include "projetZElectronsGenerator.hh"
 
 // Inclusion de la visualisation
 #ifdef G4VIS_USE
@@ -107,7 +108,7 @@ int main(int argc,char** argv)
 
     // Start a run
     //
-    G4int numberOfEvent = 3;
+    G4int numberOfEvent = 1;
     runManager->BeamOn(numberOfEvent);
   // Job termination
   //
