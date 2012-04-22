@@ -76,9 +76,8 @@ void projetZCaloSD::EndOfEvent ( G4HCofThisEvent* )
         G4int NbHits = caloCollection->entries();
         G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
                << " hits dans le calorimètre: " << G4endl;
-/// Je comprends pas pourquoi je dois diviser par deux :(
-	G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal/2,"Energy" ) << G4endl;
-	EcrireEnergie(energieTotal/2);
+	G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal,"Energy" ) << G4endl;
+	EcrireEnergie(energieTotal);
 //         for ( G4int i=0; i<NbHits; i++ ) {
 //             ( *caloCollection ) [i]->Print();
 //         }

@@ -34,19 +34,20 @@ public:
     projetZElectronsGenerator ( const projetZElectronsGenerator& other );
     virtual ~projetZElectronsGenerator();
     
-    virtual void setMassHiggs(G4double energie) {energieHiggs = energie;} ;
-    virtual G4double getMassHiggs() const {return energieHiggs;} ;
-    vector< double > boost( vector< double > p_i, vector< double > b );
-    
-    virtual vector<double> uniforpi();
-    virtual double uniforme();
+    virtual void setMassHiggs(G4double energie) {masseHiggs = energie;} ;
+    virtual G4double getMassHiggs() const {return masseHiggs;} ;
+    virtual G4ThreeVector getDirectionElectron( int electron) ;
+    virtual vector< G4double > boost( vector< G4double > p_i, vector< G4double > b );
+    virtual G4double getEnergyElectron(int electron);
     
 protected:
-    G4double energieHiggs;
-    vector<double> angleZ;
-    vector<double> angleElectron;
-    vector<double> energieElectrons[4];
+    G4double masseHiggs;
+    vector<G4double> angleZ;
+    vector<G4double> angleElectron;
+    G4double momentumElectrons[4][4];
+    
     G4ThreeVector directionHiggs;
+    
 };
 
 #endif // PROJETZELECTRONSGENERATOR_HH

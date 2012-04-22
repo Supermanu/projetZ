@@ -40,12 +40,9 @@ projetZPrimaryGeneratorAction::projetZPrimaryGeneratorAction()
 {
     G4int n_particle = 1;
     particleGun = new G4ParticleGun ( n_particle );
-
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     G4String particleName;
     particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e-" ) );
-    particleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));
-    particleGun->SetParticleEnergy(0.1*GeV);
 }
 
 projetZPrimaryGeneratorAction::~projetZPrimaryGeneratorAction()
@@ -55,9 +52,26 @@ projetZPrimaryGeneratorAction::~projetZPrimaryGeneratorAction()
 
 void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
 {
+
+    projetZElectronsGenerator quatreElectrons;
+    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+    G4String particleName;
+    particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e-" ) );
+    particleGun->SetParticleMomentumDirection(quatreElectrons.getDirectionElectron(0));
+    particleGun->SetParticleEnergy(quatreElectrons.getEnergyElectron(0));
     particleGun->SetParticlePosition(G4ThreeVector(0.*cm,0.*cm,0.*cm));
     particleGun->GeneratePrimaryVertex(anEvent);
-    particleGun->GeneratePrimaryVertex ( anEvent );
+    particleGun->SetParticleMomentumDirection(quatreElectrons.getDirectionElectron(2));
+    particleGun->SetParticleEnergy(quatreElectrons.getEnergyElectron(2));
+    particleGun->GeneratePrimaryVertex(anEvent);
+    particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e+" ) );
+    particleGun->SetParticleMomentumDirection(quatreElectrons.getDirectionElectron(1));
+    particleGun->SetParticleEnergy(quatreElectrons.getEnergyElectron(1));
+    particleGun->SetParticlePosition(G4ThreeVector(0.*cm,0.*cm,0.*cm));
+    particleGun->GeneratePrimaryVertex(anEvent);
+    particleGun->SetParticleMomentumDirection(quatreElectrons.getDirectionElectron(3));
+    particleGun->SetParticleEnergy(quatreElectrons.getEnergyElectron(3));
+    particleGun->GeneratePrimaryVertex(anEvent);
 }
 
 
