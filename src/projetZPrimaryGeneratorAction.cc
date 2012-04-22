@@ -29,6 +29,7 @@
 //
 
 #include "projetZPrimaryGeneratorAction.hh"
+#include "projetZElectronsGenerator.hh"
 
 #include "G4Event.hh"
 #include "G4ParticleGun.hh"
