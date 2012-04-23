@@ -3,9 +3,9 @@
 #
 # Set some default verbose
 #
-/control/verbose 2
+/control/verbose 1
 /control/saveHistory
-/run/verbose 2
+/run/verbose 1
 #
 # Visualization setting
 /control/execute vis.mac

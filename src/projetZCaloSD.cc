@@ -65,14 +65,14 @@ G4bool projetZCaloSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
     caloCollection->insert ( newhit );
     energieTotal += eDep;
     // On range le hit dans la collection du calorimètre.
-    newhit->Print(); // Si on veut un cout.
+    //newhit->Print(); // Si on veut un cout.
     return true;
 }
 
 // Donne juste des détails
 void projetZCaloSD::EndOfEvent ( G4HCofThisEvent* )
 {
-//     if ( verboseLevel>0 ) {
+     if ( verboseLevel>3 ) {
         G4int NbHits = caloCollection->entries();
         G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
                << " hits dans le calorimètre: " << G4endl;
@@ -81,7 +81,7 @@ void projetZCaloSD::EndOfEvent ( G4HCofThisEvent* )
 //         for ( G4int i=0; i<NbHits; i++ ) {
 //             ( *caloCollection ) [i]->Print();
 //         }
-//     }
+     }
 }
 
 void projetZCaloSD::EcrireEnergie (G4double energie)
