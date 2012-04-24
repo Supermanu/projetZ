@@ -32,6 +32,7 @@
 #include "projetZDetectorConstruction.hh"
 #include "projetZCaloSD.hh"
 #include "projetZTrackerSD.hh"
+#include "projetZTrackerParametrisation.hh"
 
 #include "G4Material.hh"
 #include "G4Box.hh"

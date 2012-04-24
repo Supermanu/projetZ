@@ -9,7 +9,7 @@
 projetZTrackerParametrisation::projetZTrackerParametrisation()
 {
 
-#include "projetZTrackerParameterDef.hh"
+#include "projetZTrackerParameterDef.icc"
 
 }
 
