@@ -1,5 +1,4 @@
-﻿Test
-Instruction pour l'installation :
+﻿Instruction pour l'installation :
 Il faut Geant4, cmake et make.
 
 Pour installer cmake et make sur ubuntu:
