@@ -33,10 +33,13 @@
 #include "projetZCaloSD.hh"
 #include "projetZTrackerSD.hh"
 #include "projetZTrackerParametrisation.hh"
+#include "projetZTrackerParameterDef.hh"
+#include "projetZCaloParametrisation.hh"
 
 #include "G4Material.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
+#include "G4VSolid.hh"
 #include "G4LogicalVolume.hh"
 #include "G4ThreeVector.hh"
 #include "G4PVPlacement.hh"
@@ -47,13 +50,15 @@
 #include "G4UniformMagField.hh"
 #include "G4TransportationManager.hh"
 #include "G4FieldManager.hh"
+#include "G4Color.hh"
+#include "G4PVParameterised.hh"
 
 projetZDetectorConstruction::projetZDetectorConstruction()
-    :  WorldVolume_log ( 0 ), tracker_log ( 0 ),
+    :  WorldVolume_log ( 0 ), /*tracker_log ( 0 ),*/
        calorimeterBlock_log ( 0 ),
-       World_Volume ( 0 ),calorimeterBlock_phys ( 0 ), tracker ( 0 )
+       World_Volume ( 0 ),calorimeterBlock_phys ( 0 )/*, tracker_phys ( 0 )*/
 {
-    SetMagField(0.0004);
+    SetMagField(0.04);
 }
 
 projetZDetectorConstruction::~projetZDetectorConstruction()
@@ -103,30 +108,27 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     World_Volume = new G4PVPlacement ( 0,G4ThreeVector(),WorldVolume_log,"World_Volume",0,false,0 ); // raises it to physical volume
 
     //------------------------------ a tracker tube
+    G4double trkTubs_rmin = 8.*cm;
+    G4double trkTubs_rmax = 110.1*cm;
+    G4double trkTubs_dz = 13.6*m;
+    G4double trkTubs_sphi = 0.*deg;
+    G4double trkTubs_dphi = 360.*deg;
+    
+    G4VSolid * tracker_tubs = new G4Tubs("trkTubs_tubs",trkTubs_rmin,trkTubs_rmax,trkTubs_dz, trkTubs_sphi,trkTubs_dphi);
+    G4LogicalVolume * tracker_log = new G4LogicalVolume(tracker_tubs,Air,"trackerT_L",0,0,0);
+    // G4VPhysicalVolume * tracker_phys =
+    new G4PVPlacement(0,G4ThreeVector(),tracker_log,"tracker_phys",WorldVolume_log,false,0);
+    G4VisAttributes* tracker_logVisAtt = new G4VisAttributes(G4Colour(1.0,0.0,1.0));
+    tracker_log->SetVisAttributes(tracker_logVisAtt);
 
-    int const nbTracker=13;
-    G4int Iradii[nbTracker]= {8*cm,9*cm,10*cm,20*cm,30*cm,40*cm,50*cm,60*cm,70*cm,80*cm,90*cm,100*cm,110*cm};
-    G4int Oradii[nbTracker]= {8.1*cm,9.1*cm,10.1*cm,20.1*cm,30.1*cm,40.1*cm,50.1*cm,60.1*cm,70.1*cm,80.1*cm,90.1*cm,100.1*cm,110.1*cm};
-    int const nbSteps=3;
-
-    std::string namesTracker[nbSteps][nbTracker] =
-    {"t1s","t2s","t3s","t4s","t5s","t6s","t7s","t8s","t9s","t10s","t11s","t12s","t13s","t1l","t2l","t3l","t4l","t5l","t6l","t7l","t8l","t9l","t10l","t11l","t12l","t13l","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13"} ; // J'ai inversé nbSteps et nbTracker pour bien définir l'array. J'ai répercuté le changement dans la boucle en bas.
-
-
-    for ( int i=0; i<13; i++ ) {
-        G4double innerRadiusOfTheTube = Iradii[i];
-        G4double outerRadiusOfTheTube =Oradii[i];
-        G4double hightOfTheTube = 5.8*m;     //half length of the tube
-        G4double startAngleOfTheTube = 0.*deg;
-        G4double spanningAngleOfTheTube = 360.*deg;
-
-        G4Tubs* tracker_Solid = new G4Tubs ( namesTracker[0][i],innerRadiusOfTheTube,outerRadiusOfTheTube,hightOfTheTube,startAngleOfTheTube,spanningAngleOfTheTube );
-
-        tracker_log = new G4LogicalVolume ( tracker_Solid, Si,namesTracker[1][i],0,0,0 ); // fill the solid with "Silicon"       variable non declarée...
-        ///TODO G4SensitiveDetector* trackerS_log = new   //
-        tracker = new G4PVPlacement ( 0,G4ThreeVector(),tracker_log, namesTracker[2][i],WorldVolume_log,false,0 ); // raises it to physical volume
-    }
-
+     G4VSolid * trackerLayer_tubs  = new G4Tubs("trkTubs_tubs",trkTubs_rmin,trkTubs_rmax,trkTubs_dz, trkTubs_sphi,trkTubs_dphi);
+     G4LogicalVolume * trackerLayer_log = new G4LogicalVolume(trackerLayer_tubs,Si,"trackerB_L",0,0,0);
+     G4VPVParameterisation * trackerParam = new projetZTrackerParametrisation;
+     new G4PVParameterised("trackerLayer_phys",trackerLayer_log,tracker_log,kXAxis, 13, trackerParam);
+     G4VisAttributes* trackerLayer_logVisAtt = new G4VisAttributes(G4Colour(0.5,0.0,1.0));
+     trackerLayer_logVisAtt->SetForceWireframe(true);
+     trackerLayer_log->SetVisAttributes(trackerLayer_logVisAtt);
+    
 
     //------------------------------ Le calorimètre
 
@@ -134,13 +136,20 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
      
     G4double innerRadiusOfTheCalo = 1.5*m;
     G4double outerRadiusOfTheCalo = 3.*m;
-    G4double hightOfTheCalo = 5.8*m;
+    G4double hightOfTheCalo = 14.*m;
 
     G4double startAngleOfTheCalo = 0.*deg;
     G4double spanningAngleOfTheCalo = 360.*deg;
     G4Tubs* calorimeterBlock_tube = new G4Tubs ( "caloTube",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo,startAngleOfTheCalo,spanningAngleOfTheCalo );
-        calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,CsI,"calo_log",0,0,0 );
-        calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log, "calo_phys",WorldVolume_log,false,0 );
+    calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,Air,"calo_log",0,0,0 );
+    calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log, "calo_phys",WorldVolume_log,false,0 );
+    
+    G4VSolid* caloCell_tubs = new G4Tubs("caloCell_tubs",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo/20 ,0.*deg,360.*deg/48);
+    G4LogicalVolume* caloCell_log = new G4LogicalVolume(caloCell_tubs,CsI,"caloCell_log",0,0,0);
+    G4VPVParameterisation* calorimeterParam = new projetZCaloParametrisation;
+    new G4PVParameterised("caloCell_phys",caloCell_log,calorimeterBlock_log,kUndefined, 1920, calorimeterParam);
+    G4VisAttributes* caloCell_logVisAtt = new G4VisAttributes(G4Colour(0.7,1.0,0.0));
+    caloCell_log->SetVisAttributes(caloCell_logVisAtt);
 
     //------------------------------- Détecteur sensible
     
@@ -150,12 +159,12 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     G4String caloDetectSDname = "projetZ/caloDetectSD"; 
     projetZCaloSD* aCaloSD = new projetZCaloSD(caloDetectSDname);
     SDman->AddNewDetector(aCaloSD);
-    calorimeterBlock_log->SetSensitiveDetector(aCaloSD);
+    caloCell_log->SetSensitiveDetector(aCaloSD);
     // Trackeur
-    G4String trackerSDname = "projetZ/trackerDetectSD";
-    projetZTrackerSD* trackerSD = new projetZTrackerSD(trackerSDname);
-    SDman->AddNewDetector(trackerSD);
-    tracker_log->SetSensitiveDetector(trackerSD);
+//     G4String trackerSDname = "projetZ/trackerDetectSD";
+//     projetZTrackerSD* trackerSD = new projetZTrackerSD(trackerSDname);
+//     SDman->AddNewDetector(trackerSD);
+//     tracker_log->SetSensitiveDetector(trackerSD);
     
 
     return World_Volume;

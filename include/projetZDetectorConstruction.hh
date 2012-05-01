@@ -37,6 +37,7 @@ class G4Material;
 class G4Element;
 
 #include "G4VUserDetectorConstruction.hh"
+#include "G4VisAttributes.hh"
 #include "globals.hh"
 
 class projetZDetectorConstruction : public G4VUserDetectorConstruction
@@ -62,7 +63,7 @@ private:
     //
     G4VPhysicalVolume* World_Volume;
     G4VPhysicalVolume* calorimeterBlock_phys;
-    G4VPhysicalVolume* tracker;
+    G4VPhysicalVolume* tracker_phys;
     
     // Eléments et matériaux
     //
@@ -72,6 +73,8 @@ private:
   
     G4Element* elI;
     G4Element* elCs;
+    
+    G4VisAttributes* tracker_logVisAtt;
 };
 
 #endif

@@ -47,6 +47,13 @@ void projetZCaloSD::Initialize ( G4HCofThisEvent* HCE )
     }
     HCE->AddHitsCollection ( HCID, caloCollection );
     energieTotal = 0;
+    for (int n = 0 ; n<48 ; n++)
+    {
+      for (int k = 0 ; k<20 ; k++)
+      {
+	energieCell[n][k] = 0;
+      }
+    }
 }
 
 // Dans cette méthode, on décrit ce qu'il se passe quand un step (une étape de la particule)
@@ -65,23 +72,27 @@ G4bool projetZCaloSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
     caloCollection->insert ( newhit );
     energieTotal += eDep;
     // On range le hit dans la collection du calorimètre.
-    //newhit->Print(); // Si on veut un cout.
+    newhit->Print(); // Si on veut un cout.
     return true;
 }
 
 // Donne juste des détails
 void projetZCaloSD::EndOfEvent ( G4HCofThisEvent* )
 {
-     if ( verboseLevel>3 ) {
-        G4int NbHits = caloCollection->entries();
-        G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
-               << " hits dans le calorimètre: " << G4endl;
-	G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal,"Energy" ) << G4endl;
-	EcrireEnergie(energieTotal);
-//         for ( G4int i=0; i<NbHits; i++ ) {
-//             ( *caloCollection ) [i]->Print();
-//         }
-     }
+    G4int NbHits = caloCollection->entries();
+    if ( verboseLevel>3 ) 
+    {
+      G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
+      << " hits dans le calorimètre: " << G4endl;
+      G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal,"Energy" ) << G4endl;
+    }
+    EcrireEnergie(energieTotal);
+    for ( G4int i=0; i<NbHits; i++ ) {
+	G4int positionCell = ( *caloCollection ) [i]->GetCaloNb();
+	G4int positionZ = int(positionCell/48);
+	G4int positionpPhi = positionCell - positionZ*48;
+        energieCell[positionpPhi][positionZ] += ( *caloCollection ) [i]->GetEdep();
+    }
 }
 
 void projetZCaloSD::EcrireEnergie (G4double energie)

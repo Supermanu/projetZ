@@ -47,6 +47,8 @@ public:
     void SetTrackID  (G4int track)      { trackID = track; };
     void SetCaloNb(G4int calo)      { caloNb = calo; };  
     void SetEdep     (G4double de)      { eDep = de; };
+    G4double GetEdep() {return eDep;} ;
+    G4int GetCaloNb() {return caloNb;} ;
     
 private:
   

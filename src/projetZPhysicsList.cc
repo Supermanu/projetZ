@@ -28,11 +28,11 @@
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
 //
-#define KUBUNTU // A commenter ou supprimer si on ne se trouve pas sur une machine disposant de la dernière version.
+#define NOLAST_GEANT // A commenter ou supprimer si on ne se trouve pas sur une machine disposant de la dernière version de geant4.
 #include "projetZPhysicsList.hh"
 #include "G4ParticleTypes.hh"
 
-#ifndef KUBUNTU
+#ifndef NOLAST_GEANT
 
 #include "G4PhysicsListHelper.hh"
 
@@ -88,7 +88,7 @@ void projetZPhysicsList::ConstructProcess()
 
 void projetZPhysicsList::ConstructEM()
 {
-#ifdef KUBUNTU
+#ifdef NOLAST_GEANT
 theParticleIterator->reset();
   while( (*theParticleIterator)() ){
     G4ParticleDefinition* particle = theParticleIterator->value();
@@ -117,7 +117,7 @@ theParticleIterator->reset();
     }      
   }
 #endif
-#ifndef KUBUNTU
+#ifndef NOLAST_GEANT
   G4PhysicsListHelper* ph = G4PhysicsListHelper::GetPhysicsListHelper();
   
   theParticleIterator->reset();

@@ -41,6 +41,7 @@ public:
 private:
     projetZCaloHitCollection* caloCollection;
     G4double energieTotal;
+    G4double energieCell[48][20];
 };
 
 #endif // PROJETZCALOSD_H
