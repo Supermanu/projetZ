@@ -16,6 +16,7 @@ projetZTrackerParametrisation::projetZTrackerParametrisation()
   trkTubs_dphi = 360.*deg;
 
   notrkLayers = 13;
+  
   tracker_radius[0]  = 8.*cm;
   tracker_radius[1]  = 9.*cm;
   tracker_radius[2]  = 10.*cm;
@@ -29,8 +30,8 @@ projetZTrackerParametrisation::projetZTrackerParametrisation()
   tracker_radius[10] = 90.*cm;
   tracker_radius[11] = 100.*cm;
   tracker_radius[12] = 110.*cm;
-
   tracker_thick =  0.1*cm;
+
 
 
 }
@@ -48,6 +49,7 @@ void projetZTrackerParametrisation::ComputeTransformation
 void projetZTrackerParametrisation::ComputeDimensions
 (G4Tubs& trackerLayer, const G4int copyNo, const G4VPhysicalVolume*) const
 {
+
   trackerLayer.SetInnerRadius(tracker_radius[copyNo]);
   trackerLayer.SetOuterRadius(tracker_radius[copyNo]+tracker_thick);
   trackerLayer.SetZHalfLength(trkTubs_dz);

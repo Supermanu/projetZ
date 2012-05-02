@@ -56,6 +56,7 @@ class projetZTrackerParametrisation : public G4VPVParameterisation
     G4double trkTubs_sphi;
     G4double trkTubs_dphi;
     G4double tracker_thick;
+    G4double tracker_length[13];
     G4int notrkLayers;
 
 };
