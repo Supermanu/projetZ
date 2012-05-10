@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc} 
+%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+
+%\usepackage{setspace}
+\usepackage[bottom=3cm, top=3cm,left=4cm, right=4cm]{geometry}
+
+\usepackage{float}
+\usepackage{graphicx}
+%\usepackage{wrapfig}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+%\usepackage[overload]{empheq}
+
+
+\newtheorem{champ_parallele}{Définition}
+\newtheorem{geodesique}{Définition}
+\newtheorem{unicite}{Lemme}
+\newtheorem{isometrie}{Définition}
+
+\pagestyle{headings}
+
+\makeatletter
+\def\clap#1{\hbox to 0pt{\hss #1\hss}}%
+\def\ligne#1{%
+\hbox to \hsize{%
+\vbox{\centering #1}}}%
+\def\haut#1#2#3{%
+\hbox to \hsize{%
+\rlap{\vtop{\raggedright #1}}%
+\hss
+\clap{\vtop{\centering #2}}%
+\hss
+\llap{\vtop{\raggedleft #3}}}}%
+\def\bas#1#2#3{%
+\hbox to \hsize{%
+\rlap{\vbox{\raggedright #1}}%
+\hss
+\clap{\vbox{\centering #2}}%
+\hss
+\llap{\vbox{\raggedleft #3}}}}%
+\def\maketitle{%
+\thispagestyle{empty}\vbox to \vsize{%
+\haut{}{\@blurb}{}
+\vfill
+\vspace{1cm}
+\begin{flushleft}
+\usefont{OT1}{ptm}{m}{n}
+\huge \@title
+\end{flushleft}
+\par
+\hrule height 4pt
+\par
+\begin{flushright}
+\usefont{OT1}{phv}{m}{n}
+\Large \@author
+\par
+\end{flushright}
+\vspace{1cm}
+\vfill
+\vfill
+\bas{}{\@location, \@date}{}
+}%
+\cleardoublepage
+}
+\def\date#1{\def\@date{#1}}
+\def\author#1{\def\@author{#1}}
+\def\title#1{\def\@title{#1}}
+\def\location#1{\def\@location{#1}}
+\def\blurb#1{\def\@blurb{#1}}
+
+\blurb{}
+\makeatother
+
+\title{Calorimétrie et boson de Higgs}
+\author{ Maëlle Joveneau \\ Manuel Tondeur \\ Brieuc François }
+\date{Année académique 2011-2012}
+\location{Louvain - La - Neuve}
+
+\blurb{%
+Université Catholique de Louvain\\
+Faculté des Sciences\\
+\textbf{LPHY2135-Computing et Méthodes numériques en physique des particules}\\
+Bruno Giacomo Luca}% 
+
+\setlength{\parskip}{1ex plus .6ex minus .6ex}
+\renewcommand\arraystretch{1.5}
+%\onehalfspacing
+
+\begin{document}
+
+	\maketitle
+		
+	\tableofcontents
+
+	\newpage
+	
+			\section{Introduction}
+	Afin de d\'ecouvrir les principes de bases de Geant4, un framework conçu
+pour la physique des particules, nous avons cr\'eé un programme permettant de
+d\'eterminer la masse du Higgs en suivant la d\'esint\'egration de celui-ci en
+deux $Z^0$ qui eux-m\^emes se d\'esint\`egrent en $e^-$ $e^+$.
+
+Pour ce faire nous avons d'abord dû construire un d\'etecteur qui soit efficace
+pour notre d\'esint\'egration. Nous avons d\'etermin\'e que les \'el\'ements
+n\'ecessaires pour ce d\'etecteur \'etaient : des calorim\`etres
+\'electromagn\'etiques et des trackers. Nous avons donc dû utiliser les classes
+de Geant4 pertinentes pour nos besoins.
+ 
+Nous avons alors g\'en\'er\'e nous-m\^eme les diff\'erentes particules qui
+apparaissent dans l'\'ev\`enement qui nous int\'eresse. Pour donner aux
+diff\'erentes particules leur masse, leur \'energie, et/ou leur impulsion, nous
+avons dû faire appel \`a des fonctions de distribution vari\'ees qui nous ont
+permises de mettre en pratique la th\'eorie des variables aléatoires dont la
+méthode "Monte Carlo".
+ 
+A partir des classes abstraites de Geant4, nous avons défini les interactions
+possibles entre les particules et les \'el\'ements pr\'esents au sein du
+d\'etecteur. Cela fait il nous fallait reconstruire la trajectoire des
+\'electrons \`a partir des informations fournies par les trackers et les
+calorim\`etres. Avec celles-ci, nous avons pu d\'eterminer l'\'energie et
+l'impulsion des quatre \'electrons qui nous donnent la masse du Higgs par la
+relation de la masse invariante suivante : 
+ 
+\begin{equation}
+M_H^2=E_H^2-p_H^2=(E_1+E_2+E_3+E_4)^2-(\vec{p}_1+\vec{p}_2+\vec{p}_3+\vec{p}_4)^2.
+\end{equation} 
+    
+Afin d'inclure les erreurs dues aux bruits et celles dues \`a ?????(erreur
+stochastique)??????, nous avons du...
+
+
+		    \section{Descriptifs et méthodes}
+
+\subsection{Description du détecteur}
+
+Pour la construction du détecteur nous avons opté pour une géométrie cylindrique
+de type CMS que nous avons bien entendu simplifiées pour ne garder que les
+éléments utiles à notre simulation. Le détecteur est donc constitué de plusieurs
+trackers en forme de tubes imbriqués et d'un calorimètre
+électromagnétique granulaire qui englobe le tout. Ces éléments sont placés dans
+le "world volume" que nous avons choisi de remplir d'air pour se rapprocher de
+la réalité.
+
+Comme dans le CMS, les trackers sont fait de silicium et mesurent 13.6 m de
+long.Ils sont au nombre de treize, nous en avons mis trois très proches du
+centre, le premier étant à 8 cm du vertex et les deux autres espacé de 1 cm du
+premier. Les dix autres trackers se trouvent espacés chacun de 10 cm, le premier
+ayant un rayon 20 cm. Bien qu'il nous fallait plusieurs trackers pour obtenir
+une bonne résolution sur la direction des particules, ce choix particulier est
+fait pour se rapprocher du CMS. Étant donné que notre projet ne nécessite
+aucunement un champ magnétique, nous avons simplement choisi de ne pas en
+mettre pour ne pas nous compliquer la tâche inutilement. 
+
+Le bloc de calorimètres est un gros tube de 14 m de long dont
+l'épaisseur s'étend de 1.5 m du centre à 3 m du centre. Il est uniquement
+composé de calorimètres électromagnétiques car l'événement d'intérêt n'implique
+ni muon ni hadron. L'épaisseur fût choisie pour éviter toute perte d'énergie.
+
+Je ferai la segmentation à la fin pcq ca peut encore changer
+Je dois encore dire pk on a mit de si grosse cellules si on laisse commme ça et
+l'iodure de Cesium c est comme dans CMS j'imagine?
+
+La suite au prochain épisode 
+
+
+
+
+
+		
+\end{document}
+
+
+
+
+
+
+
+
+
+
+			
