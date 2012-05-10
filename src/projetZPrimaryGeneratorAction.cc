@@ -36,6 +36,7 @@
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
 #include "globals.hh"
+#include "G4UnitsTable.hh"
 
 projetZPrimaryGeneratorAction::projetZPrimaryGeneratorAction()
 {
@@ -55,6 +56,11 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
 {
 
     projetZElectronsGenerator quatreElectrons;
+    
+    G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron(0),"Energy" )<< endl;
+    G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron(1),"Energy" )<< endl;
+    G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron(2),"Energy" )<< endl;
+    G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron(3),"Energy" )<< endl;
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     G4String particleName;
     particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e-" ) );

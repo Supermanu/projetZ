@@ -2,6 +2,8 @@
 #include <cstdlib>  // pour "rand"
 #include <cmath>    // pour "acos", "log" et "sqrt"
 #include <vector>
+#include <time.h>
+
 
 #include "globals.hh" // Pour inclure pi
 
@@ -39,3 +41,46 @@ double distribGauss(const double mu, const double sigma) {
 	return sqrt(2*sigma*sigma*distribExpo(1)) * cos(2*pi*distribUniforme()) + mu;
 }
 
+	double norm(double x, double y, double a) {
+	
+	double resultat;
+		resultat = (1/pi)*(y/((x-a)*(x-a)+y*y)); 
+	return resultat;
+	}
+
+
+double breitWigner(double y, double a){
+	srand(time(NULL)); // initialisation de rand
+    
+	//créer 2 nombre aléatoire dans un cadre allant de 197 à 203 et variant en hauteur de 0 à 100
+	double nombre_aleatoire[2];
+	//je donne des valeurs au 2 nombres pour faire démarrer le while
+	nombre_aleatoire[1]=1/(pi*y);
+	nombre_aleatoire[0]=a;
+
+    	double masse; 
+	while (nombre_aleatoire[1] > norm(nombre_aleatoire[0],y,a))
+	{
+		
+	nombre_aleatoire[0] = rand()/RAND_MAX*(a+10);
+	nombre_aleatoire[1] = rand()/RAND_MAX*(1/(pi*y));
+		
+		
+		if  (nombre_aleatoire[1] <= norm(nombre_aleatoire[0],y,a))
+		{ 	
+			masse = nombre_aleatoire[0];
+			//cout<< nombre_aleatoire[0] << endl;
+			//cout<< nombre_aleatoire[1] << endl;
+			//cout<< norm(nombre_aleatoire[0],y,a) << endl;
+			
+			
+		}
+
+	}
+   
+
+	//system("PAUSE");
+
+return masse;
+  
+}

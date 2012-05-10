@@ -30,7 +30,6 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
 {
   srand(time(NULL));
   // on va d'abord calculer l'énergie des Z pour un H au repos, ensuite l'énergie pour des électrons avec un Z au repos.
-  // Et finalement, on va booster l'énergie des électrons pour se retrouver dans le référentiel du labo.
   
   G4double pZ = sqrt((masseHiggs*masseHiggs)/4 - 91.187*GeV*91.187*GeV);
   G4double energieZ = masseHiggs/2;
@@ -41,9 +40,16 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   G4double pElectron = sqrt((91.187*GeV*91.187*GeV)/4 - 0.511*MeV*0.511*MeV);
   G4double energieElectron = 91.187*GeV/2;
   
+  // On calcul le boost dû au Higgs.
+  vector<G4double> angleAleatoire = uniforpi();
+  vector<G4double> boostH (3);
+  boostH[0] = vitesseH * cos(angleAleatoire[0])*sin(angleAleatoire[1]);
+  boostH[1] = vitesseH * sin(angleAleatoire[0])*sin(angleAleatoire[1]);
+  boostH[2] = vitesseH * cos(angleAleatoire[1]);
+  
   // On va maintenant distribuer la quantité de mouvement pour un angle aléatoire
   
-  vector<G4double> angleAleatoire = uniforpi();
+  angleAleatoire = uniforpi();
   vector<G4double> pVectorZ(4);
   pVectorZ[0] = energieZ;
   pVectorZ[1] = pZ * cos(angleAleatoire[0])*sin(angleAleatoire[1]);
@@ -72,6 +78,9 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   // On boost des électrons
   
   vector<G4double> pVectorElectronBoosted = boost(pVectorElectron, boostZ);
+  
+  // Une deuxième fois
+  pVectorElectronBoosted = boost(pVectorElectronBoosted, boostH);
 
   for (int n = 0 ; n<4 ; n++)
   {
@@ -85,6 +94,10 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   pVectorElectron[3] = - pVectorElectron[3];
   
   pVectorElectronBoosted = boost(pVectorElectron, boostZ);
+    
+  // Une deuxième fois
+  pVectorElectronBoosted = boost(pVectorElectronBoosted, boostH);
+  
   for (int n = 0 ; n<4 ; n++)
   {
     momentumElectrons[1][n] = pVectorElectronBoosted[n];
@@ -102,6 +115,10 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   pVectorElectron[3] = pElectron * cos(angleAleatoire[1]);
   
   pVectorElectronBoosted = boost(pVectorElectron, boostZ);
+    
+  // Une deuxième fois
+  pVectorElectronBoosted = boost(pVectorElectronBoosted, boostH);
+  
   for (int n = 0 ; n<4 ; n++)
   {
     momentumElectrons[2][n] = pVectorElectronBoosted[n];
@@ -112,6 +129,10 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   pVectorElectron[3] = - pVectorElectron[3];
   
   pVectorElectronBoosted = boost(pVectorElectron, boostZ);
+    
+  // Une deuxième fois
+  pVectorElectronBoosted = boost(pVectorElectronBoosted, boostH);
+  
   for (int n = 0 ; n<4 ; n++)
   {
     momentumElectrons[3][n] = pVectorElectronBoosted[n];
