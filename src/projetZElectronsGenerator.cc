@@ -20,6 +20,7 @@ using namespace std;
 #include "projetZElectronsGenerator.hh"
 #include "G4ios.hh"
 #include <cmath>
+#include "math.h"
 #include "distributions.hh"
 #include "Randomize.hh"
 #include "G4UnitsTable.hh"
@@ -34,7 +35,10 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   
   G4double pZ = sqrt((masseHiggs*masseHiggs)/4 - 91.187*GeV*91.187*GeV);
   G4double energieZ = masseHiggs/2;
-    
+  G4double EnergieCinetiqueH = distribExpo(30.*GeV);
+  G4double vitesseH = sqrt(1 - (1/(((EnergieCinetiqueH/masseHiggs)+1)*((EnergieCinetiqueH/masseHiggs)+1))));
+  G4cout << "Energie cinétique du H: " << G4BestUnit(EnergieCinetiqueH, "Energy") << endl;
+  G4cout << "Vitesse du H: " << vitesseH << endl;
   G4double pElectron = sqrt((91.187*GeV*91.187*GeV)/4 - 0.511*MeV*0.511*MeV);
   G4double energieElectron = 91.187*GeV/2;
   
