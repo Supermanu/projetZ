@@ -30,7 +30,8 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
 {
   srand(time(NULL));
   // on va d'abord calculer l'énergie des Z pour un H au repos, ensuite l'énergie pour des électrons avec un Z au repos.
-  
+  masseHiggs = breitWigner(500.*MeV,200.*GeV);
+  G4cout << "Masse du H: " << G4BestUnit(masseHiggs, "Energy") << endl;
   G4double pZ = sqrt((masseHiggs*masseHiggs)/4 - 91.187*GeV*91.187*GeV);
   G4double energieZ = masseHiggs/2;
   G4double EnergieCinetiqueH = distribExpo(30.*GeV);
@@ -184,6 +185,25 @@ G4ThreeVector projetZElectronsGenerator::getDirectionElectron( int electron)
     G4double pElec = sqrt(momentumElectrons[electron][1]*momentumElectrons[electron][1] + momentumElectrons[electron][2]*momentumElectrons[electron][2] + momentumElectrons[electron][3]*momentumElectrons[electron][3]);
     G4ThreeVector moment(momentumElectrons[electron][1]/pElec,momentumElectrons[electron][2]/pElec,momentumElectrons[electron][3]/pElec);
     return moment;
+}
+
+G4ThreeVector projetZElectronsGenerator::getAnglesElectron(int electron)
+{
+    G4double x = getDirectionElectron(electron)[0];
+    G4double y = getDirectionElectron(electron)[1];
+    G4double z = getDirectionElectron(electron)[2];
+    G4double rayon = sqrt(x*x + y*y + z*z);
+    G4double theta ;
+    G4double phi = acos(z/rayon);
+    if (y < 0)
+    {
+	theta = 2*pi - acos(x/sqrt(x*x + y*y));
+    }
+    else
+    {
+	theta = acos(x/sqrt(x*x + y*y));
+    }
+    return G4ThreeVector(rayon,theta,phi);
 }
 
 G4double projetZElectronsGenerator::getEnergyElectron (int electron)

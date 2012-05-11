@@ -25,7 +25,7 @@
 
 projetZCaloParametrisation::projetZCaloParametrisation()
 {
-    G4int nbreSegmentPhi = 48;    
+    G4int nbreSegmentPhi = 40;    
     G4int nbreSegmentZ = 20;
     G4double caloCell_rmax = 3.0*m;
     G4double caloCell_rmin = 1.5*m;
@@ -40,7 +40,7 @@ projetZCaloParametrisation::~projetZCaloParametrisation()
 void projetZCaloParametrisation::ComputeTransformation ( const G4int copyNo, G4VPhysicalVolume* physVol) const
 {
     G4ThreeVector origin;
-    physVol->SetTranslation(G4ThreeVector(0.,0.,-14.*m +14.*m/20 + int(copyNo/48)*(14.*m/20)));
+    physVol->SetTranslation(G4ThreeVector(0.,0.,-14.*m +14.*m/20 + int(copyNo/40)*(14.*m/20)));
 }
 
 void projetZCaloParametrisation::ComputeDimensions (G4Tubs & calorimeterBlock, const G4int copyNo, const G4VPhysicalVolume* physVol) const
@@ -48,8 +48,8 @@ void projetZCaloParametrisation::ComputeDimensions (G4Tubs & calorimeterBlock, c
     calorimeterBlock.SetInnerRadius(1.5*m);
     calorimeterBlock.SetOuterRadius(3.*m);
     calorimeterBlock.SetZHalfLength(14.*m/20);
-    calorimeterBlock.SetStartPhiAngle(copyNo*360.*deg/48);
-    calorimeterBlock.SetDeltaPhiAngle(360.*deg/48);
+    calorimeterBlock.SetStartPhiAngle(copyNo*360.*deg/40);
+    calorimeterBlock.SetDeltaPhiAngle(360.*deg/36);
 }
 
 

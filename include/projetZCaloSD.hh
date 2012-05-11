@@ -37,11 +37,10 @@ public:
     virtual void Initialize ( G4HCofThisEvent* );
     virtual void EndOfEvent ( G4HCofThisEvent* );
     G4bool ProcessHits ( G4Step*, G4TouchableHistory* );
-    virtual void EcrireEnergie (G4double);
+    virtual projetZCaloHitCollection* GetCollection() {return caloCollection;};
 private:
     projetZCaloHitCollection* caloCollection;
     G4double energieTotal;
-    G4double energieCell[48][20];
 };
 
 #endif // PROJETZCALOSD_H

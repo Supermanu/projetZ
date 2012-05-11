@@ -31,7 +31,7 @@
 // --------------------------------------------------------------
 //      GEANT 4 - exampleN01
 // --------------------------------------------------------------
-#include "G4RunManager.hh"
+#include "projetZRunManager.hh"
 #include "G4UImanager.hh"
 
 #include "projetZDetectorConstruction.hh"
@@ -53,7 +53,7 @@ int main(int argc,char** argv)
 {
   // Construct the default run manager
   //
-  G4RunManager* runManager = new G4RunManager;
+  projetZRunManager* runManager = new projetZRunManager;
 
   // set mandatory initialization classes
   //
@@ -101,9 +101,9 @@ int main(int argc,char** argv)
   else {
 
     // batch mode
-    UImanager->ApplyCommand("/run/verbose 1");
-    UImanager->ApplyCommand("/event/verbose 1");
-    UImanager->ApplyCommand("/tracking/verbose 1");
+    UImanager->ApplyCommand("/run/verbose 0");
+    UImanager->ApplyCommand("/event/verbose 0");
+    UImanager->ApplyCommand("/tracking/verbose 0");
   }
 
     // Start a run

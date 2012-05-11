@@ -37,6 +37,7 @@ public:
     virtual void setMassHiggs(G4double energie) {masseHiggs = energie;} ;
     virtual G4double getMassHiggs() const {return masseHiggs;} ;
     virtual G4ThreeVector getDirectionElectron( int electron) ;
+    virtual G4ThreeVector getAnglesElectron(int electron);
     virtual vector< G4double > boost( vector< G4double > p_i, vector< G4double > b );
     virtual G4double getEnergyElectron(int electron);
     
@@ -45,7 +46,6 @@ protected:
     vector<G4double> angleZ;
     vector<G4double> angleElectron;
     G4double momentumElectrons[4][4];
-    
     G4ThreeVector directionHiggs;
     
 };
