@@ -28,7 +28,7 @@
 // GEANT4 tag $Name: not supported by cvs2svn $
 //
 //
-#define NOLAST_GEANT // A commenter ou supprimer si on ne se trouve pas sur une machine disposant de la dernière version de geant4.
+//#define NOLAST_GEANT // A commenter ou supprimer si on ne se trouve pas sur une machine disposant de la dernière version de geant4.
 #include "projetZPhysicsList.hh"
 #include "G4ParticleTypes.hh"
 

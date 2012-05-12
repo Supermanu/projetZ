@@ -20,7 +20,7 @@ using namespace std;
 #include "G4ios.hh"
 #include <cmath>
 #include "math.h"
-#include "distributions.hh"
+#include "projetZDistribution.hh"
 #include "Randomize.hh"
 #include "G4UnitsTable.hh"
 
@@ -30,11 +30,15 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
 {
   srand(time(NULL));
   // on va d'abord calculer l'énergie des Z pour un H au repos, ensuite l'énergie pour des électrons avec un Z au repos.
-  masseHiggs = breitWigner(500.*MeV,200.*GeV);
+  G4double valeurTampon[1];
+  projetZDistribution(valeurTampon,"breitWigner",500.*MeV,200.*GeV);
+  masseHiggs = valeurTampon[0];
   G4cout << "Masse du H: " << G4BestUnit(masseHiggs, "Energy") << endl;
   G4double pZ = sqrt((masseHiggs*masseHiggs)/4 - 91.187*GeV*91.187*GeV);
   G4double energieZ = masseHiggs/2;
-  G4double EnergieCinetiqueH = distribExpo(30.*GeV);
+  projetZDistribution(valeurTampon, "distribExpo", 30.*GeV);
+  G4double EnergieCinetiqueH = valeurTampon[0];
+  // G4double EnergieCinetiqueH = distribExpo(30.*GeV);
   G4double vitesseH = sqrt(1 - (1/(((EnergieCinetiqueH/masseHiggs)+1)*((EnergieCinetiqueH/masseHiggs)+1))));
   G4cout << "Energie cinétique du H: " << G4BestUnit(EnergieCinetiqueH, "Energy") << endl;
   G4cout << "Vitesse du H: " << vitesseH << endl;
@@ -42,7 +46,8 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   G4double energieElectron = 91.187*GeV/2;
   
   // On calcul le boost dû au Higgs.
-  vector<G4double> angleAleatoire = uniforpi();
+  G4double angleAleatoire[2];
+  projetZDistribution(angleAleatoire, "uniforpi");
   vector<G4double> boostH (3);
   boostH[0] = vitesseH * cos(angleAleatoire[0])*sin(angleAleatoire[1]);
   boostH[1] = vitesseH * sin(angleAleatoire[0])*sin(angleAleatoire[1]);
@@ -50,7 +55,7 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   
   // On va maintenant distribuer la quantité de mouvement pour un angle aléatoire
   
-  angleAleatoire = uniforpi();
+  projetZDistribution(angleAleatoire, "uniforpi");
   vector<G4double> pVectorZ(4);
   pVectorZ[0] = energieZ;
   pVectorZ[1] = pZ * cos(angleAleatoire[0])*sin(angleAleatoire[1]);
@@ -68,7 +73,7 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   
   // On distribue la quantité de mouvement des électrons.
   
-  angleAleatoire = uniforpi();
+  projetZDistribution(angleAleatoire, "uniforpi");
   
   vector<G4double> pVectorElectron(4);
   pVectorElectron[0] = energieElectron;
@@ -110,7 +115,7 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   boostZ[1] = - boostZ[1];
   boostZ[2] = - boostZ[2];
   
-  angleAleatoire = uniforpi();
+  projetZDistribution(angleAleatoire, "uniforpi");
   pVectorElectron[1] = pElectron * cos(angleAleatoire[0])*sin(angleAleatoire[1]);
   pVectorElectron[2] = pElectron * sin(angleAleatoire[0])*sin(angleAleatoire[1]);
   pVectorElectron[3] = pElectron * cos(angleAleatoire[1]);
