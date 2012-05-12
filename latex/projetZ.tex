@@ -153,7 +153,7 @@ Comme dans le CMS, les trackers sont fait de silicium et mesurent 13.6 m de
 long.Ils sont au nombre de treize, nous en avons mis trois très proches du
 centre, le premier étant à 8 cm du vertex et les deux autres espacé de 1 cm du
 premier. Les dix autres trackers se trouvent espacés chacun de 10 cm, le premier
-ayant un rayon 20 cm. Bien qu'il nous fallait plusieurs trackers pour obtenir
+ayant un rayon 20 cm. Bien qu'il nous faut plusieurs trackers pour obtenir
 une bonne résolution sur la direction des particules, ce choix particulier est
 fait pour se rapprocher du CMS. Étant donné que notre projet ne nécessite
 aucunement un champ magnétique, nous avons simplement choisi de ne pas en
@@ -165,12 +165,47 @@ composé de calorimètres électromagnétiques car l'événement d'intérêt n'i
 ni muon ni hadron. L'épaisseur fût choisie pour éviter toute perte d'énergie.
 
 Je ferai la segmentation à la fin pcq ca peut encore changer
-Je dois encore dire pk on a mit de si grosse cellules si on laisse commme ça et
+Je dois encore dire pk on a mit de si grosse cellules si on laisse comme ça et
 l'iodure de Cesium c est comme dans CMS j'imagine?
 
-La suite au prochain épisode 
+\subsection{Description physique du processus}
 
+Pour rappel, le but de ce projet est de reconstruire la masse invariante du
+boson de Higgs à l'aide de la détection de l'énergie de quatre électrons issus
+du processus suivant :
 
+\begin{equation}
+H \longrightarrow ZZ \longrightarrow e^+ e^- e^+ e^-.
+\end{equation}
+
+Voyons maintenant en détail la méthodologie utilisée dans ce but. Dans un
+soucis de réalisme, nous avons choisi de ne pas fixer la masse du $H$ mais
+de la générer aléatoirement avec une distribution de Breit-Wigner centrée sur
+200 GeV. Nous avons dans un premier temps étudié la reconstruction de sa masse
+invariante lorsque le higgs se désintègre au repos pour ensuite se rapprocher
+de la réalité et considérer sa désintégration alors qu'il est en mouvement dans
+le repère du détecteur. Dans ce but, nous générons une énergie
+cinétique issue d'une distribution exponentielle négative de paramètre 30 GeV
+ainsi que deux angles $\theta$ et $\varphi$ issus de distributions uniformes
+pour lui donner une direction. NB: la distribution uniforme des angles se
+justifie par l'absence d'information sur les origines du $H$. Nous nous plaçons
+ensuite dans le repère où il est au repos pour simuler sa désintégration en
+deux bosons $Z$. La cinématique relativiste du processus est assez simple et
+tous les paramètres sont fixés hormis la direction d'émission (nous avons
+choisi de négliger l'incertitude sur la masse du Z car cela est sans intérêt
+pour notre discussion). Pour la direction, nous générons à nouveau deux angles
+de manière uniforme mais la justification vient cette fois de l'absence de spin
+du $H$. 
+
+La même méthode est appliquée pour simuler la désintégration des $Z$ en
+$e^+e^-$ Nous avons donc quatre électrons d'énergie et de direction bien
+déterminées dans le repère de leur parent $Z$ respectif. Il suffit alors
+d'effectuer les boosts de Lorentz adéquats pour retourner dans le repère du $H$
+et ensuite dans le repère du détecteur\footnote{Toutes ces manipulations pour
+simuler la désintégration du higgs sont des algorithmes ne nécessitant pas le
+framework "Geant4".}. NB: les temps de vie très court du $H$ et du $Z$ nous
+permettent en très bonne approximation de considérer que ces quatre électrons
+sont émis au centre géométrique de notre détecteur. 
 
 
 
