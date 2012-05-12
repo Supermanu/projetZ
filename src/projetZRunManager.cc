@@ -39,6 +39,11 @@ void projetZRunManager::AnalyzeEvent ( G4Event* anEvent )
 {
     srand ( time ( NULL ) );
     G4RunManager::AnalyzeEvent ( anEvent );
+    DetectionJets(anEvent);
+}
+
+void projetZRunManager::DetectionJets( G4Event* anEvent )
+{
     G4HCofThisEvent *HCE;
     HCE = anEvent->GetHCofThisEvent();
     projetZCaloHitCollection* caloCollection = 0;

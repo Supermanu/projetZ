@@ -31,6 +31,7 @@ public:
     virtual void EcrireEnergie ( G4double energie, G4double cell[][40] );
     virtual void TrouverJets(G4double cell[40][40]);
     virtual bool regarderAutour (G4double cell[42][42], int n, int k);
+    virtual void DetectionJets(G4Event* anEvent);
 
 protected:
     virtual void AnalyzeEvent ( G4Event* anEvent );
