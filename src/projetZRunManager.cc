@@ -200,3 +200,60 @@ void projetZRunManager::TrouverJets ( G4double ecell[][40] )
     }
 
 }
+
+
+
+
+// Fonction qui prend en argument l'énergie en Mev et les theta phi des électrons et qui renvoit la masse du Higgs en Mev.
+//NB je considère que l'énergie renvoyée par les calos est l'énergie totale tenant compte de l'impulsion et de l'énergie de masse. 
+//La masse des électrons est négligeable mais ça ne coute pas cher d'en tenir compte donc je le fais.
+
+G4double masseH(G4double e1,G4double th1,G4double phi1,G4double e2,G4double th2,G4double phi2,G4double e3,G4double th3,G4double phi3,G4double e4,G4double th4,G4double phi4)
+{
+     G4double masseH;
+     G4double p1[3],p2[3],p3[3],p4[3];  //trivecteur impulsion des électrons au vertex
+     G4double Np1=sqrt(e1*e1-0.511*0.511)*MeV; // Norme de l'impulsion des électrons
+     G4double Np2=sqrt(e2*e2-0.511*0.511)*MeV;
+     G4double Np3=sqrt(e3*e3-0.511*0.511)*MeV;
+     G4double Np4=sqrt(e4*e4-0.511*0.511)*MeV;
+     
+     // contruction des trivecteurs impulsions
+     
+     p1[0]=Np1*cos(th1)*sin(phi1);
+     p1[1]=Np1*sin(th1)*sin(phi1);
+     p1[2] =Np1 * cos(phi1);
+     p2[0]=Np2*cos(th2)*sin(phi2);
+     p2[1]=Np2*sin(th2)*sin(phi2);
+     p2[2] =Np2 * cos(phi2);
+     p3[0]=Np3*cos(th3)*sin(phi3);
+     p3[1]=Np3*sin(th3)*sin(phi3);
+     p3[2] =Np3 * cos(phi3);
+     p4[0]=Np4*cos(th4)*sin(phi4);
+     p4[1]=Np4*sin(th4)*sin(phi4);
+     p4[2] =Np4 * cos(phi4);
+     
+     // Reconstruction de la masse invariante
+     
+     G4double ptot[3];
+     ptot[0]= p1[0]+p2[0]+p3[0]+p4[0];
+     ptot[1]= p1[1]+p2[1]+p3[1]+p4[1];
+     ptot[2]= p1[2]+p2[2]+p3[2]+p4[2];
+     
+     masseH=(e1+e2+e3+e4)*(e1+e2+e3+e4)-(ptot[0]*ptot[0]+ptot[1]*ptot[1]+ptot[2]*ptot[2]);
+     
+     return masseH;
+}
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
