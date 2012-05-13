@@ -51,6 +51,7 @@
 
 int main(int argc,char** argv)
 {
+    srand ( time ( NULL ));
   // Construct the default run manager
   //
   projetZRunManager* runManager = new projetZRunManager;
