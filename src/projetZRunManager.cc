@@ -154,7 +154,7 @@ void projetZRunManager::TrouverJets ( G4double ecell[][40] )
     }
 
     // On doit maintenant parcourir toutes les cellules
-    G4double minEnergie = 5000.;
+    G4double minEnergie = 5000.*MeV;
     std::string const nomFichier ( "plotCaloNet.txt" );
     std::ofstream leFlux ( nomFichier.c_str(), std::ios::app );
     for ( int n=1 ; n<taillePhi+1 ; n++ ) {
@@ -193,12 +193,21 @@ void projetZRunManager::TrouverJets ( G4double ecell[][40] )
                             energiesJets[nombreJet-1] += cell[n-1][k-i];
                         }
                     }
+                    leFlux << energiesJets[nombreJet-1] << " " ;
                 }
                 else
 		{
-		    leFlux << n-1 << " " << k-1 << " " << 0 << G4endl;
+		    leFlux << 0 << " " ;
 		}
             }
+            else
+		{
+		    leFlux << 0 << " " ;
+		}
+	    if (k == 40)
+	    {
+		leFlux << G4endl;
+	    }
         }
     }
     if (nombreJet > nbreJetAttendu)
