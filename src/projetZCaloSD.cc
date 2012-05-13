@@ -57,9 +57,7 @@ void projetZCaloSD::Initialize ( G4HCofThisEvent* HCE )
 G4bool projetZCaloSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
 {
     G4double eDep = aStep->GetTotalEnergyDeposit(); // On sort l'énergie.
-    G4double valeurTampon[1];
-    valeurTampon[0] = projetZDistribution ( valeurTampon, "distribGauss", 0., 1000. );
-    eDep += valeurTampon;
+
     if ( eDep==0. ) {
         return false;    // Si l'énergie est nulle, on sort.
     }

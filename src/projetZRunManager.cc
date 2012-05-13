@@ -25,7 +25,7 @@
 #include <iostream>
 #include <fstream>
 #include "G4UnitsTable.hh"
-//#include "projetZDistribution.hh"
+#include "projetZDistribution.hh"
 
 projetZRunManager::projetZRunManager() : G4RunManager()
 {}
@@ -55,7 +55,8 @@ void projetZRunManager::DetectionJets ( G4Event* anEvent )
     G4double energieCell[40][40];
     for ( int n = 0 ; n<40 ; n++ ) {
         for ( int k = 0 ; k<40 ; k++ ) {
-            energieCell[n][k] = 0;
+	    projetZDistribution ( valeurTampon, "distribGauss", 0., 1000. );
+            energieCell[n][k] = abs(valeurTampon[0]);
         }
     }
     for ( G4int i=0; i<NbHits; i++ ) {
@@ -81,14 +82,18 @@ void projetZRunManager::EcrireEnergie ( G4double energie, G4double cell[][40] )
     }
     std::string const nomFichier2 ( "depotCalorimetre.txt" );
     std::ofstream monFlux2 ( nomFichier2.c_str(), std::ios::app );
+    std::string const nomFichier3 ( "plotCaloBrut.txt" );
+    std::ofstream monFlux3 ( nomFichier3.c_str(), std::ios::app );
     if ( monFlux2 ) {
         for ( int n=0 ; n<40 ; n++ ) {
             for ( int k=0 ; k<40 ; k++ ) {
                 monFlux2 << cell[n][k] << " " ;
+		monFlux3 << n << " " << k << " " << cell[n][k] << std::endl;
             }
             monFlux2 << std::endl;
         }
         monFlux2 << -1 << G4endl;
+	monFlux3 << -1 << G4endl;
 
     } else {
         G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
@@ -139,7 +144,6 @@ void projetZRunManager::TrouverJets ( G4double ecell[][40] )
     for ( int n=1 ; n<taillePhi+1 ; n++ ) {
         for ( int k=1 ; k<tailleZ+1 ; k++ ) {
             cell[n][k] =ecell[n-1][k-1];
-//             projetZDistribution ( valeurTampon, "distribGauss", 0., 1000. );
             cell[n][k] += abs ( valeurTampon[0] );
         }
     }
@@ -151,6 +155,8 @@ void projetZRunManager::TrouverJets ( G4double ecell[][40] )
 
     // On doit maintenant parcourir toutes les cellules
     G4double minEnergie = 5000.;
+    std::string const nomFichier ( "plotCaloNet.txt" );
+    std::ofstream leFlux ( nomFichier.c_str(), std::ios::app );
     for ( int n=1 ; n<taillePhi+1 ; n++ ) {
         for ( int k=1 ; k<tailleZ+1 ; k++ ) {
             if ( cell[n][k] > minEnergie ) {
@@ -188,6 +194,10 @@ void projetZRunManager::TrouverJets ( G4double ecell[][40] )
                         }
                     }
                 }
+                else
+		{
+		    leFlux << n-1 << " " << k-1 << " " << 0 << G4endl;
+		}
             }
         }
     }
