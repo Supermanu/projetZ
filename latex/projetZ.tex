@@ -149,8 +149,8 @@ trackers en forme de tubes imbriqués et d'un calorimètre
 le "world volume" que nous avons choisi de remplir d'air pour se rapprocher de
 la réalité.
 
-Comme dans le CMS, les trackers sont fait de silicium et mesurent 13.6 m de
-long.Ils sont au nombre de treize, nous en avons mis trois très proches du
+Comme dans le CMS, les trackers sont fait de silicium et mesurent 27.2 m de
+long. Ils sont au nombre de treize, nous en avons mis trois très proches du
 centre, le premier étant à 8 cm du vertex et les deux autres espacé de 1 cm du
 premier. Les dix autres trackers se trouvent espacés chacun de 10 cm, le premier
 ayant un rayon 20 cm. Bien qu'il nous faut plusieurs trackers pour obtenir
@@ -159,16 +159,27 @@ fait pour se rapprocher du CMS. Étant donné que notre projet ne nécessite
 aucunement un champ magnétique, nous avons simplement choisi de ne pas en
 mettre pour ne pas nous compliquer la tâche inutilement. 
 
-Le bloc de calorimètres est un gros tube de 14 m de long dont
+Le bloc de calorimètres est un gros tube de 28 m de long dont
 l'épaisseur s'étend de 1.5 m du centre à 3 m du centre. Il est uniquement
 composé de calorimètres électromagnétiques car l'événement d'intérêt n'implique
 ni muon ni hadron. L'épaisseur fût choisie pour éviter toute perte d'énergie.
 
-Je ferai la segmentation à la fin pcq ca peut encore changer
-Je dois encore dire pk on a mit de si grosse cellules si on laisse comme ça et
-l'iodure de Cesium c est comme dans CMS j'imagine?
+Les cellules, composées d'Iodure de Cesium, sont relativement grosses par
+rapport à celles du CMS. En effet, les événements considérés au CMS impliquent
+un grand nombre de particules qu'il faut pouvoir distinguer les unes des
+autres. Notre simulation n'ayant que quatre particules identiques à considérer,
+nous pouvons tout à fait nous permettre cette simplification. La taille des
+cellules fut donc choisie de sorte que l'énergie d'un jet se dépose presque
+toujours dans quatre d'entre elles.
 
-\subsection{Description physique du processus}
+NB : on trouvera les détails de la construction des détecteurs dans les classes
+suivantes : \textit{"projetZTrackerParametrisation.cc",
+"projetZCaloParametrisation.cc", "projetZTrackerSD.cc", "projetZCaloSD.cc"} et 
+\textit{"projetZDetectroConstruction.cc"}. 
+
+
+
+\subsection{Description physique du processus initial}
 
 Pour rappel, le but de ce projet est de reconstruire la masse invariante du
 boson de Higgs à l'aide de la détection de l'énergie de quatre électrons issus
@@ -184,18 +195,18 @@ de la générer aléatoirement avec une distribution de Breit-Wigner centrée su
 200 GeV. Nous avons dans un premier temps étudié la reconstruction de sa masse
 invariante lorsque le higgs se désintègre au repos pour ensuite se rapprocher
 de la réalité et considérer sa désintégration alors qu'il est en mouvement dans
-le repère du détecteur. Dans ce but, nous générons une énergie
-cinétique issue d'une distribution exponentielle négative de paramètre 30 GeV
-ainsi que deux angles $\theta$ et $\varphi$ issus de distributions uniformes
-pour lui donner une direction. NB: la distribution uniforme des angles se
+le repère du détecteur. Dans ce but, nous générons une énergie cinétique issue
+d'une distribution exponentielle négative de paramètre 30 GeV ainsi que deux
+angles $\theta$ et $\varphi$ issus de distributions uniformes pour lui donner
+une direction\footnote{On trouvera les différentes distributions dans la classe
+"\textit{projetZDistribution.cc}".}. NB: la distribution uniforme des angles se
 justifie par l'absence d'information sur les origines du $H$. Nous nous plaçons
-ensuite dans le repère où il est au repos pour simuler sa désintégration en
-deux bosons $Z$. La cinématique relativiste du processus est assez simple et
-tous les paramètres sont fixés hormis la direction d'émission (nous avons
-choisi de négliger l'incertitude sur la masse du Z car cela est sans intérêt
-pour notre discussion). Pour la direction, nous générons à nouveau deux angles
-de manière uniforme mais la justification vient cette fois de l'absence de spin
-du $H$. 
+ensuite dans le repère où il est au repos pour simuler sa désintégration en deux
+bosons $Z$. La cinématique relativiste du processus est assez simple et tous les
+paramètres sont fixés hormis la direction d'émission (nous avons choisi de
+négliger l'incertitude sur la masse du Z car cela est sans intérêt pour notre
+discussion). Pour la direction, nous générons à nouveau deux angles de manière
+uniforme mais la justification vient cette fois de l'absence de spin du $H$. 
 
 La même méthode est appliquée pour simuler la désintégration des $Z$ en
 $e^+e^-$ Nous avons donc quatre électrons d'énergie et de direction bien
@@ -203,9 +214,63 @@ déterminées dans le repère de leur parent $Z$ respectif. Il suffit alors
 d'effectuer les boosts de Lorentz adéquats pour retourner dans le repère du $H$
 et ensuite dans le repère du détecteur\footnote{Toutes ces manipulations pour
 simuler la désintégration du higgs sont des algorithmes ne nécessitant pas le
-framework "Geant4".}. NB: les temps de vie très court du $H$ et du $Z$ nous
-permettent en très bonne approximation de considérer que ces quatre électrons
-sont émis au centre géométrique de notre détecteur. 
+framework "Geant4".}. On trouvera les détails de ces manipulations dans la
+classe "\textit{projetZElectronsGenerator.cc}". NB: les temps de vie très court
+du $H$ et du $Z$ nous permettent en très bonne approximation de considérer que
+ces quatre électrons sont émis au centre géométrique de notre détecteur. L'étape
+suivante consiste à "lancer" ces quatre électrons dans notre détecteur à l'aide
+du framework Geant4. Cela est implémenté dans la classe
+"\textit{projetZPrimaryGeneratorAction.cc}".
+
+Le choix des interactions discrètes autorisées pour chacune des particules est
+assez simple puisque nous n'avons en jeux que des électrons-positrons et des
+photons cf "\textit{projetZPhysicsList.cc}". Le voici tout de même : 
+\begin{itemize}
+\item photons : création de paires électrons-positrons, diffusion Compton et
+effet photoélectrique.
+\item électrons : ionisation, bremsstrahlung et diffusion multiple.
+\item positrons : ionisation, bremsstrahlung, diffusion multiple et
+annihilation avec un électron. 
+\end{itemize}
+
+\subsection{Reconstruction de la masse invariante du boson de Higgs}
+
+Une fois les électrons lancés dans le détecteur, nous obtenons une réponse sous
+forme d'un ensemble de "hits" aussi bien pour le tracker que pour le
+calorimètre. NB : les détails des hits se trouvent dans les classes
+"\textit{projetZTrackerHit.cc}" et "\textit{projetZCaloHit.cc}". L'information
+d'intérêt dépend de la pièce du détecteur eg la position du hit pour les
+trackers et l'énergie déposée pour le calorimètre. 
+
+Présentons les choses dans l'ordre d'utilisation de notre code. Chaque cellule
+du calorimètre nous renvoie l'énergie totale déposée en elle. Grâce à un
+algorithme de cluster qui sera explicité plus loin, nous pouvons isoler de
+cela quatre jets distinct (dans la majorité des cas) et extraire de ces
+informations l'énergie totale et l'endroit ou chacun des électrons s'est
+arrêté. L'énergie déposée dans les trackers et dans l'air est en effet
+insignifiante par rapport aux énergies en jeux. Comme nous avons pu éviter de
+mettre un champs magnétique, la position des différents jets nous donne une
+information précieuse sur la direction de l'impulsion initiale des électrons aux
+vertex. Cependant, nos cellules ayant une relativement grande taille, la
+précision sur la direction est assez médiocre... C'est pourquoi nous avons
+choisi d'affiner cette information à l'aide des trackers. Avoir une idée de la
+direction des impulsions grâce aux cellules du calorimètres simplifie
+grandement la méthode pour obtenir cette même information précisée à l'aide des
+trackers. En effet, nous avons considéré un cône d'ouverture ???
+(valeurs affinée par essais-erreurs) dont la pointe est le vertex et dont l'axe
+relie ce dernier à la position centrale du jets. La "vraie" direction de
+l'impulsion initiale de l'électron est obtenue en faisant une moyenne de toutes
+les directions donnée par le tracker en ne tenant compte que des hits à
+l'intérieur de ce cône.
+
+Expliquer pk on a utilisé ça ( difficulté due aux electrons parasites etc)?
+Dire ou on trouve le code de cela.
+Expliquer l'algorithme de cluster qui avait l'air de l'intéresser. (parler du
+seuil à 5 GeV et des difficulté rencontrées)
+Expliquer la calibration?
+Donner les résultats obtenus.
+Ecrire une conclusion.
+D'autres idées?
 
 
 
