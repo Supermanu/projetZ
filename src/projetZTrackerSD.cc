@@ -51,6 +51,7 @@ G4bool projetZTrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
   projetZTrackerHit* newHit = new projetZTrackerHit();
   newHit->SetEdep( edep );
   newHit->SetPos( aStep->GetPreStepPoint()->GetPosition() );
+  newHit->SetTrackerNb(aStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() );
   trackerCollection->insert( newHit );
 
   return true;

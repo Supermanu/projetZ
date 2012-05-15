@@ -37,11 +37,13 @@ projetZTrackerHit::projetZTrackerHit(const projetZTrackerHit& right)   //on dema
 {
   edep = right.edep;
   pos = right.pos;
+  trackerNb = right.trackerNb;
 }
 
 projetZTrackerHit& projetZTrackerHit::operator=(const projetZTrackerHit& right)
 {
   edep = right.edep;
+  trackerNb = right.trackerNb;
   pos = right.pos;
   return *this;
 }

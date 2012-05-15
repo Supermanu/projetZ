@@ -61,10 +61,10 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
     if ( desintegrationHiggs ) {
         projetZElectronsGenerator quatreElectrons;
         G4double enDeg = 180/pi;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 0 ),"Energy" ) << " Avec comme angle theta: "<< quatreElectrons.getAnglesElectron ( 0 ) [1]*enDeg << " Et phi : "<< quatreElectrons.getAnglesElectron ( 0 ) [2]*enDeg<<endl;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 1 ),"Energy" ) << "Avec comme angle theta: "<< quatreElectrons.getAnglesElectron ( 1 ) [1]*enDeg << " Et phi : "<< quatreElectrons.getAnglesElectron ( 1 ) [2]*enDeg<< endl;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 2 ),"Energy" ) << "Avec comme angle theta: "<< quatreElectrons.getAnglesElectron ( 2 ) [1]*enDeg << " Et phi : "<< quatreElectrons.getAnglesElectron ( 2 ) [2]*enDeg<< endl;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 3 ),"Energy" ) << "Avec comme angle theta: "<< quatreElectrons.getAnglesElectron ( 3 ) [1]*enDeg << " Et phi : "<< quatreElectrons.getAnglesElectron ( 3 ) [2]*enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 0 ),"Energy" ) << " Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(0).theta()*enDeg  << " Et theta : "<< quatreElectrons.getDirectionElectron(0).phi()*enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 1 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(1).theta()*enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron(1).phi()*enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 2 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(2).theta()*enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron(2).phi()*enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 3 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(3).theta()*enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron(3).phi()*enDeg<< endl;
         G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         G4String particleName;
         particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e-" ) );

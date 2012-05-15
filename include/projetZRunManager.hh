@@ -22,6 +22,7 @@
 
 #include <Geant4/G4RunManager.hh>
 #include "projetZCaloHit.hh" 
+#include "projetZTrackerHit.hh"
 
 class projetZRunManager : public G4RunManager
 {
@@ -29,13 +30,31 @@ public:
     projetZRunManager();
     ~projetZRunManager();
     virtual void EcrireEnergie ( G4double energie, G4double cell[][40] );
-    virtual void TrouverJets(G4double cell[40][40]);
+    virtual bool TrouverJets(G4double cell[40][40], G4int[][2]);
     virtual bool regarderAutour (G4double cell[42][42], int n, int k);
-    virtual void DetectionJets(G4Event* anEvent);
+    virtual bool DetectionJets(G4Event* anEvent, G4int positionsJets[4][2]);
+    virtual void DetectionTrace (G4Event* anEvent);
+    virtual bool TrouverTrace( G4Event* anEvent,G4int positionsJets[4][2], G4int numeroJet);
+    virtual G4double masseH ();
 
 protected:
     virtual void AnalyzeEvent ( G4Event* anEvent );
+    
+private:
     G4double valeurTampon[1];
+    G4double e1;
+    G4double th1;
+    G4double phi1;
+    G4double e2;
+    G4double th2;
+    G4double phi2;
+    G4double e3;
+    G4double th3;
+    G4double phi3;
+    G4double e4;
+    G4double th4;
+    G4double phi4;
+    
 };
 
 #endif // PROJETZRUNMANAGER_HH

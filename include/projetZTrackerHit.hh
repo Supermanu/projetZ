@@ -49,6 +49,7 @@ public:
 private:
       G4double edep;
       G4ThreeVector pos;
+      G4int trackerNb;
       static std::map<G4String,G4AttDef> fAttDefs;
 
 public:
@@ -60,6 +61,10 @@ public:
       { pos = xyz; }
       inline G4ThreeVector GetPos()
       { return pos; }
+      inline G4int GetTrackerNb()
+      {return trackerNb;}
+      inline void SetTrackerNb(G4int Nb)
+      { trackerNb = Nb; }
 
 };
 
