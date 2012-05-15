@@ -44,10 +44,22 @@ void projetZRunManager::AnalyzeEvent ( G4Event* anEvent )
     G4int positionsJets[4][2];
     bool jetLocalised = DetectionJets ( anEvent, positionsJets );
     if ( jetLocalised ) {
+	bool tracefinder;
         for ( int jt=0 ; jt<4 ; jt++ ) {
-            TrouverTrace ( anEvent ,positionsJets, jt );
+            tracefinder = TrouverTrace ( anEvent ,positionsJets, jt );
         }
         G4cout << "La masse du Higgs vaut : " << G4BestUnit(masseH(), "Energy") << G4endl;
+	if (tracefinder)
+	{
+	  std::string const nomFichier ( "masseHiggs.txt" );
+        std::ofstream fluxe ( nomFichier.c_str(), std::ios::app );
+        if ( fluxe ) {
+            fluxe << masseH() << G4endl ;
+
+        } else {
+            G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+        }
+	}
     }
 }
 
