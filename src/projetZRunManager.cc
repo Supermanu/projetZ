@@ -204,7 +204,7 @@ bool projetZRunManager::TrouverTrace( G4Event* anEvent, G4int positionsJets[4][2
     G4double hitPhi;
     
     // Une façon d'améliorer l'algo, c'est d'éliminer les points parasites. Ces points sont caractérisés par le fait qu'ils sont très proches et très nombreux, alors qu'une bonne particules va laisser maximum trois ou quatres hits dans la même direction.
-    for ( int i = 0; i<1; i++ ) {
+    for ( int i = 0; i<2; i++ ) {
         std::vector<projetZTrackerHit> leVecteurDeHits = vecteurHits[i]; // On récupère le vecteur de hit associé au bon tracker
         int p = leVecteurDeHits.size(); // Nombre de hit dans le tracker
 	G4cout << "Recherche dans le tracker : " << i << G4endl;
@@ -385,7 +385,7 @@ bool projetZRunManager::TrouverJets ( G4double ecell[][40], G4int positionsJets[
     }
 
     // On doit maintenant parcourir toutes les cellules
-    G4double minEnergie = 5000.*MeV;
+    G4double minEnergie = 6000.*MeV;
     std::string const nomFichier ( "plotCaloNet.txt" );
     std::ofstream leFlux ( nomFichier.c_str(), std::ios::app );
     for ( int n=1 ; n<taillePhi+1 ; n++ ) {

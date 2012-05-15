@@ -57,7 +57,7 @@ projetZDetectorConstruction::projetZDetectorConstruction()
        calorimeterBlock_log ( 0 ),
        World_Volume ( 0 ),calorimeterBlock_phys ( 0 ), tracker_phys ( 0 )
 {
-    SetMagField(4.*tesla);
+    SetMagField(0.*tesla);
 }
 
 projetZDetectorConstruction::~projetZDetectorConstruction()
@@ -144,7 +144,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     calorimeterBlock_log = new G4LogicalVolume ( calorimeterBlock_tube,Air,"calo_log",0,0,0 );
     calorimeterBlock_phys = new G4PVPlacement ( 0,G4ThreeVector(),calorimeterBlock_log, "calo_phys",WorldVolume_log,false,0 );
     G4VisAttributes* caloBlock_logVisAtt = new G4VisAttributes(G4Color(1.0,1.0,1.0));
-    caloBlock_logVisAtt->SetVisibility(false);
+    caloBlock_logVisAtt->SetVisibility(true);
     calorimeterBlock_log->SetVisAttributes(caloBlock_logVisAtt);
     
     G4VSolid* caloCell_tubs = new G4Tubs("caloCell_tubs",innerRadiusOfTheCalo,outerRadiusOfTheCalo,hightOfTheCalo/20 ,0.*deg,360.*deg/40);
@@ -152,7 +152,7 @@ G4VPhysicalVolume* projetZDetectorConstruction::Construct()
     G4VPVParameterisation* calorimeterParam = new projetZCaloParametrisation;
     new G4PVParameterised("caloCell_phys",caloCell_log,calorimeterBlock_log,kUndefined, 40*20*2 - 40, calorimeterParam);
     G4VisAttributes* caloCell_logVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,1.0,0.1));
-    caloCell_logVisAtt->SetVisibility(true);
+    caloCell_logVisAtt->SetVisibility(false);
     caloCell_log->SetVisAttributes(caloCell_logVisAtt);
 
     //------------------------------- Détecteur sensible
