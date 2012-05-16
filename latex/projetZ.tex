@@ -169,8 +169,8 @@ rapport à celles du CMS. En effet, les événements considérés au CMS impliqu
 un grand nombre de particules qu'il faut pouvoir distinguer les unes des
 autres. Notre simulation n'ayant que quatre particules identiques à considérer,
 nous pouvons tout à fait nous permettre cette simplification. La taille des
-cellules fut donc choisie de sorte que l'énergie d'un jet se dépose presque
-toujours dans quatre d'entre elles.
+cellules fut donc choisie pour correspondre à la taille d'un jet de sorte que
+l'énergie d'un jet se dépose presque toujours dans maximum quatre d'entre elles.
 
 NB : on trouvera les détails de la construction des détecteurs dans les classes
 suivantes : \textit{"projetZTrackerParametrisation.cc",
@@ -256,23 +256,43 @@ précision sur la direction est assez médiocre... C'est pourquoi nous avons
 choisi d'affiner cette information à l'aide des trackers. Avoir une idée de la
 direction des impulsions grâce aux cellules du calorimètres simplifie
 grandement la méthode pour obtenir cette même information précisée à l'aide des
-trackers. En effet, nous avons considéré un cône d'ouverture ???
+trackers. En effet, nous avons considéré un cône d'ouverture 40$^{\circ}$
 (valeurs affinée par essais-erreurs) dont la pointe est le vertex et dont l'axe
 relie ce dernier à la position centrale du jets. La "vraie" direction de
 l'impulsion initiale de l'électron est obtenue en faisant une moyenne de toutes
 les directions donnée par le tracker en ne tenant compte que des hits à
-l'intérieur de ce cône.
+l'intérieur de ce cône. NB: l'utilisation du cône est nécessaire car le tracker
+nous donne les hits de tous les électrons y compris ceux qui rebondissent sur
+le calorimètre et revienne dans le tracker. 
 
-Expliquer pk on a utilisé ça ( difficulté due aux electrons parasites etc)?
-Dire ou on trouve le code de cela.
-Expliquer l'algorithme de cluster qui avait l'air de l'intéresser. (parler du
-seuil à 5 GeV et des difficulté rencontrées)
-Expliquer la calibration?
+Pour l'algorithme de cluster, nous avons opté pour une solution assez simple
+et immédiate. L'algorithme parcourt chacune des cellules et compare l'énergie
+détectée dans cette cellule avec celles détectées dans les cellules voisines.
+Si la cellule en question est celle qui possède le maximum, nous la retenons.
+L'énergie totale du jet est obtenue en y ajoutant les trois énergies
+maximales voisines. Pour que cet algorithme soit efficace, il faut bien entendu
+supprimer toutes les cellules ayant reçu peu d'énergie due au du bruit. Après
+plusieurs essais, nous avons choisi de fixer le seuil à 6 GeV pour éviter de
+compter parfois 5 jets au lieu de quatre à cause du bruit ( le bruit est tiré
+aléatoirement d'une gaussienne centrée sur 0 et de largeur 1 GeV et il arrivait
+que des énergies fantômes montent jusqu'à 5 GeV). Bien sûr, cette énergie seuil
+donne lieu à des erreurs systématiques lorsque le jet est réparti par exemple
+sur trois cellules et que la quatrième ne reçoit que quelques GeV. Cette
+énergie est donc éliminée par le seuil, mais ce problème peut-être en partie
+solutionné. En effet, une fois calibré, la perte moyenne d'énergie due à ce
+phénomène est corrigée si nous prenons nos données sur un suffisamment grand
+nombre d'événement. Le seul effet négatif est l'élargissement de la gaussienne
+centrée sur la "vraie" valeur. 
+
+NB: l'algorithme du cluster et de la reconstruction de la direction des
+impulsions au vertex peut-être trouvé dans "\textit{projetZRunManager.cc}"
+
+
 Donner les résultats obtenus.
 Ecrire une conclusion.
-D'autres idées?
 
-
+\section{Conclusion}
+ 
 
 		
 \end{document}
