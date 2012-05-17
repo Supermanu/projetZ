@@ -133,8 +133,8 @@ relation de la masse invariante suivante :
 M_H^2=E_H^2-p_H^2=(E_1+E_2+E_3+E_4)^2-(\vec{p}_1+\vec{p}_2+\vec{p}_3+\vec{p}_4)^2.
 \end{equation} 
     
-Ensuite, les erreurs dues aux bruits ont \'et\'e prises en compte en posant un seuil de d'\'energie au niveau de la 
-d\'etection et pour inclure les erreurs syst\'ematiques, il a fallut lancer de nombreuses fois notre programme puis
+Ensuite, les erreurs dues aux bruits ont \'et\'e prises en compte en posant un seuil d'\'energie au niveau de la 
+d\'etection. Pour inclure les erreurs syst\'ematiques, il a fallut lancer de nombreuses fois notre programme puis
 moyenner les diff\'erences entre la masse calcul\'ee et celle donn\'ee par la Breit Wigner 
 (enregistr\'ee au pr\'ealable). 
 
@@ -264,10 +264,10 @@ choisi d'affiner cette information à l'aide des trackers. Avoir une idée de la
 direction des impulsions grâce aux cellules du calorimètres simplifie
 grandement la méthode pour obtenir cette même information précisée à l'aide des
 trackers. En effet, nous avons considéré un cône d'ouverture 40$^{\circ}$
-(valeurs affinée par essais-erreurs) dont la pointe est le vertex et dont l'axe
+(valeurs affinées par essais-erreurs) dont la pointe est le vertex et dont l'axe
 relie ce dernier à la position centrale du jets. La "vraie" direction de
 l'impulsion initiale de l'électron est obtenue en faisant une moyenne de toutes
-les directions donnée par le tracker en ne tenant compte que des hits à
+les directions données par le tracker en ne tenant compte que des hits à
 l'intérieur de ce cône. NB: l'utilisation du cône est nécessaire car le tracker
 nous donne les hits de tous les électrons y compris ceux qui rebondissent sur
 le calorimètre et revienne dans le tracker. 
@@ -301,30 +301,30 @@ Ecrire une conclusion.
 \section{Conclusion}
  Il apparait clairement dans la section pr\'ec\'edente que nous avons r\'eussi \`a obtenir la masse du Higgs.
 Cependant, notre programme n'est pas optimal, il serait possible de le rendre plus rapide et 
-moins couteux en m\'emoire vivre. La pr\'ecision pourrait \'egalement être augment\'ee. 
+moins couteux en m\'emoire vive. La pr\'ecision pourrait \'egalement être augment\'ee. 
 
-Une première amélioration serait de refermer le d\'etecteur c'est-à-dire de placer des d\'etecteurs aux extrémités 
+Une première amélioration serait de refermer le d\'etecteur c'est-à-dire de placer des d\'etecteurs aux extrémités, 
 perpendiculairement à l'axe des z dans notre cas (en laissant évidemment un espace libre pour permettre l'envoie des 
 particules dans le d\'etecteur). 
 
-Au niveau de l'algorithme du cluster, on remarque que si deux jets sont très proches l'un de l'autre, une seule case 
-s\'eparant deux maxima d'énergie détectés, alors l'énergie se trouvant sur cette case et comptée 2 fois. Cet algorithme
- pourrait être modifier de sorte que la quantité soit partagée équitablement entre les 2 jets. Là encore
-le plus simple serait  de se contenter de diviser la quantité par 2 mais mieux encore serait de regarder ou se trouve le 
-maxima entre le 2 pics détectés. En considérant que chaque jets contient toujours la même énergie, La quantité serait
+Au niveau de l'algorithme du cluster, on remarque que si deux jets sont très proches l'un de l'autre (une seule case 
+s\'eparant deux maxima d'énergie détectés) alors l'énergie se trouvant sur cette case et comptée deux fois. Cet algorithme
+ pourrait être modifier de sorte que la quantité soit partagée équitablement entre les deux jets.Le plus simple serait
+alors de se contenter de diviser la quantité par deux mais mieux encore serait de regarder où se trouve le 
+maxima entre les deux pics détectés. En considérant que chaque jet contient toujours la même énergie, la quantité serait
 répartir en conséquence entre les deux jets (une plus grande partie pour le plus petit des deux maxima et vice-versa).
 
-Une autre façon de limiter le surcomptage de l'énergie décris dans le paragraphe précédent, serait de raffiner les 
+Une autre façon de limiter le surcomptage de l'énergie décrit dans le paragraphe précédent, serait de raffiner les 
 cellules. En effet, cela diminuerait la probabilité de "case" partagée et même dans les cas où cela se produirait, la
-quantité d'énergie partagée serait moindre. Cependant cela necessiterai de créer un algorithme totalement différent
-étant donné que le notre est basé sur le fait qu'un jets ne puisse pas occuper plus de quatre cellules.
+quantité d'énergie partagée serait moindre. Cependant cela necessiterait un algorithme totalement différent
+étant donné que le notre est basé sur le fait qu'un jet ne puisse pas occuper plus de quatre cellules.
 
 L'argorithme de reconstruction de la trace est assez basique et par conséquent pas des plus précis. Il aurait sans doute
 été préférable d'utiliser un algorithme plus complexe du type régression linéaire.
 
-Enfin notons que dans les cellules des vrais d\'etecteurs sont des cellules focalisées ce qui n'est évidemment pas le 
+Enfin notons que les cellules de vrais d\'etecteurs sont des cellules focalisées ce qui n'est évidemment pas le 
 cas dans notre simulation, il en résulte des effets indésirables comme des rebonds de particules sur les cellules du
-calorimètre. Ces effets diminuent également la précision des résultats mais ils ne seront pas présents dans un cas réel.
+calorimètre. Ces effets diminuent également la précision des résultats bien qu'ils ne sont pas présents dans un cas réel.
 
 
 		
