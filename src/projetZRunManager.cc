@@ -51,7 +51,7 @@ void projetZRunManager::AnalyzeEvent ( G4Event* anEvent )
         G4cout << "La masse du Higgs vaut : " << G4BestUnit(masseH(), "Energy") << G4endl;
 	if (tracefinder)
 	{
-	  std::string const nomFichier ( "masseHiggs.txt" );
+	  std::string const nomFichier ( "masseHiggs2.txt" );
         std::ofstream fluxe ( nomFichier.c_str(), std::ios::app );
         if ( fluxe ) {
             fluxe << masseH() << G4endl ;
@@ -204,7 +204,7 @@ bool projetZRunManager::TrouverTrace( G4Event* anEvent, G4int positionsJets[4][2
     G4double hitPhi;
     
     // Une façon d'améliorer l'algo, c'est d'éliminer les points parasites. Ces points sont caractérisés par le fait qu'ils sont très proches et très nombreux, alors qu'une bonne particules va laisser maximum trois ou quatres hits dans la même direction.
-    for ( int i = 0; i<2; i++ ) {
+    for ( int i = 0; i<1; i++ ) {
         std::vector<projetZTrackerHit> leVecteurDeHits = vecteurHits[i]; // On récupère le vecteur de hit associé au bon tracker
         int p = leVecteurDeHits.size(); // Nombre de hit dans le tracker
 	G4cout << "Recherche dans le tracker : " << i << G4endl;
@@ -303,31 +303,31 @@ bool projetZRunManager::DetectionJets ( G4Event* anEvent, G4int positionsJets[4]
 
 void projetZRunManager::EcrireEnergie ( G4double energie, G4double cell[][40] )
 {
-    std::string const nomFichier ( "energieCalorimetre.txt" );
-    std::ofstream monFlux ( nomFichier.c_str(), std::ios::app );
-    if ( monFlux ) {
-        monFlux << energie << G4endl;
-    } else {
-        G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-    }
-    std::string const nomFichier2 ( "depotCalorimetre.txt" );
-    std::ofstream monFlux2 ( nomFichier2.c_str(), std::ios::app );
-    std::string const nomFichier3 ( "plotCaloBrut.txt" );
-    std::ofstream monFlux3 ( nomFichier3.c_str(), std::ios::app );
-    if ( monFlux2 ) {
-        for ( int n=0 ; n<40 ; n++ ) {
-            for ( int k=0 ; k<40 ; k++ ) {
-                monFlux2 << cell[n][k] << " " ;
-                monFlux3 << n << " " << k << " " << cell[n][k] << std::endl;
-            }
-            monFlux2 << std::endl;
-        }
-        monFlux2 << -1 << G4endl;
-        monFlux3 << -1 << G4endl;
-
-    } else {
-        G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-    }
+//     std::string const nomFichier ( "energieCalorimetre.txt" );
+//     std::ofstream monFlux ( nomFichier.c_str(), std::ios::app );
+//     if ( monFlux ) {
+//         monFlux << energie << G4endl;
+//     } else {
+//         G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+//     }
+//     std::string const nomFichier2 ( "depotCalorimetre.txt" );
+//     std::ofstream monFlux2 ( nomFichier2.c_str(), std::ios::app );
+//     std::string const nomFichier3 ( "plotCaloBrut.txt" );
+//     std::ofstream monFlux3 ( nomFichier3.c_str(), std::ios::app );
+//     if ( monFlux2 ) {
+//         for ( int n=0 ; n<40 ; n++ ) {
+//             for ( int k=0 ; k<40 ; k++ ) {
+//                 monFlux2 << cell[n][k] << " " ;
+//                 monFlux3 << n << " " << k << " " << cell[n][k] << std::endl;
+//             }
+//             monFlux2 << std::endl;
+//         }
+//         monFlux2 << -1 << G4endl;
+//         monFlux3 << -1 << G4endl;
+// 
+//     } else {
+//         G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+//     }
 }
 
 bool projetZRunManager::regarderAutour ( double cell[42][42], int n, int k )
@@ -386,8 +386,8 @@ bool projetZRunManager::TrouverJets ( G4double ecell[][40], G4int positionsJets[
 
     // On doit maintenant parcourir toutes les cellules
     G4double minEnergie = 6000.*MeV;
-    std::string const nomFichier ( "plotCaloNet.txt" );
-    std::ofstream leFlux ( nomFichier.c_str(), std::ios::app );
+//     std::string const nomFichier ( "plotCaloNet.txt" );
+//     std::ofstream leFlux ( nomFichier.c_str(), std::ios::app );
     for ( int n=1 ; n<taillePhi+1 ; n++ ) {
         for ( int k=1 ; k<tailleZ+1 ; k++ ) {
             if ( cell[n][k] > minEnergie ) {
@@ -424,24 +424,24 @@ bool projetZRunManager::TrouverJets ( G4double ecell[][40], G4int positionsJets[
                             energiesJets[nombreJet-1] += cell[n-1][k-i];
                         }
                     }
-                    leFlux << energiesJets[nombreJet-1] << " " ;
+//                     leFlux << energiesJets[nombreJet-1] << " " ;
                 } else {
-                    leFlux << 0 << " " ;
+//                     leFlux << 0 << " " ;
                 }
             } else {
-                leFlux << 0 << " " ;
+//                 leFlux << 0 << " " ;
             }
             if ( k == 40 ) {
-                leFlux << G4endl;
+//                 leFlux << G4endl;
             }
         }
     }
     if ( nombreJet > nbreJetAttendu ) {
-        std::string const nomFichier ( "erreurDetection.txt" );
-        std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
-        if ( monFlux2 ) {
-            monFlux2 << " " << -2 << G4endl ;
-        }
+//         std::string const nomFichier ( "erreurDetection.txt" );
+//         std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
+//         if ( monFlux2 ) {
+//             monFlux2 << " " << -2 << G4endl ;
+//         }
         return false;
     }
     if ( nombreJet < nbreJetAttendu ) {
@@ -458,19 +458,19 @@ bool projetZRunManager::TrouverJets ( G4double ecell[][40], G4int positionsJets[
     } else if ( nombreJet == nbreJetAttendu ) {
         for ( int i=0 ; i<nbreJetAttendu ; i++ ) {
 	    
-            G4cout << "Jet d'énergie : " << G4BestUnit ( energiesJets[i] + 0.0230304*energiesJets[i], "Energy" ) << " Et de position (n,k) : " << positionsJets[i][0] << " " << positionsJets[i][1]  << " Et theta : " << 9*positionsJets[i][0] +4.5 <<  " Et phi : " << ( pi/2 - atan ( ( ( positionsJets[i][1] ) -20.5 ) *14/40 ) ) *180/pi << G4endl;
+            G4cout << "Jet d'énergie : " << G4BestUnit ( energiesJets[i] /*+ 0.0230304*energiesJets[i]*/, "Energy" ) << " Et de position (n,k) : " << positionsJets[i][0] << " " << positionsJets[i][1]  << " Et theta : " << 9*positionsJets[i][0] +4.5 <<  " Et phi : " << ( pi/2 - atan ( ( ( positionsJets[i][1] ) -20.5 ) *14/40 ) ) *180/pi << G4endl;
             switch ( i ) {
             case 0:
-		e1 = energiesJets[i] + 0.0330304*energiesJets[i];
+		e1 = energiesJets[i] - 1194.48*MeV*energiesJets[i]/200000. /*+ 0.0330304*energiesJets[i]*/;
                 break;
             case 1:
-                e2 = energiesJets[i] + 0.0330304*energiesJets[i];
+                e2 = energiesJets[i] - 1194.48*MeV*energiesJets[i]/200000. /*+ 0.0330304*energiesJets[i]*/;
                 break;
             case 2:
-                e3 = energiesJets[i] + 0.0330304*energiesJets[i];
+                e3 = energiesJets[i] - 1194.48*MeV*energiesJets[i]/200000. /*+ 0.0330304*energiesJets[i]*/;
                 break;
             case 3:
-                e4 = energiesJets[i] + 0.0330304*energiesJets[i];
+                e4 = energiesJets[i] - 1194.48*MeV*energiesJets[i]/200000. /*+ 0.0330304*energiesJets[i]*/;
                 break;
             default:
                 G4cout << "Problèèèèmeeee !!! (le retour)" << G4endl;
@@ -479,14 +479,14 @@ bool projetZRunManager::TrouverJets ( G4double ecell[][40], G4int positionsJets[
 
         }
 
-        std::string const nomFichier ( "erreurDetection.txt" );
-        std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
-        if ( monFlux2 ) {
-            monFlux2 << " " << energiesJets[0] << G4endl ;
-
-        } else {
-            G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-        }
+//         std::string const nomFichier ( "erreurDetection.txt" );
+//         std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
+//         if ( monFlux2 ) {
+//             monFlux2 << " " << energiesJets[0] << G4endl ;
+// 
+//         } else {
+//             G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+//         }
         return true;
     }
     
@@ -530,7 +530,7 @@ G4double projetZRunManager::masseH ()
     ptot[1]= p1[1]+p2[1]+p3[1]+p4[1];
     ptot[2]= p1[2]+p2[2]+p3[2]+p4[2];
 
-    masseH=sqrt ( ( e1+e2+e3+e4 ) * ( e1+e2+e3+e4 )- ( ptot[0]*ptot[0]+ptot[1]*ptot[1]+ptot[2]*ptot[2] ) );
+    masseH=sqrt ( ( e1+e2+e3+e4 ) * ( e1+e2+e3+e4 )- ( ptot[0]*ptot[0]+ptot[1]*ptot[1]+ptot[2]*ptot[2] ) ) /*- 1194.48*MeV*/;
 
     return masseH;
 }

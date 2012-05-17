@@ -31,14 +31,15 @@ projetZElectronsGenerator::projetZElectronsGenerator() : masseHiggs(200.0*GeV), 
   srand(time(NULL));
   // on va d'abord calculer l'énergie des Z pour un H au repos, ensuite l'énergie pour des électrons avec un Z au repos.
   G4double valeurTampon[1];
-  projetZDistribution(valeurTampon,"breitWigner",500.*MeV,200.*GeV);
-  masseHiggs = valeurTampon[0];
+  projetZDistribution(valeurTampon,"breitWigner",2.5,200.);
+  masseHiggs = valeurTampon[0]*GeV;
+  
   G4cout << "Masse du H: " << G4BestUnit(masseHiggs, "Energy") << endl;
   G4double pZ = sqrt((masseHiggs*masseHiggs)/4 - 91.187*GeV*91.187*GeV);
   G4double energieZ = masseHiggs/2;
   projetZDistribution(valeurTampon, "distribExpo", 30.*GeV);
   G4double EnergieCinetiqueH = valeurTampon[0];
-  // G4double EnergieCinetiqueH = distribExpo(30.*GeV);
+//   G4double EnergieCinetiqueH = 0.;
   G4double vitesseH = sqrt(1 - (1/(((EnergieCinetiqueH/masseHiggs)+1)*((EnergieCinetiqueH/masseHiggs)+1))));
   G4cout << "Energie cinétique du H: " << G4BestUnit(EnergieCinetiqueH, "Energy") << endl;
   G4cout << "Vitesse du H: " << vitesseH << endl;

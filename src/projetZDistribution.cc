@@ -77,9 +77,7 @@ G4double bw ( G4double x, G4double y, G4double a )
 
 G4double breitWigner ( G4double y, G4double a )
 {
-    srand ( time ( NULL ) ); // initialisation de rand
 
-    //créer 2 nombre aléatoire dans un cadre allant de 197 à 203 et variant en hauteur de 0 à 100
     G4double nombre_aleatoire[2];
     //je donne des valeurs au 2 nombres pour faire démarrer le while
     nombre_aleatoire[1]=1/ ( pi*y ) +1;

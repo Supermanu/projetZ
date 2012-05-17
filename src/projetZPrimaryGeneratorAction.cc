@@ -83,16 +83,16 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
         particleGun->SetParticleMomentumDirection ( quatreElectrons.getDirectionElectron ( 3 ) );
         particleGun->SetParticleEnergy ( quatreElectrons.getEnergyElectron ( 3 ) );
         particleGun->GeneratePrimaryVertex ( anEvent );
-        std::string const nomFichier ( "energiesElectrons.txt" );
-        std::ofstream monFlux ( nomFichier.c_str(), std::ios::app );
-        if ( monFlux ) {
-            for ( int n=0 ; n<4 ; n++ ) {
-                monFlux << quatreElectrons.getEnergyElectron ( n ) << " " ;
-            }
-            monFlux << G4endl;
-        } else {
-            G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-        }
+//         std::string const nomFichier ( "energiesElectrons.txt" );
+//         std::ofstream monFlux ( nomFichier.c_str(), std::ios::app );
+//         if ( monFlux ) {
+//             for ( int n=0 ; n<4 ; n++ ) {
+//                 monFlux << quatreElectrons.getEnergyElectron ( n ) << " " ;
+//             }
+//             monFlux << G4endl;
+//         } else {
+//             G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+//         }
     } else {
         G4double energieTampon[1];
         projetZDistribution ( energieTampon, "distribGauss", 60.*GeV, 25.*GeV );
@@ -111,13 +111,13 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
         particleGun->SetParticleMomentumDirection ( G4ThreeVector ( x,y,z ) );
         particleGun->GeneratePrimaryVertex ( anEvent );
 
-        std::string const nomFichier ( "erreurDetection.txt" );
-        std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
-        if ( monFlux2 ) {
-            monFlux2 << energieTampon[0] ;
-        } else {
-            G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-        }
+//         std::string const nomFichier ( "erreurDetection.txt" );
+//         std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
+//         if ( monFlux2 ) {
+//             monFlux2 << energieTampon[0] ;
+//         } else {
+//             G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+//         }
     }
 }
 
