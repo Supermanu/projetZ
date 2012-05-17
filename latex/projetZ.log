@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  16 MAY 2012 21:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  17 MAY 2012 23:26
 entering extended mode
  %&-line parsing enabled.
 **projetZ.tex
@@ -591,31 +591,82 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
  [2
 
 ] [3] [4] [5]
-[6] (./projetZ.aux) ) 
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.299 \includegraphics{bonCasBrut.eps}
+                                      
+? 
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.304 \includegraphics{bonCasNet.eps}
+                                     
+? 
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.310 \includegraphics{mauvaisCasBrut.eps}
+                                          
+? 
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.315 \includegraphics{mauvaisCasNet.eps}
+                                         
+? 
+[6] <bwmH.png, id=37, 892.08281pt x 473.51906pt>
+File: bwmH.png Graphic file (type png)
+ <use bwmH.png>
+<histmH.png, id=38, 908.64468pt x 463.7325pt>
+File: histmH.png Graphic file (type png)
+ <use histmH.png> [7 <./bwmH.png (PNG copy)>] [8 <./histmH.png (PNG copy)>] [9]
+ (./projetZ.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3648 strings out of 493848
- 45566 string characters out of 1152823
- 105844 words of memory out of 3000000
- 6830 multiletter control sequences out of 15000+50000
- 57436 words of font info for 52 fonts, out of 3000000 for 9000
+ 3670 strings out of 493848
+ 45813 string characters out of 1152823
+ 105864 words of memory out of 3000000
+ 6843 multiletter control sequences out of 15000+50000
+ 60231 words of font info for 53 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 27i,5n,24p,245b,209s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share
-/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm
--rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-te
-xlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx1
-0.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/font
-s/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb>
-</usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1
-/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/shar
-e/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/l
-m/lmri9.pfb></usr/share/texmf/fonts/type1/public/lm/lmro10.pfb></usr/share/texm
-f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
-8.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share
-/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
-Output written on projetZ.pdf (6 pages, 254625 bytes).
+ 27i,6n,24p,339b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
+ips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share
+/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-texlive/fonts/enc/dvi
+ps/base/8r.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf
+/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr
+/share/texmf/fonts/type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmro10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share
+/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-texlive/fonts/type1/ur
+w/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pf
+b>
+Output written on projetZ.pdf (9 pages, 332763 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

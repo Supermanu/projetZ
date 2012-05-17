@@ -144,7 +144,7 @@ Les d\'etails de toutes ces \'etapes sera pr\'esent\'es dans la suite.
 
 
 
-		    \section{Descriptifs et méthodes}
+		    \section{Descriptifs des méthodes et résultats}
 
 \subsection{Description du détecteur}
 
@@ -299,21 +299,53 @@ impulsions au vertex peut-être trouvé dans "\textit{projetZRunManager.cc}"
 \includegraphics{bonCasBrut.eps}
 \end{figure}
 \begin{figure}
-\caption{Résultat typique d'une détection de 4 jets parfaits par le cluster après passage de l'algorithme du cluster}
+\caption{Résultat typique d'une détection de 4 jets parfaits par le cluster
+après passage de l'algorithme du cluster}
 \includegraphics{bonCasNet.eps}
 \end{figure}
 \begin{figure}
-\caption{Résultat d'une détection dite à problème\newline On peut voir un niveau des pics les plus à gauche le problème du double comptage d'une quantité d'énergie}
+\caption{Résultat d'une détection dite à problème\newline On peut voir un niveau
+des pics les plus à gauche le problème du double comptage d'une quantité
+d'énergie}
 \includegraphics{mauvaisCasBrut.eps}
 \end{figure}
 \begin{figure}
-\caption{Résultat  d'une détection dite à problème après passage de l'algorithme du cluster}
+\caption{Résultat  d'une détection dite à problème après passage de l'algorithme
+du cluster}
 \includegraphics{mauvaisCasNet.eps}
 \end{figure}
 
-Donner les résultats obtenus.
-Ecrire une conclusion.
+\subsection{Analyse des résultats}
 
+Une fois tout cela implémenté, nous avons fait tourner le programme en boucle
+1500 fois pour mesurer un grand nombre de masse du higgs. C'est avec grand
+plaisir que nous constatons que la distribution obtenue est fort proche de celle
+attendue. il suffit de regarder les figures (\ref{bw}) et (\ref{hist}) pour voir
+que, bien que l'algorithme ne soit pas parfait, les résultats sont plus
+qu'acceptables. Nous obtenons en effet une moyenne de 199.8950 GeV pour un
+écart type de 7.0826 GeV. Sur les 1500 higgs créés, 1356 ont générés des
+événements que notre algorithme à pu identifier correctement et reconstruire.
+Cela fait moins de 10\% de pertes. Une première remarque sur l'histogramme des
+résultats est que nombre maximum d'événements se trouve un peu au dessus du 200
+GeV mais cela serait explicable par une fluctuation statistique. Une seconde
+remarque est l'apparition d'événement fort éloignés de 200 GeV probablement dûs
+aux failles de nos algorithmes. C'est un peu facile de dire ça je sais mais je
+vois pas trop comment ça peut arriver... Une idée???
+
+\begin{figure}
+\caption{Distribution Breit-Wigner des masses des higgs générés}
+\includegraphics[scale=0.4]{bwmH.png}
+\label{bw}
+\end{figure}
+
+\begin{figure}
+\caption{Histogrammes des masses mesurées par notre détecteur}
+\includegraphics[scale=0.4]{histmH.png}
+\label{hist}
+\end{figure}
+
+
+\newpage
 \section{Conclusion}
  Il apparait clairement dans la section pr\'ec\'edente que nous avons r\'eussi \`a obtenir la masse du Higgs.
 Cependant, notre programme n'est pas optimal, il serait possible de le rendre plus rapide et 
@@ -324,23 +356,46 @@ perpendiculairement à l'axe des z dans notre cas (en laissant évidemment un es
 particules dans le d\'etecteur). 
 
 Au niveau de l'algorithme du cluster, on remarque que si deux jets sont très proches l'un de l'autre (une seule case 
-s\'eparant deux maxima d'énergie détectés) alors l'énergie se trouvant sur cette case et comptée deux fois. Cet algorithme
- pourrait être modifier de sorte que la quantité soit partagée équitablement entre les deux jets.Le plus simple serait
+s\'eparant deux maxima d'énergie détectés) alors l'énergie se trouvant sur cette
+case est comptée deux fois. Cet algorithme
+ pourrait être modifié de sorte que la quantité soit partagée équitablement
+entre les deux jets.Le plus simple serait
 alors de se contenter de diviser la quantité par deux mais mieux encore serait de regarder où se trouve le 
 maxima entre les deux pics détectés. En considérant que chaque jet contient toujours la même énergie, la quantité serait
-répartir en conséquence entre les deux jets (une plus grande partie pour le plus petit des deux maxima et vice-versa).
+répartie en conséquence entre les deux jets (une plus grande partie pour le plus
+petit des deux maxima et vice-versa). 
 
 Une autre façon de limiter le surcomptage de l'énergie décrit dans le paragraphe précédent, serait de raffiner les 
 cellules. En effet, cela diminuerait la probabilité de "case" partagée et même dans les cas où cela se produirait, la
-quantité d'énergie partagée serait moindre. Cependant cela necessiterait un algorithme totalement différent
-étant donné que le notre est basé sur le fait qu'un jet ne puisse pas occuper plus de quatre cellules.
+quantité d'énergie partagée serait moindre. Cependant cela nécessiterait un
+algorithme totalement différent
+étant donné que le notre est basé sur le fait qu'un jet ne puisse pas occuper
+plus de quatre cellules.
 
-L'argorithme de reconstruction de la trace est assez basique et par conséquent pas des plus précis. Il aurait sans doute
+Un dernier point concernant l'algorithme de cluster serait de limiter le nombre
+de higgs "perdus". En effet, dans le cas présent, nous jetons tous les
+événements ou nous ne détectons pas exactement quatre jets. Seul un algorithme
+bien plus complexe pourrait nous permettre d'exploiter certains de ces cas
+particuliers. Les higgs étant ici simuler informatiquement, il ne nous coûtent
+pas très cher.
+
+L'algorithme de reconstruction de la trace est assez basique et par conséquent
+pas des plus précis. Il aurait sans doute
 été préférable d'utiliser un algorithme plus complexe du type régression linéaire.
+
 
 Enfin notons que les cellules de vrais d\'etecteurs sont des cellules focalisées ce qui n'est évidemment pas le 
 cas dans notre simulation, il en résulte des effets indésirables comme des rebonds de particules sur les cellules du
 calorimètre. Ces effets diminuent également la précision des résultats bien qu'ils ne soient pas présents dans un cas réel.
+
+
+
+Certaines de ces améliorations auraient demandées beaucoup de temps à
+développer pour parfois peu d'amélioration de précision. Nous avons tenté de
+faire au plus proche de la réalité en passant du temps sur les point qui nous
+semblaient prioritaires. Nous avons cherché le juste milieu entre l'amélioration
+des résultats obtenues et le temps demandé pour y parvenir tout en ne négligeant
+pas nos autres cours et obligations.
 
 
 		
