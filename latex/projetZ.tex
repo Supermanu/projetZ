@@ -296,27 +296,39 @@ centrée sur la "vraie" valeur.
 NB: l'algorithme du cluster et de la reconstruction de la direction des
 impulsions au vertex peut-être trouvé dans "\textit{projetZRunManager.cc}"
 
+Cet algorithme possède un autre défaut, lorsque deux jets sont l'un à coté de
+l'autre, l'énergie de certaines cases provient des deux jets et notre
+algorithme la comptera donc deux fois. A titre d'exemple visuel, voici quelques
+graphiques illustrant les différents cas rencontrés. Sur la figure (\ref{bonb})
+on voit un événement avec bruit correspondant aux cas où notre algorithme
+fonctionne parfaitement. Le même cas après imposition du seuil d'énergie est
+illustré sur la figure (\ref{bonp}). Ensuite viennent les cas où nous
+rencontrons le problème du surcomptage de l'énergie sur les cases "partagées"
+(voir figure (\ref{pasbonb}) et (\ref{pasbonp})).
 \begin{figure}
-\caption{Résultat typique d'une détection de 4 jets parfaits par le cluster}
-\includegraphics{images/bonCasBrut-eps-converted-to.pdf}
+\caption{Résultat typique d'une détection de 4 jets parfaits par le cluster avec bruit}
+\includegraphics[scale=0.55]{images/bonCasBrut-eps-converted-to.pdf}
+\label{bonb}
 \end{figure}
 \begin{figure}
 \caption{Résultat typique d'une détection de 4 jets parfaits par le cluster
-après passage de l'algorithme du cluster}
-\includegraphics{images/bonCasNet-eps-converted-to.pdf}
+après nettoyage du bruit}
+\includegraphics[scale=0.55]{images/bonCasNet-eps-converted-to.pdf}
+\label{bonp}
 \end{figure}
 \begin{figure}
-\caption{Résultat d'une détection dite à problème\newline On peut voir un niveau
-des pics les plus à gauche le problème du double comptage d'une quantité
-d'énergie}
-\includegraphics{images/mauvaisCasBrut-eps-converted-to.pdf}
+\caption{Résultat d'une détection dite à problème.\newline On peut voir au
+niveau des deux jets les plus à gauche le problème du double comptage d'énergie}
+\includegraphics[scale=0.55]{images/mauvaisCasBrut-eps-converted-to.pdf}
+\label{pasbonb}
 \end{figure}
 \begin{figure}
-\caption{Résultat  d'une détection dite à problème après passage de l'algorithme
-du cluster}
-\includegraphics{images/mauvaisCasNet-eps-converted-to.pdf}
+\caption{Même après nettoyage du bruit, le problème reste présent}
+\includegraphics[scale=0.55]{images/mauvaisCasNet-eps-converted-to.pdf}
+\label{pasbonp}
 \end{figure}
 
+\newpage
 \subsection{Analyse des résultats}
 
 Une fois tout cela implémenté, nous avons fait tourner le programme en boucle
@@ -334,15 +346,15 @@ remarque est l'apparition d'événement fort éloignés de 200 GeV probablement 
 aux failles de nos algorithmes. C'est un peu facile de dire ça je sais mais je
 vois pas trop comment ça peut arriver... Une idée???
 
-\begin{figure}
+\begin{figure}[h!]
 \caption{Distribution Breit-Wigner des masses des higgs générés}
-\includegraphics[scale=0.4]{bwmH.png}
+\includegraphics[scale=0.4]{images/bwmH.png}
 \label{bw}
 \end{figure}
 
 \begin{figure}
 \caption{Histogramme des masses mesurées par notre détecteur}
-\includegraphics[scale=0.4]{histmH.png}
+\includegraphics[scale=0.4]{images/histmH.png}
 \label{hist}
 \end{figure}
 
