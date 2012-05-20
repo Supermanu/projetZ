@@ -3,6 +3,6 @@
 \contentsline {section}{\numberline {2}Descriptifs des m\IeC {\'e}thodes et r\IeC {\'e}sultats}{3}
 \contentsline {subsection}{\numberline {2.1}Description du d\IeC {\'e}tecteur}{3}
 \contentsline {subsection}{\numberline {2.2}Description physique du processus initial}{4}
-\contentsline {subsection}{\numberline {2.3}Reconstruction de la masse invariante du boson de Higgs}{5}
-\contentsline {subsection}{\numberline {2.4}Analyse des r\IeC {\'e}sultats}{9}
-\contentsline {section}{\numberline {3}Conclusion}{10}
+\contentsline {subsection}{\numberline {2.3}Reconstruction de la masse invariante du boson de Higgs}{7}
+\contentsline {subsection}{\numberline {2.4}Analyse des r\IeC {\'e}sultats}{10}
+\contentsline {section}{\numberline {3}Conclusion}{11}

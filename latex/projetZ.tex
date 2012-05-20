@@ -201,7 +201,7 @@ H \longrightarrow ZZ \longrightarrow e^+ e^- e^+ e^-.
 Voyons maintenant en détail la méthodologie utilisée dans ce but. Dans un
 soucis de réalisme, nous avons choisi de ne pas fixer la masse du $H$ mais
 de la générer aléatoirement avec une distribution de Breit-Wigner centrée sur
-200 GeV. Nous avons dans un premier temps étudié la reconstruction de sa masse
+200 GeV et de demi largeur 2.5 GeV. Nous avons dans un premier temps étudié la reconstruction de sa masse
 invariante lorsque le higgs se désintègre au repos pour ensuite se rapprocher
 de la réalité et considérer sa désintégration alors qu'il est en mouvement dans
 le repère du détecteur. Dans ce but, nous générons une énergie cinétique issue
@@ -243,9 +243,33 @@ photons cf "\textit{projetZPhysicsList.cc}". Le voici tout de même :
 effet photoélectrique.
 \item électrons : ionisation, bremsstrahlung et diffusion multiple.
 \item positrons : ionisation, bremsstrahlung, diffusion multiple et
-annihilation avec un électron. 
+annihilation avec un électron.\\ 
 \end{itemize}
 
+A titre informatif, on peut voir sur les figures ci-dessous l'illustration de
+deux higgs différents qui se désintègrent dans le détecteur.
+La figure (\ref{viz1}) montre clairement les quatre jets séparément (nous avons
+choisi de ne montrer que les particules de plus de 100 MeV pour la propreté). La
+figure (\ref{viz2}) montre toutes les particules de plus de 20 MeV. Cette
+dernière fait apparaître la structure des trackers ainsi que l'importance des
+particules secondaires qui "rebondissent" un peu partout et génèrent ainsi
+du bruit dans nos trackers.
+
+\begin{figure}
+\caption{Visualisation d'un événement ne montrant que les particules de plus
+de 100 MeV}
+\includegraphics[scale=0.40]{images/evenPlus100MeV.png}
+\label{viz1}
+\end{figure}
+
+\begin{figure}
+\caption{Visualisation d'un événement ne montrant que les particules de plus
+de 20 MeV}
+\includegraphics[scale=0.40]{images/evenPlus20MeV3.png}
+\label{viz2}
+\end{figure}
+
+\newpage
 \subsection{Reconstruction de la masse invariante du boson de Higgs}
 
 Une fois les électrons lancés dans le détecteur, nous obtenons une réponse sous
@@ -261,15 +285,17 @@ algorithme de cluster qui sera explicité plus loin, nous pouvons isoler de
 cela quatre jets distinct (dans la majorité des cas) et extraire de ces
 informations l'énergie totale et l'endroit ou chacun des électrons s'est
 arrêté. L'énergie déposée dans les trackers et dans l'air est en effet
-insignifiante par rapport aux énergies en jeux. Comme nous avons pu éviter de
-mettre un champs magnétique, la position des différents jets nous donne une
-information précieuse sur la direction de l'impulsion initiale des électrons aux
+insignifiante par rapport aux énergies en jeux. Comme la trajectoire des
+particules dans le détecteur est rectiligne, la position des différents jets
+dans le calorimètre nous donne immédiatement une information précieuse sur la
+direction de l'impulsion initiale des électrons aux
 vertex. Cependant, nos cellules ayant une relativement grande taille, la
-précision sur la direction est assez médiocre... C'est pourquoi nous avons
+précision sur cette direction est assez médiocre... C'est pourquoi nous avons
 choisi d'affiner cette information à l'aide des trackers. Avoir une idée de la
-direction des impulsions grâce aux cellules du calorimètres simplifie
-grandement la méthode pour obtenir cette même information précisée à l'aide des
-trackers. En effet, nous avons considéré un cône d'ouverture 40$^{\circ}$
+direction des impulsions grâce aux cellules du calorimètre simplifie
+grandement l'algorithme utilisé pour obtenir cette direction plus précisément à
+l'aide des trackers. En effet, nous avons considéré un cône d'ouverture
+40$^{\circ}$
 (valeurs affinées par essais-erreurs) dont la pointe est le vertex et dont l'axe
 relie ce dernier à la position centrale du jets. La "vraie" direction de
 l'impulsion initiale de l'électron est obtenue en faisant une moyenne de toutes
@@ -305,7 +331,7 @@ l'autre, l'énergie de certaines cases provient des deux jets et notre
 algorithme la comptera donc deux fois. A titre d'exemple visuel, voici quelques
 graphiques illustrant les différents cas rencontrés. Sur la figure (\ref{bonb})
 on voit un événement avec bruit correspondant aux cas où notre algorithme
-fonctionne parfaitement. Le même cas après imposition du seuil d'énergie est
+fonctionne parfaitement. Le même cas après introduction du seuil d'énergie est
 illustré sur la figure (\ref{bonp}). Ensuite viennent les cas où nous
 rencontrons le problème du surcomptage de l'énergie sur les cases "partagées"
 (voir figure (\ref{pasbonb}) et (\ref{pasbonp})).
@@ -336,9 +362,9 @@ niveau des deux jets les plus à gauche le problème du double comptage d'énerg
 \subsection{Analyse des résultats}
 
 Une fois tout cela implémenté, nous avons fait tourner le programme en boucle
-1500 fois pour mesurer un grand nombre de masse du higgs. C'est avec grand
+1500 fois pour mesurer un grand nombre de masses du higgs. C'est avec grand
 plaisir que nous constatons que la distribution obtenue est fort proche de celle
-attendue. il suffit de regarder les figures (\ref{bw}) et (\ref{hist}) pour voir
+attendue. Il suffit de regarder les figures (\ref{bw}) et (\ref{hist}) pour voir
 que, bien que l'algorithme ne soit pas parfait, les résultats sont plus
 qu'acceptables. Nous obtenons en effet une moyenne de 199.8950 GeV pour un
 écart type de 7.0826 GeV. Sur les 1500 higgs créés, 1356 ont générés des
@@ -346,9 +372,10 @@ qu'acceptables. Nous obtenons en effet une moyenne de 199.8950 GeV pour un
 Cela fait moins de 10\% de pertes. Une première remarque sur l'histogramme des
 résultats est que le nombre maximum d'événements se trouve un peu au dessus du
 200 GeV mais cela serait explicable par une fluctuation statistique. Une seconde
-remarque est l'apparition d'événement fort éloignés de 200 GeV probablement dûs
-aux failles de nos algorithmes. C'est un peu facile de dire ça je sais mais je
-vois pas trop comment ça peut arriver... Une idée???
+remarque est l'apparition d'événements fort éloignés de 200 GeV. Cela pourrait
+être dû aux failles de nos algorithmes oui bien également à une fluctuation
+statistique mais quoi qu'il en soit, cela ne concerne que deux événements
+sur 1356 et est donc négligeable.
 
 \begin{figure}[h!]
 \caption{Distribution Breit-Wigner des masses des higgs générés}
@@ -400,12 +427,6 @@ pas très cher.
 L'algorithme de reconstruction de la trace est assez basique et par conséquent
 pas des plus précis. Il aurait sans doute
 été préférable d'utiliser un algorithme plus complexe du type régression linéaire.
-
-
-Enfin notons que les cellules de vrais d\'etecteurs sont des cellules focalisées ce qui n'est évidemment pas le 
-cas dans notre simulation, il en résulte des effets indésirables comme des rebonds de particules sur les cellules du
-calorimètre. Ces effets diminuent également la précision des résultats bien qu'ils ne soient pas présents dans un cas réel.
-
 
 
 Certaines de ces améliorations auraient demandées beaucoup de temps à
