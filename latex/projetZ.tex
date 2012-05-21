@@ -125,7 +125,7 @@ méthode "Monte Carlo".
  
 A partir des classes abstraites de Geant4, nous avons défini les interactions
 possibles entre les particules et les \'el\'ements pr\'esents au sein du
-d\'etecteur. Cela fait il nous fallait reconstruire la trajectoire des
+d\'etecteur. Cela fait, il nous fallait reconstruire la trajectoire des
 \'electrons \`a partir des informations fournies par les trackers et les
 calorim\`etres. Avec celles-ci, nous avons pu d\'eterminer l'\'energie et
 l'impulsion des quatre \'electrons qui nous donnent la masse du Higgs par la
@@ -136,11 +136,11 @@ M_H^2=E_H^2-p_H^2=(E_1+E_2+E_3+E_4)^2-(\vec{p}_1+\vec{p}_2+\vec{p}_3+\vec{p}_4)^
 \end{equation} 
     
 Ensuite, les erreurs dues aux bruits ont \'et\'e prises en compte en posant un seuil d'\'energie au niveau de la 
-d\'etection. Pour inclure les erreurs syst\'ematiques, 4 électrons d'énergie connues ont été lancés 1200 fois dans 
+d\'etection. Pour inclure les erreurs syst\'ematiques, 4 électrons d'énergie connue ont été lancés 1200 fois dans 
 le détecteur. Les diff\'erences entre l'énergie détectée et l'énergie vraie sont alors mesurées et pondérées avec 
-l'énergie vraie. 
+l'énergie vraie. Le facteur correctif est déterminé en conséquence.
 
-Les d\'etails de toutes ces \'etapes sera pr\'esent\'es dans la suite.
+Les d\'etails de toutes ces \'etapes seront pr\'esent\'es dans la suite.
 
 
 
@@ -228,9 +228,13 @@ d'effectuer les boosts de Lorentz adéquats pour retourner dans le repère du $H
 et ensuite dans le repère du détecteur\footnote{Toutes ces manipulations pour
 simuler la désintégration du higgs sont des algorithmes ne nécessitant pas le
 framework "Geant4".}. On trouvera les détails de ces manipulations dans la
-classe "\textit{projetZElectronsGenerator.cc}". NB: les temps de vie très court
+classe "\textit{projetZElectronsGenerator.cc}".
+
+NB: les temps de vie très court
 du $H$ et du $Z$ nous permettent en très bonne approximation de considérer que
-ces quatre électrons sont émis au centre géométrique de notre détecteur. L'étape
+ces quatre électrons sont émis au centre géométrique de notre détecteur. 
+
+L'étape
 suivante consiste à "lancer" ces quatre électrons dans notre détecteur à l'aide
 du framework Geant4. Cela est implémenté dans la classe
 "\textit{projetZPrimaryGeneratorAction.cc}".
@@ -282,7 +286,7 @@ trackers et l'énergie déposée pour le calorimètre.
 Présentons les choses dans l'ordre d'utilisation de notre code. Chaque cellule
 du calorimètre nous renvoie l'énergie totale déposée en elle. Grâce à un
 algorithme de cluster qui sera explicité plus loin, nous pouvons isoler de
-cela quatre jets distinct (dans la majorité des cas) et extraire de ces
+cela quatre jets distincts (dans la majorité des cas) et extraire de ces
 informations l'énergie totale et l'endroit ou chacun des électrons s'est
 arrêté. L'énergie déposée dans les trackers et dans l'air est en effet
 insignifiante par rapport aux énergies en jeux. Comme la trajectoire des
