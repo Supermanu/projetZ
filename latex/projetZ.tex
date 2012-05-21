@@ -314,7 +314,7 @@ détectée dans cette cellule avec celles détectées dans les cellules voisines
 Si la cellule en question est celle qui possède le maximum, nous la retenons.
 L'énergie totale du jet est obtenue en y ajoutant les trois énergies
 maximales voisines. Pour que cet algorithme soit efficace, il faut bien entendu
-supprimer toutes les cellules ayant reçu peu d'énergie due au du bruit. Après
+supprimer toutes les cellules ayant reçu un peu d'énergie suite au bruit. Après
 plusieurs essais, nous avons choisi de fixer le seuil à 6 GeV pour éviter de
 compter parfois 5 jets au lieu de quatre à cause du bruit ( le bruit est tiré
 aléatoirement d'une gaussienne centrée sur 0 et de largeur 1 GeV et il arrivait
@@ -377,7 +377,7 @@ Cela fait moins de 10\% de pertes. Une première remarque sur l'histogramme des
 résultats est que le nombre maximum d'événements se trouve un peu au dessus du
 200 GeV mais cela serait explicable par une fluctuation statistique. Une seconde
 remarque est l'apparition d'événements fort éloignés de 200 GeV. Cela pourrait
-être dû aux failles de nos algorithmes oui bien également à une fluctuation
+être dû aux failles de nos algorithmes ou bien également à une fluctuation
 statistique mais quoi qu'il en soit, cela ne concerne que deux événements
 sur 1356 et est donc négligeable.
 
@@ -408,24 +408,20 @@ Au niveau de l'algorithme du cluster, on remarque que si deux jets sont très pr
 s\'eparant deux maxima d'énergie détectés) alors l'énergie se trouvant sur cette
 case est comptée deux fois. Cet algorithme
  pourrait être modifié de sorte que la quantité soit partagée équitablement
-entre les deux jets.Le plus simple serait
-alors de se contenter de diviser la quantité par deux mais mieux encore serait de regarder où se trouve le 
-maxima entre les deux pics détectés. En considérant que chaque jet contient toujours la même énergie, la quantité serait
-répartie en conséquence entre les deux jets (une plus grande partie pour le plus
-petit des deux maxima et vice-versa). 
+entre les deux jets.
 
-Une autre façon de limiter le surcomptage de l'énergie décrit dans le paragraphe précédent, serait de raffiner les 
+Une autre façon de limiter le surcomptage de l'énergie, serait de raffiner les 
 cellules. En effet, cela diminuerait la probabilité de "case" partagée et même dans les cas où cela se produirait, la
-quantité d'énergie partagée serait moindre. Cependant cela nécessiterait un
-algorithme totalement différent
+quantité d'énergie partagée serait moindre. Cependant cela nécessiterait une modification de notre 
+algorithme 
 étant donné que le notre est basé sur le fait qu'un jet ne puisse pas occuper
 plus de quatre cellules.
 
-Un dernier point concernant l'algorithme de cluster serait de limiter le nombre
-de higgs "perdus". En effet, dans le cas présent, nous jetons tous les
-événements ou nous ne détectons pas exactement quatre jets. Seul un algorithme
+Une derniere suggestion d'amélioration concernant l'algorithme de cluster serait de limiter le nombre
+de Higgs "perdus". En effet, dans le cas présent, nous jetons tous les
+événements où nous ne détectons pas exactement quatre jets. Seul un algorithme
 bien plus complexe pourrait nous permettre d'exploiter certains de ces cas
-particuliers. Les higgs étant ici simuler informatiquement, il ne nous coûtent
+particuliers. Les Higgs étant ici simulés informatiquement, ils ne nous coûtent
 pas très cher.
 
 L'algorithme de reconstruction de la trace est assez basique et par conséquent
@@ -433,12 +429,12 @@ pas des plus précis. Il aurait sans doute
 été préférable d'utiliser un algorithme plus complexe du type régression linéaire.
 
 
-Certaines de ces améliorations auraient demandées beaucoup de temps à
-développer pour parfois peu d'amélioration de précision. Nous avons tenté de
+Certaines de ces améliorations auraient nécessité beaucoup de temps 
+pour parfois peu d'amélioration au niveau de la précision. Nous avons tenté de
 faire au plus proche de la réalité en passant du temps sur les point qui nous
 semblaient prioritaires. Nous avons cherché le juste milieu entre l'amélioration
-des résultats obtenues et le temps demandé pour y parvenir tout en ne négligeant
-pas nos autres cours et obligations.
+des résultats obtenues et le temps imparti pour y parvenir tout en ne négligeant
+pas nos autres obligations.
 
 
 		
