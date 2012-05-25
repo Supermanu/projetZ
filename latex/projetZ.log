@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  20 MAY 2012 21:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  25 MAY 2012 21:33
 entering extended mode
  %&-line parsing enabled.
 **projetZ.tex
@@ -645,7 +645,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
  [2
 
 ] [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 245--247
+Underfull \hbox (badness 10000) in paragraph at lines 249--251
 
  []
 
@@ -658,31 +658,31 @@ File: images/evenPlus20MeV3.png Graphic file (type png)
 
 <use images/evenPlus20MeV3.png> [5] [6 <./images/evenPlus100MeV.png (PNG copy)>
  <./images/evenPlus20MeV3.png (PNG copy)>] [7]
-<images/bonCasBrut-eps-converted-to.pdf, id=43, 436.63126pt x 372.39125pt>
+<images/bonCasBrut-eps-converted-to.pdf, id=44, 436.63126pt x 372.39125pt>
 File: images/bonCasBrut-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/bonCasBrut-eps-converted-to.pdf>
-<images/bonCasNet-eps-converted-to.pdf, id=44, 436.63126pt x 372.39125pt>
+<images/bonCasNet-eps-converted-to.pdf, id=45, 436.63126pt x 372.39125pt>
 File: images/bonCasNet-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/bonCasNet-eps-converted-to.pdf>
-<images/mauvaisCasBrut-eps-converted-to.pdf, id=45, 517.935pt x 401.5pt>
+<images/mauvaisCasBrut-eps-converted-to.pdf, id=46, 517.935pt x 401.5pt>
 File: images/mauvaisCasBrut-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/mauvaisCasBrut-eps-converted-to.pdf>
-<images/mauvaisCasNet-eps-converted-to.pdf, id=46, 517.935pt x 401.5pt>
+<images/mauvaisCasNet-eps-converted-to.pdf, id=47, 517.935pt x 401.5pt>
 File: images/mauvaisCasNet-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/mauvaisCasNet-eps-converted-to.pdf> [8 <./images/bonCasBrut-eps-con
 verted-to.pdf>] [9 <./images/bonCasNet-eps-converted-to.pdf> <./images/mauvaisC
 asBrut-eps-converted-to.pdf>]
-<images/bwmH.png, id=68, 892.08281pt x 473.51906pt>
+<images/bwmH.png, id=69, 892.08281pt x 473.51906pt>
 File: images/bwmH.png Graphic file (type png)
  <use images/bwmH.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/histmH.png, id=69, 908.64468pt x 463.7325pt>
+<images/histmH.png, id=70, 908.64468pt x 463.7325pt>
 File: images/histmH.png Graphic file (type png)
  <use images/histmH.png>
 [10 <./images/mauvaisCasNet-eps-converted-to.pdf>] [11 <./images/bwmH.png (PNG 
@@ -707,11 +707,12 @@ xmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9
 .pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts
 /type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/public/lm/lmro10.pfb><
 /usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1
-/public/lm/lmsy8.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.
-pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
-Output written on projetZ.pdf (12 pages, 1505130 bytes).
+/public/lm/lmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symb
+ols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></
+usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
+Output written on projetZ.pdf (12 pages, 1508823 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
+ 142 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

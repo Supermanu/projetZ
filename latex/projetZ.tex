@@ -107,14 +107,14 @@ Bruno Giacomo Luca}%
 			\section{Introduction}
 	Afin de d\'ecouvrir les principes de bases de Geant4, un framework conçu
 pour la physique des particules, nous avons cr\'eé un programme permettant de
-d\'eterminer la masse du Higgs en suivant la d\'esint\'egration de celui-ci en
+d\'eterminer la masse du Higgs en simulant la d\'esint\'egration de celui-ci en
 deux $Z^0$ qui eux-m\^emes se d\'esint\`egrent en $e^-$ $e^+$.
 
 Pour ce faire nous avons d'abord dû construire un d\'etecteur qui soit efficace
 pour notre d\'esint\'egration. Nous avons d\'etermin\'e que les \'el\'ements
 n\'ecessaires pour ce d\'etecteur \'etaient : des calorim\`etres
 \'electromagn\'etiques et des trackers. Nous avons donc dû utiliser les classes
-de Geant4 pertinentes pour nos besoins.
+de Geant4 adaptées à nos besoins.
  
 Nous avons alors g\'en\'er\'e nous-m\^eme les diff\'erentes particules qui
 apparaissent dans l'\'ev\`enement qui nous int\'eresse. Pour donner aux
@@ -135,12 +135,12 @@ relation de la masse invariante suivante :
 M_H^2=E_H^2-p_H^2=(E_1+E_2+E_3+E_4)^2-(\vec{p}_1+\vec{p}_2+\vec{p}_3+\vec{p}_4)^2.
 \end{equation} 
     
-Ensuite, les erreurs dues aux bruits ont \'et\'e prises en compte en posant un seuil d'\'energie au niveau de la 
+Les erreurs dues aux bruits ont \'et\'e introduites dans la simulation, ce qui
+nous poussa à posé un seuil d'\'energie au niveau de la 
 d\'etection. Pour inclure les erreurs syst\'ematiques, 4 électrons d'énergie connue ont été lancés 1200 fois dans 
 le détecteur. Les diff\'erences entre l'énergie détectée et l'énergie vraie sont alors mesurées et pondérées avec 
-l'énergie vraie. Le facteur correctif est déterminé en conséquence.
-
-Les d\'etails de toutes ces \'etapes seront pr\'esent\'es dans la suite.
+l'énergie vraie. Le facteur correctif est déterminé en conséquence. Les
+d\'etails de toutes ces \'etapes sont pr\'esent\'es dans la suite de ce rapport.
 
 
 
@@ -164,6 +164,7 @@ centre, le premier étant à 8 cm du vertex et les deux autres espacés de 1 cm 
 premier. Les dix autres trackers se trouvent espacés chacun de 10 cm, le premier
 ayant un rayon 20 cm. Bien qu'il nous faille plusieurs trackers pour obtenir
 une bonne résolution sur la direction des particules, ce choix particulier est
+simplement
 fait pour se rapprocher du CMS. Étant donné que notre projet ne nécessite
 aucunement un champ magnétique, nous avons simplement choisi de ne pas en
 mettre pour ne pas nous compliquer la tâche inutilement. 
@@ -202,22 +203,21 @@ Voyons maintenant en détail la méthodologie utilisée dans ce but. Dans un
 soucis de réalisme, nous avons choisi de ne pas fixer la masse du $H$ mais
 de la générer aléatoirement avec une distribution de Breit-Wigner centrée sur
 200 GeV et de demi largeur 2.5 GeV. Nous avons dans un premier temps étudié la reconstruction de sa masse
-invariante lorsque le higgs se désintègre au repos pour ensuite se rapprocher
-de la réalité et considérer sa désintégration alors qu'il est en mouvement dans
+invariante lorsque le Higgs se désintègre au repos pour ensuite se rapprocher
+de la réalité en considérant sa désintégration alors qu'il est en mouvement dans
 le repère du détecteur. Dans ce but, nous générons une énergie cinétique issue
 d'une distribution exponentielle négative de paramètre 30 GeV ainsi que deux
 angles $\theta$ et $\varphi$ issus de distributions uniformes pour lui donner
 une direction\footnote{On trouvera les différentes distributions dans la classe
-"\textit{projetZDistribution.cc}".}. 
-
-NB: la distribution uniforme des angles se
+"\textit{projetZDistribution.cc}".}. La distribution uniforme des angles se
 justifie par l'absence d'information sur les origines du $H$. 
 
 Nous nous plaçons
 ensuite dans le repère où il est au repos pour simuler sa désintégration en deux
 bosons $Z$. La cinématique relativiste du processus est assez simple et tous les
 paramètres sont fixés hormis la direction d'émission (nous avons choisi de
-négliger l'incertitude sur la masse du Z car cela est sans intérêt pour notre
+négliger le caractère aléatoire de la masse du Z qui est dû à l'incertitude
+d'Heisenberg $\Delta E \Delta t \geq \hbar$ car cela est sans intérêt pour notre
 discussion). Pour la direction, nous générons à nouveau deux angles de manière
 uniforme mais la justification vient cette fois de l'absence de spin du $H$. 
 
@@ -226,13 +226,13 @@ $e^+e^-$ Nous avons donc quatre électrons d'énergie et de direction bien
 déterminées dans le repère de leur parent $Z$ respectif. Il suffit alors
 d'effectuer les boosts de Lorentz adéquats pour retourner dans le repère du $H$
 et ensuite dans le repère du détecteur\footnote{Toutes ces manipulations pour
-simuler la désintégration du higgs sont des algorithmes ne nécessitant pas le
+simuler la désintégration du Higgs sont des algorithmes ne nécessitant pas le
 framework "Geant4".}. On trouvera les détails de ces manipulations dans la
 classe "\textit{projetZElectronsGenerator.cc}".
 
 NB: les temps de vie très court
 du $H$ et du $Z$ nous permettent en très bonne approximation de considérer que
-ces quatre électrons sont émis au centre géométrique de notre détecteur. 
+les quatre électrons sont émis au centre géométrique de notre détecteur. 
 
 L'étape
 suivante consiste à "lancer" ces quatre électrons dans notre détecteur à l'aide
@@ -251,13 +251,13 @@ annihilation avec un électron.\\
 \end{itemize}
 
 A titre informatif, on peut voir sur les figures ci-dessous l'illustration de
-deux higgs différents qui se désintègrent dans le détecteur.
+deux Higgs différents qui se désintègrent dans le détecteur.
 La figure (\ref{viz1}) montre clairement les quatre jets séparément (nous avons
 choisi de ne montrer que les particules de plus de 100 MeV pour la propreté). La
 figure (\ref{viz2}) montre toutes les particules de plus de 20 MeV. Cette
 dernière fait apparaître la structure des trackers ainsi que l'importance des
 particules secondaires qui "rebondissent" un peu partout et génèrent ainsi
-du bruit dans nos trackers.
+des hits indésirables dans nos trackers.
 
 \begin{figure}
 \caption{Visualisation d'un événement ne montrant que les particules de plus
@@ -340,7 +340,8 @@ illustré sur la figure (\ref{bonp}). Ensuite viennent les cas où nous
 rencontrons le problème du surcomptage de l'énergie sur les cases "partagées"
 (voir figure (\ref{pasbonb}) et (\ref{pasbonp})).
 \begin{figure}
-\caption{Résultat typique d'une détection de 4 jets parfaits par le cluster avec bruit}
+\caption{Résultat typique d'une détection de 4 jets parfaits par le cluster avec
+bruit}
 \includegraphics[scale=0.55]{images/bonCasBrut-eps-converted-to.pdf}
 \label{bonb}
 \end{figure}
@@ -366,12 +367,12 @@ niveau des deux jets les plus à gauche le problème du double comptage d'énerg
 \subsection{Analyse des résultats}
 
 Une fois tout cela implémenté, nous avons fait tourner le programme en boucle
-1500 fois pour mesurer un grand nombre de masses du higgs. C'est avec grand
+1500 fois pour mesurer un grand nombre de masses du Higgs. C'est avec grand
 plaisir que nous constatons que la distribution obtenue est fort proche de celle
 attendue. Il suffit de regarder les figures (\ref{bw}) et (\ref{hist}) pour voir
 que, bien que l'algorithme ne soit pas parfait, les résultats sont plus
 qu'acceptables. Nous obtenons en effet une moyenne de 199.8950 GeV pour un
-écart type de 7.0826 GeV. Sur les 1500 higgs créés, 1356 ont générés des
+écart type de 7.0826 GeV. Sur les 1500 Higgs créés, 1356 ont générés des
 événements que notre algorithme à pu identifier correctement et reconstruire.
 Cela fait moins de 10\% de pertes. Une première remarque sur l'histogramme des
 résultats est que le nombre maximum d'événements se trouve un peu au dessus du
@@ -382,7 +383,7 @@ statistique mais quoi qu'il en soit, cela ne concerne que deux événements
 sur 1356 et est donc négligeable.
 
 \begin{figure}[h!]
-\caption{Distribution Breit-Wigner des masses des higgs générés}
+\caption{Distribution Breit-Wigner des masses des Higgs générés}
 \includegraphics[scale=0.4]{images/bwmH.png}
 \label{bw}
 \end{figure}
