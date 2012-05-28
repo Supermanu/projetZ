@@ -24,8 +24,6 @@
 // ********************************************************************
 //
 //
-// $Id: projetZPrimaryGeneratorAction.cc,v 1.6 2006-06-29 17:47:23 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
 //
 
 #include "projetZPrimaryGeneratorAction.hh"
@@ -61,10 +59,10 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
     if ( desintegrationHiggs ) {
         projetZElectronsGenerator quatreElectrons;
         G4double enDeg = 180/pi;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 0 ),"Energy" ) << " Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(0).theta()*enDeg  << " Et theta : "<< quatreElectrons.getDirectionElectron(0).phi()*enDeg<< endl;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 1 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(1).theta()*enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron(1).phi()*enDeg<< endl;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 2 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(2).theta()*enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron(2).phi()*enDeg<< endl;
-        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 3 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron(3).theta()*enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron(3).phi()*enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 0 ),"Energy" ) << " Avec comme angle phi: "<< quatreElectrons.getDirectionElectron ( 0 ).theta() *enDeg  << " Et theta : "<< quatreElectrons.getDirectionElectron ( 0 ).phi() *enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 1 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron ( 1 ).theta() *enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron ( 1 ).phi() *enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 2 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron ( 2 ).theta() *enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron ( 2 ).phi() *enDeg<< endl;
+        G4cout << G4BestUnit ( quatreElectrons.getEnergyElectron ( 3 ),"Energy" ) << "Avec comme angle phi: "<< quatreElectrons.getDirectionElectron ( 3 ).theta() *enDeg << " Et theta : "<< quatreElectrons.getDirectionElectron ( 3 ).phi() *enDeg<< endl;
         G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
         G4String particleName;
         particleGun->SetParticleDefinition ( particleTable->FindParticle ( particleName="e-" ) );
@@ -83,16 +81,6 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
         particleGun->SetParticleMomentumDirection ( quatreElectrons.getDirectionElectron ( 3 ) );
         particleGun->SetParticleEnergy ( quatreElectrons.getEnergyElectron ( 3 ) );
         particleGun->GeneratePrimaryVertex ( anEvent );
-//         std::string const nomFichier ( "energiesElectrons.txt" );
-//         std::ofstream monFlux ( nomFichier.c_str(), std::ios::app );
-//         if ( monFlux ) {
-//             for ( int n=0 ; n<4 ; n++ ) {
-//                 monFlux << quatreElectrons.getEnergyElectron ( n ) << " " ;
-//             }
-//             monFlux << G4endl;
-//         } else {
-//             G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-//         }
     } else {
         G4double energieTampon[1];
         projetZDistribution ( energieTampon, "distribGauss", 60.*GeV, 25.*GeV );
@@ -100,9 +88,6 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
         particleGun->SetParticleEnergy ( sqrt ( energieTampon[0]*energieTampon[0] ) );
         G4double angleTampon[2];
         projetZDistribution ( angleTampon, "uniforpi" );
-//         if ( abs ( angleTampon[1] ) < atan ( 0.2 ) ) {
-//             angleTampon[1] += atan ( 0.25 );
-//         }
         G4double x = cos ( angleTampon[0] ) *sin ( angleTampon[1] );
         G4double y = sin ( angleTampon[0] ) *sin ( angleTampon[1] );
         G4double z = cos ( angleTampon[1] );
@@ -111,13 +96,13 @@ void projetZPrimaryGeneratorAction::GeneratePrimaries ( G4Event* anEvent )
         particleGun->SetParticleMomentumDirection ( G4ThreeVector ( x,y,z ) );
         particleGun->GeneratePrimaryVertex ( anEvent );
 
-//         std::string const nomFichier ( "erreurDetection.txt" );
-//         std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
-//         if ( monFlux2 ) {
-//             monFlux2 << energieTampon[0] ;
-//         } else {
-//             G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
-//         }
+        std::string const nomFichier ( "erreurDetection.txt" );
+        std::ofstream monFlux2 ( nomFichier.c_str(), std::ios::app );
+        if ( monFlux2 ) {
+            monFlux2 << energieTampon[0] ;
+        } else {
+            G4cout << "ERREUR: Impossible d'ouvrir le fichier." << G4endl;
+        }
     }
 }
 

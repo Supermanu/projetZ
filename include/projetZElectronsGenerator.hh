@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -33,21 +33,25 @@ public:
     projetZElectronsGenerator();
     projetZElectronsGenerator ( const projetZElectronsGenerator& other );
     virtual ~projetZElectronsGenerator();
-    
-    virtual void setMassHiggs(G4double energie) {masseHiggs = energie;} ;
-    virtual G4double getMassHiggs() const {return masseHiggs;} ;
-    virtual G4ThreeVector getDirectionElectron( int electron) ;
-    virtual G4ThreeVector getAnglesElectron(int electron);
-    virtual vector< G4double > boost( vector< G4double > p_i, vector< G4double > b );
-    virtual G4double getEnergyElectron(int electron);
-    
+
+    virtual void setMassHiggs ( G4double energie ) {
+        masseHiggs = energie;
+    } ;
+    virtual G4double getMassHiggs() const {
+        return masseHiggs;
+    } ;
+    virtual G4ThreeVector getDirectionElectron ( int electron ) ;
+    virtual G4ThreeVector getAnglesElectron ( int electron );
+    virtual vector< G4double > boost ( vector< G4double > p_i, vector< G4double > b );
+    virtual G4double getEnergyElectron ( int electron );
+
 protected:
     G4double masseHiggs;
     vector<G4double> angleZ;
     vector<G4double> angleElectron;
     G4double momentumElectrons[4][4];
     G4ThreeVector directionHiggs;
-    
+
 };
 
 #endif // PROJETZELECTRONSGENERATOR_HH

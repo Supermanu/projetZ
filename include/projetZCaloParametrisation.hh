@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -41,24 +41,24 @@ class projetZCaloParametrisation : public G4VPVParameterisation
 public:
     projetZCaloParametrisation();
     virtual ~projetZCaloParametrisation();
-    
-    virtual void ComputeTransformation ( const G4int copyNo, G4VPhysicalVolume* physVol) const;
-    virtual void ComputeDimensions ( G4Tubs& calorimeterBlock, const G4int copyNo, const G4VPhysicalVolume* physVol) const;
-    
+
+    virtual void ComputeTransformation ( const G4int copyNo, G4VPhysicalVolume* physVol ) const;
+    virtual void ComputeDimensions ( G4Tubs& calorimeterBlock, const G4int copyNo, const G4VPhysicalVolume* physVol ) const;
+
 private:
     // Pour se débarasser des warning pendant la compilation
-    void ComputeDimensions (G4Trd&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Trap&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Cons&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Orb&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Sphere&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Torus&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Para&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Hype&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Box&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Polycone&,const G4int,const G4VPhysicalVolume*) const {}
-    void ComputeDimensions (G4Polyhedra&,const G4int,const G4VPhysicalVolume*) const {}
-    
+    void ComputeDimensions ( G4Trd&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Trap&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Cons&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Orb&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Sphere&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Torus&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Para&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Hype&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Box&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Polycone&,const G4int,const G4VPhysicalVolume* ) const {}
+    void ComputeDimensions ( G4Polyhedra&,const G4int,const G4VPhysicalVolume* ) const {}
+
 };
 
 #endif // PROJETZCALOPARAMETRISATION_HH

@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -41,7 +41,7 @@ projetZCaloSD::~projetZCaloSD() {}
 // la colletion de hits de cet évenement dans le G4HCofThisEvent.
 
 void projetZCaloSD::Initialize ( G4HCofThisEvent* HCE )
-{			
+{
     caloCollection = new projetZCaloHitCollection ( SensitiveDetectorName,collectionName[0] );
     static G4int HCID = -1;
     if ( HCID<0 ) {
@@ -76,11 +76,10 @@ G4bool projetZCaloSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
 void projetZCaloSD::EndOfEvent ( G4HCofThisEvent* )
 {
     G4int NbHits = caloCollection->entries();
-    if ( verboseLevel>3 ) 
-    {
-      G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
-      << " hits dans le calorimètre: " << G4endl;
-      G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal,"Energy" ) << G4endl;
+    if ( verboseLevel>3 ) {
+        G4cout << "\n-------->Collection de hits: dans cet évenement il y a " <<  NbHits
+               << " hits dans le calorimètre: " << G4endl;
+        G4cout << "L'énergie totale déposé est de : " << G4BestUnit ( energieTotal,"Energy" ) << G4endl;
     }
-    
+
 }

@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>>
 
     This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 #define PROJETZCALOSD_H
 
 #include "G4VSensitiveDetector.hh"
-#include "projetZCaloHit.hh" 
+#include "projetZCaloHit.hh"
 
 
 class G4Step;
@@ -33,11 +33,13 @@ class projetZCaloSD : public G4VSensitiveDetector
 public:
     projetZCaloSD ( G4String );
     ~projetZCaloSD();
-    
+
     virtual void Initialize ( G4HCofThisEvent* );
     virtual void EndOfEvent ( G4HCofThisEvent* );
     G4bool ProcessHits ( G4Step*, G4TouchableHistory* );
-    virtual projetZCaloHitCollection* GetCollection() {return caloCollection;};
+    virtual projetZCaloHitCollection* GetCollection() {
+        return caloCollection;
+    };
 private:
     projetZCaloHitCollection* caloCollection;
     G4double energieTotal;

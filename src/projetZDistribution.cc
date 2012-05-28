@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -52,7 +52,7 @@ G4double distribGauss ( const G4double mu, const G4double sigma )
     return sqrt ( 2*sigma*sigma*distribExpo ( 1 ) ) * cos ( 2*pi*distribUniforme() ) + mu;
 }
 
-void uniforpi(G4double resultat[])
+void uniforpi ( G4double resultat[] )
 {
     //renvoie une direction (un théta et un phi dans l'ordre)
     resultat[0] = distribUniforme() *2*pi;
@@ -83,7 +83,6 @@ G4double breitWigner ( G4double y, G4double a )
     nombre_aleatoire[1]=1/ ( pi*y ) +1;
     nombre_aleatoire[0]=a;
 
-
     G4double masse;
     while ( nombre_aleatoire[1] > bw ( nombre_aleatoire[0],y,a ) ) {
 
@@ -100,33 +99,22 @@ G4double breitWigner ( G4double y, G4double a )
     return masse;
 }
 
-projetZDistribution::projetZDistribution (G4double resultat[], G4String category, G4double argument1, G4double argument2)
+projetZDistribution::projetZDistribution ( G4double resultat[], G4String category, G4double argument1, G4double argument2 )
 {
-  if (category == "distribExpo")
-  {
-	resultat[0] = distribExpo(argument1);
-  }
-  else if (category == "distribGauss")
-  {
-      resultat[0] = distribGauss(argument1, argument2);
-  }
-  else if (category == "distribUniforme")
-  {
-      resultat[0] = distribUniforme();
-  }
-  else if (category == "uniforpi")
-  {
-      uniforpi(resultat);
-  }
-  else if (category == "breitWigner")
-  {
-      resultat[0] = breitWigner(argument1,argument2);
-  }
-  else
-  {
-      G4cout << "ERREUR, catégorie inconnue  !! Valeur par défaut: 1" << G4endl;
-      resultat[0]=1;
-  }
+    if ( category == "distribExpo" ) {
+        resultat[0] = distribExpo ( argument1 );
+    } else if ( category == "distribGauss" ) {
+        resultat[0] = distribGauss ( argument1, argument2 );
+    } else if ( category == "distribUniforme" ) {
+        resultat[0] = distribUniforme();
+    } else if ( category == "uniforpi" ) {
+        uniforpi ( resultat );
+    } else if ( category == "breitWigner" ) {
+        resultat[0] = breitWigner ( argument1,argument2 );
+    } else {
+        G4cout << "ERREUR, catégorie inconnue  !! Valeur par défaut: 1" << G4endl;
+        resultat[0]=1;
+    }
 }
 
 projetZDistribution::~projetZDistribution()

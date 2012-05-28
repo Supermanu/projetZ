@@ -24,11 +24,8 @@
 // ********************************************************************
 //
 //
-// $Id: projetZPhysicsList.cc,v 1.6 2006-06-29 17:47:21 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
-//
 //#define NOLAST_GEANT // A commenter ou supprimer si on ne se trouve pas sur une machine disposant de la dernière version de geant4.
+
 #include "projetZPhysicsList.hh"
 #include "G4ParticleTypes.hh"
 
@@ -40,9 +37,9 @@
 
 #include "G4ProcessManager.hh"
 
-projetZPhysicsList::projetZPhysicsList(): G4VUserPhysicsList()
+projetZPhysicsList::projetZPhysicsList() : G4VUserPhysicsList()
 {
-  SetVerboseLevel(1);
+    SetVerboseLevel ( 1 );
 }
 
 projetZPhysicsList::~projetZPhysicsList()
@@ -55,13 +52,12 @@ void projetZPhysicsList::ConstructParticle()
     // This ensures that objects of these particle types will be
     // created in the program.
 
-  // gamma
-  G4Gamma::GammaDefinition();
-  // leptons
-  //  e+/-
-  G4Electron::ElectronDefinition();
-  G4Positron::PositronDefinition();
-  // mu+/-
+    // gamma
+    G4Gamma::GammaDefinition();
+    // leptons
+    //  e+/-
+    G4Electron::ElectronDefinition();
+    G4Positron::PositronDefinition();
 }
 
 void projetZPhysicsList::ConstructProcess()
@@ -70,8 +66,7 @@ void projetZPhysicsList::ConstructProcess()
 
     AddTransportation();
     ConstructEM();
-//     ConstructGeneral();
-     AddStepMax();
+    AddStepMax();
 }
 
 //---------------Ajout de l'ionisation pour le proton
@@ -89,63 +84,63 @@ void projetZPhysicsList::ConstructProcess()
 void projetZPhysicsList::ConstructEM()
 {
 #ifdef NOLAST_GEANT
-theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
-    G4ProcessManager* pmanager = particle->GetProcessManager();
-    G4String particleName = particle->GetParticleName();
-     
-    if (particleName == "gamma") {
-      // gamma         
-      pmanager->AddDiscreteProcess(new G4PhotoElectricEffect);
-      pmanager->AddDiscreteProcess(new G4ComptonScattering);
-      pmanager->AddDiscreteProcess(new G4GammaConversion);
-      
-    } else if (particleName == "e-") {
-      //electron
-      pmanager->AddProcess(new G4eMultipleScattering, -1, 1, 1);
-      pmanager->AddProcess(new G4eIonisation,         -1, 2, 2);
-      pmanager->AddProcess(new G4eBremsstrahlung,     -1, 3, 3);      
+    theParticleIterator->reset();
+    while ( ( *theParticleIterator ) () ) {
+        G4ParticleDefinition* particle = theParticleIterator->value();
+        G4ProcessManager* pmanager = particle->GetProcessManager();
+        G4String particleName = particle->GetParticleName();
 
-    } else if (particleName == "e+") {
-      //positron
-      pmanager->AddProcess(new G4eMultipleScattering, -1, 1, 1);
-      pmanager->AddProcess(new G4eIonisation,         -1, 2, 2);
-      pmanager->AddProcess(new G4eBremsstrahlung,     -1, 3, 3);
-      pmanager->AddProcess(new G4eplusAnnihilation,    0,-1, 4);
+        if ( particleName == "gamma" ) {
+            // gamma
+            pmanager->AddDiscreteProcess ( new G4PhotoElectricEffect );
+            pmanager->AddDiscreteProcess ( new G4ComptonScattering );
+            pmanager->AddDiscreteProcess ( new G4GammaConversion );
 
-    }      
-  }
+        } else if ( particleName == "e-" ) {
+            //electron
+            pmanager->AddProcess ( new G4eMultipleScattering, -1, 1, 1 );
+            pmanager->AddProcess ( new G4eIonisation,         -1, 2, 2 );
+            pmanager->AddProcess ( new G4eBremsstrahlung,     -1, 3, 3 );
+
+        } else if ( particleName == "e+" ) {
+            //positron
+            pmanager->AddProcess ( new G4eMultipleScattering, -1, 1, 1 );
+            pmanager->AddProcess ( new G4eIonisation,         -1, 2, 2 );
+            pmanager->AddProcess ( new G4eBremsstrahlung,     -1, 3, 3 );
+            pmanager->AddProcess ( new G4eplusAnnihilation,    0,-1, 4 );
+
+        }
+    }
 #endif
 #ifndef NOLAST_GEANT
-  G4PhysicsListHelper* ph = G4PhysicsListHelper::GetPhysicsListHelper();
-  
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
-    G4String particleName = particle->GetParticleName();
-    
-    if (particleName == "gamma") {
-      // gamma         
-      ph->RegisterProcess(new G4PhotoElectricEffect, particle);
-      ph->RegisterProcess(new G4ComptonScattering,   particle);
-      ph->RegisterProcess(new G4GammaConversion,     particle);
-      
-    } else if (particleName == "e-") {
-      //electron
-      ph->RegisterProcess(new G4eMultipleScattering, particle);
-      ph->RegisterProcess(new G4eIonisation,         particle);
-      ph->RegisterProcess(new G4eBremsstrahlung,     particle);      
+    G4PhysicsListHelper* ph = G4PhysicsListHelper::GetPhysicsListHelper();
 
-    } else if (particleName == "e+") {
-      //positron
-      ph->RegisterProcess(new G4eMultipleScattering, particle);
-      ph->RegisterProcess(new G4eIonisation,         particle);
-      ph->RegisterProcess(new G4eBremsstrahlung,     particle);
-      ph->RegisterProcess(new G4eplusAnnihilation,   particle);
-    
-    }      
-  }
+    theParticleIterator->reset();
+    while ( ( *theParticleIterator ) () ) {
+        G4ParticleDefinition* particle = theParticleIterator->value();
+        G4String particleName = particle->GetParticleName();
+
+        if ( particleName == "gamma" ) {
+            // gamma
+            ph->RegisterProcess ( new G4PhotoElectricEffect, particle );
+            ph->RegisterProcess ( new G4ComptonScattering,   particle );
+            ph->RegisterProcess ( new G4GammaConversion,     particle );
+
+        } else if ( particleName == "e-" ) {
+            //electron
+            ph->RegisterProcess ( new G4eMultipleScattering, particle );
+            ph->RegisterProcess ( new G4eIonisation,         particle );
+            ph->RegisterProcess ( new G4eBremsstrahlung,     particle );
+
+        } else if ( particleName == "e+" ) {
+            //positron
+            ph->RegisterProcess ( new G4eMultipleScattering, particle );
+            ph->RegisterProcess ( new G4eIonisation,         particle );
+            ph->RegisterProcess ( new G4eBremsstrahlung,     particle );
+            ph->RegisterProcess ( new G4eplusAnnihilation,   particle );
+
+        }
+    }
 #endif
 }
 
@@ -153,21 +148,18 @@ theParticleIterator->reset();
 
 void projetZPhysicsList::AddStepMax()
 {
-  // Step limitation seen as a process
-  G4StepLimiter* stepLimiter = new G4StepLimiter();
-  ////G4UserSpecialCuts* userCuts = new G4UserSpecialCuts();
-  
-  theParticleIterator->reset();
-  while ((*theParticleIterator)()){
-      G4ParticleDefinition* particle = theParticleIterator->value();
-      G4ProcessManager* pmanager = particle->GetProcessManager();
+    // Step limitation seen as a process
+    G4StepLimiter* stepLimiter = new G4StepLimiter();
 
-      if (particle->GetPDGCharge() != 0.0)
-        {
-	  pmanager ->AddDiscreteProcess(stepLimiter);
-	  ////pmanager ->AddDiscreteProcess(userCuts);
+    theParticleIterator->reset();
+    while ( ( *theParticleIterator ) () ) {
+        G4ParticleDefinition* particle = theParticleIterator->value();
+        G4ProcessManager* pmanager = particle->GetProcessManager();
+
+        if ( particle->GetPDGCharge() != 0.0 ) {
+            pmanager ->AddDiscreteProcess ( stepLimiter );
         }
-  }
+    }
 }
 
 //--------------------------------------------------

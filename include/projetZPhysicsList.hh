@@ -23,21 +23,6 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-//
-// $Id: projetZPhysicsList.hh,v 1.6 2006-06-29 17:47:15 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
-// 
-//
-// projetZPhysicsList
-//  Construct/define particles and physics processes
-//
-//  Particle defined in ExampleN01
-//    geantino
-//
-//  Process defined in ExampleN01
-//    transportation
-//
 
 #ifndef projetZPhysicsList_h
 #define projetZPhysicsList_h 1
@@ -47,19 +32,19 @@
 
 class projetZPhysicsList: public G4VUserPhysicsList
 {
-  public:
+public:
     projetZPhysicsList();
     ~projetZPhysicsList();
 
-  protected:
+protected:
     // Construct particle and physics process
     void ConstructParticle();
     void ConstructProcess();
     void SetCuts();
 
-  protected:
+protected:
     void ConstructEM();
-     void AddStepMax();
+    void AddStepMax();
 };
 
 #endif

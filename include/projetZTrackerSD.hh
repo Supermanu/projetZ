@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -29,21 +29,21 @@ class G4TouchableHistory;
 class projetZTrackerSD : public G4VSensitiveDetector
 {
 
-  public:
-      projetZTrackerSD(G4String name);
-      ~projetZTrackerSD();
+public:
+    projetZTrackerSD ( G4String name );
+    ~projetZTrackerSD();
 
-      void Initialize(G4HCofThisEvent*HCE);
-      G4bool ProcessHits(G4Step*aStep,G4TouchableHistory*ROhist);
-      void EndOfEvent(G4HCofThisEvent*HCE);
-      void clear();
-      void DrawAll();
-      void PrintAll();
+    void Initialize ( G4HCofThisEvent*HCE );
+    G4bool ProcessHits ( G4Step*aStep,G4TouchableHistory*ROhist );
+    void EndOfEvent ( G4HCofThisEvent*HCE );
+    void clear();
+    void DrawAll();
+    void PrintAll();
 
-  private:
-      projetZTrackerHitsCollection *trackerCollection;
+private:
+    projetZTrackerHitsCollection *trackerCollection;
 
-  public:
+public:
 };
 
 
