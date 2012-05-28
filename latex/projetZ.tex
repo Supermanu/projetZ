@@ -278,13 +278,16 @@ de 20 MeV}
 
 Une fois les électrons lancés dans le détecteur, nous obtenons une réponse sous
 forme d'un ensemble de "hits" aussi bien pour le tracker que pour le
-calorimètre. NB : les détails des hits se trouvent dans les classes
-"\textit{projetZTrackerHit.cc}" et "\textit{projetZCaloHit.cc}". L'information
-d'intérêt dépend de la pièce du détecteur eg la position du hit pour les
-trackers et l'énergie déposée pour le calorimètre. 
+calorimètre. Les détails de l'implémentation des hits se trouvent dans les
+classes "\textit{projetZTrackerHit.cc}" et "\textit{projetZCaloHit.cc}".
+L'information
+d'intérêt dépend de la pièce du détecteur qui renvoit les donnnées du  hit eg
+pour les trackers, seule la position du hit nous intéresse tandis que pour le
+calorimètre c'est l'énergie déposée qui est utile.
 
 Présentons les choses dans l'ordre d'utilisation de notre code. Chaque cellule
-du calorimètre nous renvoie l'énergie totale déposée en elle. Grâce à un
+du calorimètre nous renvoie l'énergie totale déposée en elle par
+l'intermédiaire d'une liste de hits. Grâce à un
 algorithme de cluster qui sera explicité plus loin, nous pouvons isoler de
 cela quatre jets distincts (dans la majorité des cas) et extraire de ces
 informations l'énergie totale et l'endroit ou chacun des électrons s'est
@@ -300,21 +303,23 @@ direction des impulsions grâce aux cellules du calorimètre simplifie
 grandement l'algorithme utilisé pour obtenir cette direction plus précisément à
 l'aide des trackers. En effet, nous avons considéré un cône d'ouverture
 40$^{\circ}$
-(valeurs affinées par essais-erreurs) dont la pointe est le vertex et dont l'axe
+(valeur affinées par essais-erreurs) dont la pointe est le vertex et dont l'axe
 relie ce dernier à la position centrale du jets. La "vraie" direction de
 l'impulsion initiale de l'électron est obtenue en faisant une moyenne de toutes
-les directions données par le tracker en ne tenant compte que des hits à
-l'intérieur de ce cône. NB: l'utilisation du cône est nécessaire car le tracker
+les directions données par les trackers en ne tenant compte que des hits à
+l'intérieur de ce cône. NB: l'utilisation du cône est nécessaire car le
+tracker
 nous donne les hits de tous les électrons y compris ceux qui rebondissent sur
-le calorimètre et revienne dans le tracker. 
+le calorimètre et reviennent dans le tracker. 
 
-Pour l'algorithme de cluster, nous avons opté pour une solution assez simple
-et immédiate. L'algorithme parcourt chacune des cellules et compare l'énergie
+Pour l'algorithme de cluster, nous avons opté pour une solution assez directe :
+l'algorithme parcourt chacune des cellules et compare l'énergie
 détectée dans cette cellule avec celles détectées dans les cellules voisines.
 Si la cellule en question est celle qui possède le maximum, nous la retenons.
 L'énergie totale du jet est obtenue en y ajoutant les trois énergies
 maximales voisines. Pour que cet algorithme soit efficace, il faut bien entendu
-supprimer toutes les cellules ayant reçu un peu d'énergie suite au bruit. Après
+supprimer toutes les cellules ayant reçu un peu d'énergie suite à
+l'introduction du bruit. Après
 plusieurs essais, nous avons choisi de fixer le seuil à 6 GeV pour éviter de
 compter parfois 5 jets au lieu de quatre à cause du bruit ( le bruit est tiré
 aléatoirement d'une gaussienne centrée sur 0 et de largeur 1 GeV et il arrivait
@@ -325,7 +330,7 @@ sur trois cellules et que la quatrième ne reçoit que quelques GeV. Cette
 solutionné. En effet, une fois calibré, la perte moyenne d'énergie due à ce
 phénomène est corrigée si nous prenons nos données sur un suffisamment grand
 nombre d'événement. Le seul effet négatif est l'élargissement de la gaussienne
-centrée sur la "vraie" valeur. 
+centrée sur la "vraie" valeur de la masse du Higgs.
 
 NB: l'algorithme du cluster et de la reconstruction de la direction des
 impulsions au vertex peut-être trouvé dans "\textit{projetZRunManager.cc}"
@@ -371,7 +376,8 @@ Une fois tout cela implémenté, nous avons fait tourner le programme en boucle
 plaisir que nous constatons que la distribution obtenue est fort proche de celle
 attendue. Il suffit de regarder les figures (\ref{bw}) et (\ref{hist}) pour voir
 que, bien que l'algorithme ne soit pas parfait, les résultats sont plus
-qu'acceptables. Nous obtenons en effet une moyenne de 199.8950 GeV pour un
+qu'acceptables. Nous obtenons en effet une moyenne de 199.8950 GeV (rappel : le
+centre de la Breit-Wigner de la masse du Higgs est à 200 GeV) pour un
 écart type de 7.0826 GeV. Sur les 1500 Higgs créés, 1356 ont générés des
 événements que notre algorithme à pu identifier correctement et reconstruire.
 Cela fait moins de 10\% de pertes. Une première remarque sur l'histogramme des
@@ -379,7 +385,7 @@ résultats est que le nombre maximum d'événements se trouve un peu au dessus d
 200 GeV mais cela serait explicable par une fluctuation statistique. Une seconde
 remarque est l'apparition d'événements fort éloignés de 200 GeV. Cela pourrait
 être dû aux failles de nos algorithmes ou bien également à une fluctuation
-statistique mais quoi qu'il en soit, cela ne concerne que deux événements
+statistique mais quoi qu'il en soit, cela ne concerne que quelques événements
 sur 1356 et est donc négligeable.
 
 \begin{figure}[h!]
@@ -402,7 +408,8 @@ Cependant, notre programme n'est pas optimal, il serait possible de le rendre pl
 moins couteux en m\'emoire vive. La pr\'ecision pourrait \'egalement être augment\'ee. 
 
 Une première amélioration serait de refermer le d\'etecteur c'est-à-dire de placer des d\'etecteurs aux extrémités, 
-perpendiculairement à l'axe des z dans notre cas (en laissant évidemment un espace libre pour permettre l'envoie des 
+perpendiculairement à l'axe des z dans notre cas (en laissant évidemment un
+espace libre pour permettre le passage des 
 particules dans le d\'etecteur). 
 
 Au niveau de l'algorithme du cluster, on remarque que si deux jets sont très proches l'un de l'autre (une seule case 
@@ -415,7 +422,7 @@ Une autre façon de limiter le surcomptage de l'énergie, serait de raffiner les
 cellules. En effet, cela diminuerait la probabilité de "case" partagée et même dans les cas où cela se produirait, la
 quantité d'énergie partagée serait moindre. Cependant cela nécessiterait une modification de notre 
 algorithme 
-étant donné que le notre est basé sur le fait qu'un jet ne puisse pas occuper
+étant donné qu'il est basé sur le fait qu'un jet ne puisse pas occuper
 plus de quatre cellules.
 
 Une derniere suggestion d'amélioration concernant l'algorithme de cluster serait de limiter le nombre
@@ -434,8 +441,9 @@ Certaines de ces améliorations auraient nécessité beaucoup de temps
 pour parfois peu d'amélioration au niveau de la précision. Nous avons tenté de
 faire au plus proche de la réalité en passant du temps sur les point qui nous
 semblaient prioritaires. Nous avons cherché le juste milieu entre l'amélioration
-des résultats obtenues et le temps imparti pour y parvenir tout en ne négligeant
-pas nos autres obligations.
+des résultats obtenues et le temps nécessaire pour y parvenir tout en ne
+négligeant
+pas nos autres cours et autres obligations.
 
 
 		

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  25 MAY 2012 21:33
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  28 MAY 2012 20:26
 entering extended mode
  %&-line parsing enabled.
 **projetZ.tex
@@ -690,7 +690,7 @@ copy)> <./images/histmH.png (PNG copy)>] [12] (./projetZ.aux) )
 Here is how much of TeX's memory you used:
  4024 strings out of 493848
  52795 string characters out of 1152823
- 112297 words of memory out of 3000000
+ 113297 words of memory out of 3000000
  7162 multiletter control sequences out of 15000+50000
  60231 words of font info for 53 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -710,7 +710,7 @@ xmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9
 /public/lm/lmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></
 usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
-Output written on projetZ.pdf (12 pages, 1508823 bytes).
+Output written on projetZ.pdf (12 pages, 1509059 bytes).
 PDF statistics:
  142 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
