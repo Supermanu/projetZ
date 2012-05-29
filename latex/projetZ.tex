@@ -323,7 +323,8 @@ l'introduction du bruit. Après
 plusieurs essais, nous avons choisi de fixer le seuil à 6 GeV pour éviter de
 compter parfois 5 jets au lieu de quatre à cause du bruit ( le bruit est tiré
 aléatoirement d'une gaussienne centrée sur 0 et de largeur 1 GeV et il arrivait
-que des énergies fantômes montent jusqu'à 5 GeV). Bien sûr, cette énergie seuil
+que des énergies fantômes montent jusqu'à 5 GeV à cause de l'effet combiné du
+bruit et de particules parasites). Bien sûr, cette énergie seuil
 donne lieu à des erreurs systématiques lorsque le jet est réparti par exemple
 sur trois cellules et que la quatrième ne reçoit que quelques GeV. Cette
 énergie est donc éliminée par le seuil, mais ce problème peut-être en partie
@@ -425,10 +426,11 @@ algorithme
 étant donné qu'il est basé sur le fait qu'un jet ne puisse pas occuper
 plus de quatre cellules.
 
-Une derniere suggestion d'amélioration concernant l'algorithme de cluster serait de limiter le nombre
+Une dernière suggestion d'amélioration concernant l'algorithme de cluster serait
+de limiter le nombre
 de Higgs "perdus". En effet, dans le cas présent, nous jetons tous les
 événements où nous ne détectons pas exactement quatre jets. Seul un algorithme
-bien plus complexe pourrait nous permettre d'exploiter certains de ces cas
+plus complexe pourrait nous permettre d'exploiter certains de ces cas
 particuliers. Les Higgs étant ici simulés informatiquement, ils ne nous coûtent
 pas très cher.
 
