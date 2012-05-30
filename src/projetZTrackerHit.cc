@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -32,65 +32,67 @@ projetZTrackerHit::projetZTrackerHit() {}
 
 projetZTrackerHit::~projetZTrackerHit() {}
 
-projetZTrackerHit::projetZTrackerHit(const projetZTrackerHit& right)   //on demande l'objet dans notre constructeur de cet objet?! fonction right???
-  : G4VHit()
+projetZTrackerHit::projetZTrackerHit ( const projetZTrackerHit& right )
+    : G4VHit()
 {
-  edep = right.edep;
-  pos = right.pos;
-  trackerNb = right.trackerNb;
+    edep = right.edep;
+    pos = right.pos;
+    trackerNb = right.trackerNb;
 }
 
-projetZTrackerHit& projetZTrackerHit::operator=(const projetZTrackerHit& right)
+projetZTrackerHit& projetZTrackerHit::operator= ( const projetZTrackerHit& right )
 {
-  edep = right.edep;
-  trackerNb = right.trackerNb;
-  pos = right.pos;
-  return *this;
+    edep = right.edep;
+    trackerNb = right.trackerNb;
+    pos = right.pos;
+    return *this;
 }
 
-G4int projetZTrackerHit::operator==(const projetZTrackerHit& right) const
+G4int projetZTrackerHit::operator== ( const projetZTrackerHit& right ) const
 {
-  return (this==&right) ? 1 : 0;
+    return ( this==&right ) ? 1 : 0;
 }
 
 std::map<G4String,G4AttDef> projetZTrackerHit::fAttDefs;
 
 void projetZTrackerHit::Draw()
 {
-  G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
-  if(pVVisManager)
-  {
-    G4Circle circle(pos);
-    circle.SetScreenSize(0.04);
-    circle.SetFillStyle(G4Circle::filled);
-    G4Colour colour(1.,0.,0.);
-    G4VisAttributes attribs(colour);
-    circle.SetVisAttributes(attribs);
-    pVVisManager->Draw(circle);
-  }
+    // On dessine un petit cercle pour chacun des hits dans le tracker.
+    G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
+    if ( pVVisManager ) {
+        G4Circle circle ( pos );
+        circle.SetScreenSize ( 0.04 );
+        circle.SetFillStyle ( G4Circle::filled );
+        G4Colour colour ( 1.,0.,0. );
+        G4VisAttributes attribs ( colour );
+        circle.SetVisAttributes ( attribs );
+        pVVisManager->Draw ( circle );
+	
+    }
 }
 
 const std::map<G4String,G4AttDef>* projetZTrackerHit::GetAttDefs() const
 {
-  // G4AttDefs have to have long life.  Use static member...
-  if (fAttDefs.empty()) {
-    fAttDefs["HitType"] =
-      G4AttDef("HitType","Type of hit","Physics","","G4String");
-  }
-  return &fAttDefs;
+    // G4AttDefs have to have long life.  Use static member...
+    if ( fAttDefs.empty() ) {
+        fAttDefs["HitType"] =
+            G4AttDef ( "HitType","Type of hit","Physics","","G4String" );
+    }
+    return &fAttDefs;
 }
 
 std::vector<G4AttValue>* projetZTrackerHit::CreateAttValues() const
 {
-  // Create expendable G4AttsValues for picking...
-  std::vector<G4AttValue>* attValues = new std::vector<G4AttValue>;
-  attValues->push_back
-    (G4AttValue("HitType","projetZTrackerHit",""));
-  //G4cout << "Checking...\n" << G4AttCheck(attValues, GetAttDefs());
-  return attValues;
+    // Create expendable G4AttsValues for picking...
+    std::vector<G4AttValue>* attValues = new std::vector<G4AttValue>;
+    attValues->push_back
+    ( G4AttValue ( "HitType","projetZTrackerHit","" ) );
+    //G4cout << "Checking...\n" << G4AttCheck(attValues, GetAttDefs());
+    return attValues;
 }
 
 void projetZTrackerHit::Print()
-{;}
-
+{
+    ;
+}
 

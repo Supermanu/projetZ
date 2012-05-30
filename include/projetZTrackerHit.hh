@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -29,42 +29,48 @@ class projetZTrackerHit : public G4VHit
 {
 
 public:
-    
-      projetZTrackerHit();
-      projetZTrackerHit(const projetZTrackerHit& );
-      ~projetZTrackerHit();
-      
-      
-      virtual projetZTrackerHit& operator=(const projetZTrackerHit& );
-      G4int operator==(const projetZTrackerHit& ) const;
 
-      inline void *operator new(size_t);
-      inline void operator delete(void *aHit);
+    projetZTrackerHit();
+    projetZTrackerHit ( const projetZTrackerHit& );
+    ~projetZTrackerHit();
 
-      void Draw();
-      const std::map<G4String,G4AttDef>* GetAttDefs() const;
-      std::vector<G4AttValue>* CreateAttValues() const;
-      void Print();
+
+    virtual projetZTrackerHit& operator= ( const projetZTrackerHit& );
+    G4int operator== ( const projetZTrackerHit& ) const;
+
+    inline void *operator new ( size_t );
+    inline void operator delete ( void *aHit );
+
+    void Draw();
+    const std::map<G4String,G4AttDef>* GetAttDefs() const;
+    std::vector<G4AttValue>* CreateAttValues() const;
+    void Print();
 
 private:
-      G4double edep;
-      G4ThreeVector pos;
-      G4int trackerNb;
-      static std::map<G4String,G4AttDef> fAttDefs;
+    G4double edep;
+    G4ThreeVector pos;
+    G4int trackerNb;
+    static std::map<G4String,G4AttDef> fAttDefs;
 
 public:
-      inline void SetEdep(G4double de)
-      { edep = de; }
-      inline G4double GetEdep()
-      { return edep; }
-      inline void SetPos(G4ThreeVector xyz)
-      { pos = xyz; }
-      inline G4ThreeVector GetPos()
-      { return pos; }
-      inline G4int GetTrackerNb()
-      {return trackerNb;}
-      inline void SetTrackerNb(G4int Nb)
-      { trackerNb = Nb; }
+    inline void SetEdep ( G4double de ) {
+        edep = de;
+    }
+    inline G4double GetEdep() {
+        return edep;
+    }
+    inline void SetPos ( G4ThreeVector xyz ) {
+        pos = xyz;
+    }
+    inline G4ThreeVector GetPos() {
+        return pos;
+    }
+    inline G4int GetTrackerNb() {
+        return trackerNb;
+    }
+    inline void SetTrackerNb ( G4int Nb ) {
+        trackerNb = Nb;
+    }
 
 };
 
@@ -72,16 +78,16 @@ typedef G4THitsCollection<projetZTrackerHit> projetZTrackerHitsCollection;
 
 extern G4Allocator<projetZTrackerHit> projetZTrackerHitAllocator;
 
-inline void* projetZTrackerHit::operator new(size_t)
+inline void* projetZTrackerHit::operator new ( size_t )
 {
-  void *aHit;
-  aHit = (void *) projetZTrackerHitAllocator.MallocSingle();
-  return aHit;
+    void *aHit;
+    aHit = ( void * ) projetZTrackerHitAllocator.MallocSingle();
+    return aHit;
 }
 
-inline void projetZTrackerHit::operator delete(void *aHit)
+inline void projetZTrackerHit::operator delete ( void *aHit )
 {
-  projetZTrackerHitAllocator.FreeSingle((projetZTrackerHit*) aHit);
+    projetZTrackerHitAllocator.FreeSingle ( ( projetZTrackerHit* ) aHit );
 }
 
 #endif

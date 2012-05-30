@@ -23,10 +23,6 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-//
-// $Id: projetZDetectorConstruction.hh,v 1.6 2006-06-29 17:47:13 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
 
 #ifndef projetZDetectorConstruction_H
 #define projetZDetectorConstruction_H 1
@@ -48,7 +44,7 @@ public:
     ~projetZDetectorConstruction();
 
     G4VPhysicalVolume* Construct();
-    void SetMagField(G4double);
+    void SetMagField ( G4double );
 
 private:
 
@@ -64,16 +60,16 @@ private:
     G4VPhysicalVolume* World_Volume;
     G4VPhysicalVolume* calorimeterBlock_phys;
     G4VPhysicalVolume* tracker_phys;
-    
+
     // Eléments et matériaux
     //
     G4Material* CsI;
     G4Material* Vacuum;
     G4Material* Si;
-  
+
     G4Element* elI;
     G4Element* elCs;
-    
+
     G4VisAttributes* tracker_logVisAtt;
 };
 

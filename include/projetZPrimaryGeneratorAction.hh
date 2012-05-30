@@ -23,10 +23,6 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-//
-// $Id: projetZPrimaryGeneratorAction.hh,v 1.5 2006-06-29 17:47:17 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
 
 #ifndef projetZPrimaryGeneratorAction_h
 #define projetZPrimaryGeneratorAction_h 1
@@ -38,14 +34,14 @@ class G4Event;
 
 class projetZPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
-  public:
+public:
     projetZPrimaryGeneratorAction();
     ~projetZPrimaryGeneratorAction();
 
-  public:
-    void GeneratePrimaries(G4Event* anEvent);
+public:
+    void GeneratePrimaries ( G4Event* anEvent );
 
-  private:
+private:
     G4ParticleGun* particleGun;
 };
 

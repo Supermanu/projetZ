@@ -24,13 +24,7 @@
 // ********************************************************************
 //
 //
-// $Id: exampleN01.cc,v 1.6 2006-06-29 17:47:10 gunter Exp $
-// GEANT4 tag $Name: not supported by cvs2svn $
-//
-// 
-// --------------------------------------------------------------
-//      GEANT 4 - exampleN01
-// --------------------------------------------------------------
+
 #include "projetZRunManager.hh"
 #include "G4UImanager.hh"
 
@@ -49,81 +43,75 @@
 #include "G4UIExecutive.hh"
 #endif
 
-int main(int argc,char** argv)
+int main ( int argc,char** argv )
 {
-    srand ( time ( NULL ));
-  // Construct the default run manager
-  //
-  projetZRunManager* runManager = new projetZRunManager;
+    srand ( time ( NULL ) );
+    // Construct the default run manager
+    //
+    projetZRunManager* runManager = new projetZRunManager;
 
-  // set mandatory initialization classes
-  //
-  G4VUserDetectorConstruction* detector = new projetZDetectorConstruction;
-  runManager->SetUserInitialization(detector);
-  //
-  G4VUserPhysicsList* physics = new projetZPhysicsList;
-  runManager->SetUserInitialization(physics);
+    // set mandatory initialization classes
+    //
+    G4VUserDetectorConstruction* detector = new projetZDetectorConstruction;
+    runManager->SetUserInitialization ( detector );
+    //
+    G4VUserPhysicsList* physics = new projetZPhysicsList;
+    runManager->SetUserInitialization ( physics );
 
-  // set mandatory user action class
-  //
-  G4VUserPrimaryGeneratorAction* gen_action = new projetZPrimaryGeneratorAction;
-  runManager->SetUserAction(gen_action);
+    // set mandatory user action class
+    //
+    G4VUserPrimaryGeneratorAction* gen_action = new projetZPrimaryGeneratorAction;
+    runManager->SetUserAction ( gen_action );
 
-  // Initialize G4 kernel
-  //
-  runManager->Initialize();
-  
-  #ifdef G4VIS_USE
-  // Initialize visualization
-  G4VisManager* visManager = new G4VisExecutive;
-  // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
-  // G4VisManager* visManager = new G4VisExecutive("Quiet");
-  visManager->Initialize();
-  #endif
+    // Initialize G4 kernel
+    //
+    runManager->Initialize();
 
-  // Get the pointer to the UI manager and set verbosities
-  //
-  G4UImanager* UImanager = G4UImanager::GetUIpointer();
-
-  if (argc!=1) {
-
-    // interactive mode : define UI session
-    #ifdef G4UI_USE
-    G4UIExecutive* ui = new G4UIExecutive(argc, argv);
-    #ifdef G4VIS_USE
-    UImanager->ApplyCommand("/control/execute init_vis.mac"); 
-    #else
-    UImanager->ApplyCommand("/control/execute init.mac"); 
-    #endif
-    ui->SessionStart();
-    delete ui;
+#ifdef G4VIS_USE
+    // Initialize visualization
+    G4VisManager* visManager = new G4VisExecutive;
+    // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
+    // G4VisManager* visManager = new G4VisExecutive("Quiet");
+    visManager->Initialize();
 #endif
-  }
-  else {
 
-    // batch mode
-    UImanager->ApplyCommand("/run/verbose 0");
-    UImanager->ApplyCommand("/event/verbose 0");
-    UImanager->ApplyCommand("/tracking/verbose 0");
-  }
+    // Get the pointer to the UI manager and set verbosities
+    //
+    G4UImanager* UImanager = G4UImanager::GetUIpointer();
+
+    if ( argc!=1 ) {
+
+        // interactive mode : define UI session
+#ifdef G4UI_USE
+        G4UIExecutive* ui = new G4UIExecutive ( argc, argv );
+#ifdef G4VIS_USE
+        UImanager->ApplyCommand ( "/control/execute init_vis.mac" );
+#else
+        UImanager->ApplyCommand ( "/control/execute init.mac" );
+#endif
+        ui->SessionStart();
+        delete ui;
+#endif
+    } else {
+
+        // batch mode
+        UImanager->ApplyCommand ( "/run/verbose 0" );
+        UImanager->ApplyCommand ( "/event/verbose 0" );
+        UImanager->ApplyCommand ( "/tracking/verbose 0" );
+    }
 
     // Start a run
     //
-    G4int numberOfEvent = 1;
-    runManager->BeamOn(numberOfEvent);
-  // Job termination
-  //
-  // Free the store: user actions, physics_list and detector_desription are
-  //                 owned and deleted by the run manager, so they should not
-  //                 be deleted in the main() program !
-  //
-  #ifdef G4VIS_USE
-  delete visManager;
-  #endif
-  
-  delete runManager;
+    G4int numberOfEvent = 500;
+    runManager->BeamOn ( numberOfEvent );
 
-  return 0;
+#ifdef G4VIS_USE
+    delete visManager;
+#endif
+
+    delete runManager;
+
+    return 0;
 }
 
 

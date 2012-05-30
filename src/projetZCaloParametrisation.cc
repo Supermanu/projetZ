@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -25,31 +25,31 @@
 
 projetZCaloParametrisation::projetZCaloParametrisation()
 {
-    G4int nbreSegmentPhi = 40;    
+    G4int nbreSegmentPhi = 40;
     G4int nbreSegmentZ = 20;
-    G4double caloCell_rmax = 3.0*m;
-    G4double caloCell_rmin = 1.5*m;
-    G4double caloCell_dz   = 14.*m/nbreSegmentZ;
-    G4double caloCell_sphi = 0.*deg;
-    G4double caloCell_dphi = 360.*deg/nbreSegmentPhi;
+//     G4double caloCell_rmax = 3.0*m;
+//     G4double caloCell_rmin = 1.5*m;
+//     G4double caloCell_dz   = 14.*m/nbreSegmentZ;
+//     G4double caloCell_sphi = 0.*deg;
+//     G4double caloCell_dphi = 360.*deg/nbreSegmentPhi;
 }
 
 projetZCaloParametrisation::~projetZCaloParametrisation()
 {}
 
-void projetZCaloParametrisation::ComputeTransformation ( const G4int copyNo, G4VPhysicalVolume* physVol) const
+void projetZCaloParametrisation::ComputeTransformation ( const G4int copyNo, G4VPhysicalVolume* physVol ) const
 {
     G4ThreeVector origin;
-    physVol->SetTranslation(G4ThreeVector(0.,0.,-14.*m +14.*m/20 + int(copyNo/40)*(14.*m/20)));
+    physVol->SetTranslation ( G4ThreeVector ( 0.,0.,-14.*m +14.*m/20 + int ( copyNo/40 ) * ( 14.*m/20 ) ) );
 }
 
-void projetZCaloParametrisation::ComputeDimensions (G4Tubs & calorimeterBlock, const G4int copyNo, const G4VPhysicalVolume* physVol) const
+void projetZCaloParametrisation::ComputeDimensions ( G4Tubs & calorimeterBlock, const G4int copyNo, const G4VPhysicalVolume* physVol ) const
 {
-    calorimeterBlock.SetInnerRadius(1.5*m);
-    calorimeterBlock.SetOuterRadius(3.*m);
-    calorimeterBlock.SetZHalfLength(14.*m/20);
-    calorimeterBlock.SetStartPhiAngle(copyNo*360.*deg/40);
-    calorimeterBlock.SetDeltaPhiAngle(360.*deg/36);
+    calorimeterBlock.SetInnerRadius ( 1.5*m );
+    calorimeterBlock.SetOuterRadius ( 3.*m );
+    calorimeterBlock.SetZHalfLength ( 14.*m/20 );
+    calorimeterBlock.SetStartPhiAngle ( copyNo*360.*deg/40 );
+    calorimeterBlock.SetDeltaPhiAngle ( 360.*deg/36 );
 }
 
 

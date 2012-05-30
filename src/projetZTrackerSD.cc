@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -24,51 +24,57 @@
 #include "G4TouchableHistory.hh"
 #include "G4ios.hh"
 
-projetZTrackerSD::projetZTrackerSD(G4String name)
-:G4VSensitiveDetector(name)
+projetZTrackerSD::projetZTrackerSD ( G4String name )
+    :G4VSensitiveDetector ( name )
 {
-  G4String HCname;
-  collectionName.insert(HCname="trackerCollection");
+    G4String HCname;
+    collectionName.insert ( HCname="trackerCollection" );
 }
 
-projetZTrackerSD::~projetZTrackerSD(){;}
-
-void projetZTrackerSD::Initialize(G4HCofThisEvent* HCE)
+projetZTrackerSD::~projetZTrackerSD()
 {
-  static int HCID = -1;
-  trackerCollection = new projetZTrackerHitsCollection
-                      (SensitiveDetectorName,collectionName[0]); 
-  if(HCID<0)
-  { HCID = GetCollectionID(0); }
-  HCE->AddHitsCollection(HCID,trackerCollection);
+    ;
 }
 
-G4bool projetZTrackerSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
+void projetZTrackerSD::Initialize ( G4HCofThisEvent* HCE )
 {
-  G4double edep = aStep->GetTotalEnergyDeposit();
-  if(edep==0.) return false;
-
-  projetZTrackerHit* newHit = new projetZTrackerHit();
-  newHit->SetEdep( edep );
-  newHit->SetPos( aStep->GetPreStepPoint()->GetPosition() );
-  newHit->SetTrackerNb(aStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() );
-  trackerCollection->insert( newHit );
-
-  return true;
+    static int HCID = -1;
+    trackerCollection = new projetZTrackerHitsCollection
+    ( SensitiveDetectorName,collectionName[0] );
+    if ( HCID<0 ) {
+        HCID = GetCollectionID ( 0 );
+    }
+    HCE->AddHitsCollection ( HCID,trackerCollection );
 }
 
-void projetZTrackerSD::EndOfEvent(G4HCofThisEvent*)
+G4bool projetZTrackerSD::ProcessHits ( G4Step* aStep, G4TouchableHistory* )
+{
+    G4double edep = aStep->GetTotalEnergyDeposit();
+    if ( edep==0. ) {
+        return false;
+    }
+
+    projetZTrackerHit* newHit = new projetZTrackerHit();
+    newHit->SetEdep ( edep );
+    newHit->SetPos ( aStep->GetPreStepPoint()->GetPosition() );
+    newHit->SetTrackerNb ( aStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() );
+    trackerCollection->insert ( newHit );
+
+    return true;
+}
+
+void projetZTrackerSD::EndOfEvent ( G4HCofThisEvent* )
 {
 }
 
 void projetZTrackerSD::clear()
 {
-} 
+}
 
 void projetZTrackerSD::DrawAll()
 {
-} 
+}
 
 void projetZTrackerSD::PrintAll()
 {
-} 
+}

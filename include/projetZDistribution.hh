@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@
 class projetZDistribution
 {
 public:
-    projetZDistribution(G4double resultat[], G4String category, G4double argument1=0, G4double argument2=0);
+    projetZDistribution ( G4double resultat[], G4String category, G4double argument1=0, G4double argument2=0 );
     ~projetZDistribution();
 };
 

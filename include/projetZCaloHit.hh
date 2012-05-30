@@ -1,5 +1,5 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
+    ProjetZ est un programme de simulation de la désintégration d'un boson de Higgs de 200 Gev
     Copyright (C) 2012  Manuel Tondeur <manueltondeur@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -29,29 +29,39 @@ class projetZCaloHit : public G4VHit
 {
 
 public:
-    
+
     projetZCaloHit();
     projetZCaloHit ( const projetZCaloHit& );
     virtual ~projetZCaloHit();
     virtual projetZCaloHit& operator= ( const projetZCaloHit& );
     virtual G4bool operator== ( const projetZCaloHit& ) const;
-    
-    inline void* operator new(size_t);
-    inline void  operator delete(void*);
-    
+
+    inline void* operator new ( size_t );
+    inline void  operator delete ( void* );
+
     virtual void Draw();
     virtual void Print();
 
 public:
-  
-    void SetTrackID  (G4int track)      { trackID = track; };
-    void SetCaloNb(G4int calo)      { caloNb = calo; };  
-    void SetEdep     (G4double de)      { eDep = de; };
-    G4double GetEdep() {return eDep;} ;
-    G4int GetCaloNb() {return caloNb;} ;
-    
+
+    void SetTrackID ( G4int track )      {
+        trackID = track;
+    };
+    void SetCaloNb ( G4int calo )      {
+        caloNb = calo;
+    };
+    void SetEdep ( G4double de )      {
+        eDep = de;
+    };
+    G4double GetEdep() {
+        return eDep;
+    } ;
+    G4int GetCaloNb() {
+        return caloNb;
+    } ;
+
 private:
-  
+
     G4int trackID;
     G4int caloNb;
     G4double eDep;
@@ -62,20 +72,17 @@ typedef G4THitsCollection<projetZCaloHit> projetZCaloHitCollection;
 
 extern G4Allocator<projetZCaloHit> projetZCaloHitAllocator;
 
-// Je crois que ces inlines servent à allouer dynamiquement la mémoire des hits lorsqu'on utilise operator... 
-// Mais je comprends pas vraiment comment ça marche. Si quelqu'un a une idée ?
-
-inline void* projetZCaloHit::operator new(size_t)
+inline void* projetZCaloHit::operator new ( size_t )
 {
-  void *aHit;
-  aHit = (void *) projetZCaloHitAllocator.MallocSingle();
-  return aHit;
+    void *aHit;
+    aHit = ( void * ) projetZCaloHitAllocator.MallocSingle();
+    return aHit;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-inline void projetZCaloHit::operator delete(void *aHit)
+inline void projetZCaloHit::operator delete ( void *aHit )
 {
-  projetZCaloHitAllocator.FreeSingle((projetZCaloHit*) aHit);
+    projetZCaloHitAllocator.FreeSingle ( ( projetZCaloHit* ) aHit );
 }
 #endif // PROJETZCALOHIT_H
