@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  29 MAY 2012 11:51
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.10)  31 MAY 2012 11:17
 entering extended mode
  %&-line parsing enabled.
 **projetZ.tex
@@ -673,20 +673,21 @@ File: images/mauvaisCasBrut-eps-converted-to.pdf Graphic file (type pdf)
 <images/mauvaisCasNet-eps-converted-to.pdf, id=47, 517.935pt x 401.5pt>
 File: images/mauvaisCasNet-eps-converted-to.pdf Graphic file (type pdf)
 
-<use images/mauvaisCasNet-eps-converted-to.pdf> [8 <./images/bonCasBrut-eps-con
-verted-to.pdf>] [9 <./images/bonCasNet-eps-converted-to.pdf> <./images/mauvaisC
-asBrut-eps-converted-to.pdf>]
-<images/bwmH.png, id=69, 892.08281pt x 473.51906pt>
+<use images/mauvaisCasNet-eps-converted-to.pdf> [8] [9 <./images/bonCasBrut-eps
+-converted-to.pdf> <./images/bonCasNet-eps-converted-to.pdf>] [10 <./images/mau
+vaisCasBrut-eps-converted-to.pdf> <./images/mauvaisCasNet-eps-converted-to.pdf>
+] <images/bwmH.png, id=77, 892.08281pt x 473.51906pt>
 File: images/bwmH.png Graphic file (type png)
  <use images/bwmH.png>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<images/histmH.png, id=70, 908.64468pt x 463.7325pt>
+<images/histmH.png, id=78, 908.64468pt x 463.7325pt>
 File: images/histmH.png Graphic file (type png)
  <use images/histmH.png>
-[10 <./images/mauvaisCasNet-eps-converted-to.pdf>] [11 <./images/bwmH.png (PNG 
-copy)> <./images/histmH.png (PNG copy)>] [12] (./projetZ.aux) ) 
+[11] [12 <./images/bwmH.png (PNG copy)> <./images/histmH.png (PNG copy)>]
+[13] (./projetZ.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
  4024 strings out of 493848
  52795 string characters out of 1152823
@@ -694,25 +695,24 @@ Here is how much of TeX's memory you used:
  7162 multiletter control sequences out of 15000+50000
  60231 words of font info for 53 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,7n,24p,321b,223s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texm
-f/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.e
-nc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/d
-vips/lm/lm-mathit.enc}{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</u
-sr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/p
-ublic/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/s
-hare/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9
-.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts
-/type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/public/lm/lmro10.pfb><
-/usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1
-/public/lm/lmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></
-usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
-Output written on projetZ.pdf (12 pages, 1509397 bytes).
+ 41i,6n,24p,322b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
+ips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share
+/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-texlive/fonts/enc/dvi
+ps/base/8r.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf
+/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr
+/share/texmf/fonts/type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmro10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share
+/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-texlive/fonts/type1/pu
+blic/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/helv
+etic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
+Output written on projetZ.pdf (13 pages, 1509839 bytes).
 PDF statistics:
- 142 PDF objects out of 1000 (max. 8388607)
+ 146 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

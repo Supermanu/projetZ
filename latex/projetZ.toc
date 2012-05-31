@@ -4,5 +4,5 @@
 \contentsline {subsection}{\numberline {2.1}Description du d\IeC {\'e}tecteur}{3}
 \contentsline {subsection}{\numberline {2.2}Description physique du processus initial}{4}
 \contentsline {subsection}{\numberline {2.3}Reconstruction de la masse invariante du boson de Higgs}{7}
-\contentsline {subsection}{\numberline {2.4}Analyse des r\IeC {\'e}sultats}{10}
-\contentsline {section}{\numberline {3}Conclusion}{11}
+\contentsline {subsection}{\numberline {2.4}Analyse des r\IeC {\'e}sultats}{11}
+\contentsline {section}{\numberline {3}Conclusion}{13}
